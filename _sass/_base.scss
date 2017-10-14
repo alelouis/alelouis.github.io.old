@@ -2,6 +2,11 @@
 //
 // Update the foundational and global aspects of the page.
 
+@font-face {
+    font-family: charter;
+    src: url(charter.otf);
+}
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -15,7 +20,7 @@ body {
 }
 
 html {
-  font-family: $root-font-family;
+  font-family: charter;
   font-size: $root-font-size;
   line-height: $root-line-height;
 
