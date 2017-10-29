@@ -1,0 +1,121 @@
+<h1 id="intuitive-explanations-of-pca-underused-concepts">Intuitive explanations of PCA underused concepts</h1>
+
+<p>Work heavily in progress</p>
+
+<p>This guide is intended to be a simple, non-exhaustive but straight-forward explanation of principal component analysis technique applied to data analysis.
+Code and graphs are in R language.
+https://www.r-project.org/
+PCA is widely known as a <strong>dimension reduction</strong> technique and less for its <strong>exploratory data analysis</strong> tools.</p>
+
+<h2 id="data">Data</h2>
+
+<p>Your data should describe a given number of observations / individuals under many features / variables.
+This is typically represented as a n x m matrix with n individuals and m variables.
+PCA can be applied to your dataset using many R functions. I’ll use PCA from package FactoMinerR.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>res.pca &lt;- PCA(dataset)
+res.pca
+name               description                          
+1  "$eig"             "eigenvalues"                        
+2  "$var"             "results for the variables"          
+3  "$var$coord"       "coord. for the variables"           
+4  "$var$cor"         "correlations variables - dimensions"
+5  "$var$cos2"        "cos2 for the variables"             
+6  "$var$contrib"     "contributions of the variables"     
+7  "$ind"             "results for the individuals"        
+8  "$ind$coord"       "coord. for the individuals"         
+9  "$ind$cos2"        "cos2 for the individuals"           
+10 "$ind$contrib"     "contributions of the individuals"   
+11 "$call"            "summary statistics"                 
+12 "$call$centre"     "mean of the variables"              
+13 "$call$ecart.type" "standard error of the variables"    
+14 "$call$row.w"      "weights for the individuals"        
+15 "$call$col.w"      "weights for the variables"  
+</code></pre></div></div>
+
+<h2 id="output">Output</h2>
+
+<p>The result of the function PCA contains a lot but similar information.
+Most of people are familiar with PCA concepts and the fact it vaguely project multidimensional data into fewer principal components or factors were inertia / variance / information is maximized. PCA use is often sadly reduced to “project my 86 dimensional dataset into 2 so I can see a damn thing about what I’m doing”. This guide makes the assumption you are familiar with PCA general principles but want to exploit more information from it.</p>
+
+<p>Here we tackle the non so-obvious parameters returned by PCA function coord, cor, cos and contrib.
+A quick research of these terms will lead you to complex stack overflow / documentation of mind-blowing facts about eigenvalues, loadings, cosines between vectors standardized (or not) projected (or not). The internet polysemy is inherent to the “apparent” existing confusion and the difficulty of finding directly exploitable information about theses PCA outputs is abnormally high.</p>
+
+<p>This guide is for those who want to drive meaningful interpretation based on PCA results without losing time crossing theory aspects and algorithms implementations.</p>
+
+<h2 id="variables-or-individuals">Variables or individuals</h2>
+
+<p>The fun thing about PCA (and its friends MCA, FAMD etc…) is that you can either consider variables or individuals as your input vector space. In a traditional way, if we consider individuals as our rows, each individuals is represented by a point of M dimensions (one for each variable). On the other hand, by transposing the matrix we can see variables points of n individuals components. Keep that in mind for further analysis.</p>
+
+<h3 id="individuals">Individuals</h3>
+<p>We’ll explore the PCA outputs related to individuals (the most common way people think about PCA).</p>
+<h5 id="indcoord">$ind$coord$</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	Dim.1        Dim.2        Dim.3        Dim.4        Dim.5        Dim.6       Dim.7       Dim.8
+1   1.87527565 -2.118830852 -0.523052270 -1.498565045  1.241140053  0.096625894  0.10420419  0.51855570
+2   0.28286233  0.709260347 -0.037959700 -0.799378852  0.024049897 -0.027015764 -0.15126017  0.00663232
+3   0.01049434  1.522753419 -0.685525022  0.540867877 -0.620855870  0.770635782 -0.76437671  0.02248488
+4   0.73931610  0.758334963 -1.404787083  0.531440029 -0.589536837  0.092011347  0.81687900 -0.37774997
+</code></pre></div></div>
+<p>Each individual originally in the m-dimensional feature space is projected on the principal components or factors. Theses are simply the coordinates of the projection. Remember components are sorted by explained inertia.</p>
+
+<h5 id="indcos2">$ind$cos2</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	Dim.1        Dim.2        Dim.3        Dim.4        Dim.5        Dim.6        Dim.7        Dim.8
+1  2.483061e-01 3.169931e-01 1.931734e-02 1.585654e-01 1.087674e-01 6.592411e-04 7.667038e-04 1.898664e-02
+2  3.637151e-02 2.286770e-01 6.550232e-04 2.904801e-01 2.629284e-04 3.317765e-04 1.040065e-02 1.999595e-05
+3  2.317072e-05 4.878523e-01 9.887257e-02 6.154766e-02 8.109812e-02 1.249475e-01 1.229261e-01 1.063679e-04
+4  1.033726e-01 1.087595e-01 3.732211e-01 5.341383e-02 6.573052e-02 1.601135e-03 1.262004e-01 2.698697e-02
+</code></pre></div></div>
+<p>cos2 (pronounced cos squared) is often defined as measure of the quality of representation. It’s possible to gain a visual intuition on why that is true. First things first, what cosine is here squared ? It’s the cosine between the original vector representing our individual and the corresponding projected vector on principal components. This angle from simple geometry formulas is the ratio of the norm of the projected vector by the norm of the original vector. Albeit cos2 is the squared version of the latter. Squaring it has the nice propriety of making the sum of all cos2 for a given individual equal 1 (considering all principal components).</p>
+
+<p>You should still wonder why this has anything to do with a quality of representation. Here’s how you can understand it : the original individual vector in our m-dimensional space is projected on a few principal components, if the original vector is in a similar direction as the principal component then it successfully captures the direction of this individual vector and the projection will be a good representation of the original vector information. In this case the angle between them is small or near pi i.e cosine near 1 / -1 -&gt; cosine squared near 1. In the other case if the angle between the two is larger (there is a part of the original vector information that is not projected on the principal component) it means that the original vector has a much worst projection (cos2 is less than 1).</p>
+
+<p>The nice thing about PCA is that principal components are built orthogonally, so if you want to compute the quality of representation cos2 for the first components plane (how well is my individual represented by the first two principal components) you can simple add the cos2 of dimension 1 and dimension 2. You should now understand why it made sense to have the sum of all cos2 across all components equal 1.</p>
+
+<p><strong>Interpretation facts</strong> : projected vectors with low cos2 have a bad representation in principal components. In consequence you should not base your whole interpretation on these individuals.</p>
+
+<h5 id="indcontrib">$ind$contrib</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	Dim.1        Dim.2        Dim.3        Dim.4        Dim.5        Dim.6        Dim.7        Dim.8
+1  2.483061e-01 3.169931e-01 1.931734e-02 1.585654e-01 1.087674e-01 6.592411e-04 7.667038e-04 1.898664e-02
+2  3.637151e-02 2.286770e-01 6.550232e-04 2.904801e-01 2.629284e-04 3.317765e-04 1.040065e-02 1.999595e-05
+3  2.317072e-05 4.878523e-01 9.887257e-02 6.154766e-02 8.109812e-02 1.249475e-01 1.229261e-01 1.063679e-04
+4  1.033726e-01 1.087595e-01 3.732211e-01 5.341383e-02 6.573052e-02 1.601135e-03 1.262004e-01 2.698697e-02
+</code></pre></div></div>
+
+<p>WIP</p>
+
+<h3 id="variables">Variables</h3>
+<p>Here we start to tackle a non so-intuitive way of seeing variables outputs.</p>
+<h5 id="varcoord">$var$coord</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>				  		Dim.1        Dim.2       Dim.3       Dim.4      Dim.5       Dim.6        Dim.7
+Block.size.median         0.58312195 -0.436142784  0.05417665 -0.28264571  0.1487591  0.49036623 -0.229737181
+Altitude                  0.72890298 -0.153895038  0.47250463 -0.03153766  0.1581047 -0.14076494 -0.169718120
+p20                       0.46360753 -0.167851672  0.42165395 -0.46834161 -0.3038508 -0.12564113  0.483601604
+Wetness.index            -0.36685535  0.670561706  0.32344711 -0.35569038 -0.0187711  0.16681691  0.001830206
+</code></pre></div></div>
+<p>The first thing you should ask yourself is what could possibly represent the coordinates of a variable.
+A variable vector is not obviously not like an individual. A variable vector should be centered (having a mean of 0) and is probably reduced if you have different units (standard deviation equal to 1). So all variables can be seen as unit-scaled vectors all “touching” an hypersphere of radius 1. The coord returned by the PCA function represent correlations between the unit-scaled variable vectors in respect to principal components. So for example the variable Block.size.median has a positive correlation coefficient 0.58 with first principal component and negative correlation -0.43 with second component. The expression of the correlation coefficient between a variable and a principal component here is exactly the same as to expression of the cosine angle between them (that’s a nice property).</p>
+
+<p><strong>Interpretation facts</strong> : The most common way to plot variable output of PCA is by representing each variable in a plane with their coordinates (being correlations coefficients) and a unit circle (which has the fancy name of Circle of Correlations). This visually gives you information whether a variable is increasing or decreasing in respect to principal components axis. On the below example we see that the variable altitude is correlated with first principal components meaning individual on the right side of the plane will have high altitude values. In a similar fashion individuals on the top side would have high Wetness.index values (positively correlated).</p>
+
+<p><img src="cor.png" alt="Correlation circle" /></p>
+
+<h5 id="varcos2">$var$cos2</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>						 Dim.1        Dim.2        Dim.3        Dim.4        Dim.5       Dim.6        Dim.7
+Block.size.median        0.340031208 1.902205e-01 0.0029351095 0.0798885977 0.0221292660 0.240459044 5.277917e-02
+Altitude                 0.531299549 2.368368e-02 0.2232606257 0.0009946243 0.0249971082 0.019814767 2.880424e-02
+p20                      0.214931941 2.817418e-02 0.1777920525 0.2193438629 0.0923253350 0.015785693 2.338705e-01
+Wetness.index            0.134582846 4.496530e-01 0.1046180310 0.1265156449 0.0003523541 0.027827880 3.349653e-06
+</code></pre></div></div>
+<p>In the case of individuals cos2 was the square of the cosine between the observation and the principal component. For variables that doesn’t change : cos2 is the square of the cosine between to variable original vector and the principal component. The nice thing is that we already have the cosine between the vector variable and the principal component : it’s the coordinates, cos2 calculation is then trivial. The even nicer thing is that the underlying geometry being the same, the interpretation about quality of representation is the same as in the individuals part.</p>
+
+<p><strong>Caution</strong> You probably saw that in $var$coord explanation I was only interpreting variables that had good representation / long arrows / high cos2. The reason for this is that the projected angles between variables (those we see on the plane) cannot be blindly linked to original correlation coefficients / true angle between variables. For example we see that Altitude and p20 have a low <strong>projected</strong> angle between them but p20 has a low cos2 meaning that the variable has a bad representation in the plane. Therefore one cannot conclude that this projected angle is a representative image of the real original space angle between the two variables. Therefore we cannot conclude that p20 and Altitude are necessarily correlated despite their low apparent projected angle. p20 having some of its inertia explained by another axis the projection limits us  : we cannot access the information whether this additional axis explaining the residual variance is correlated in the same manner to variables p20 and Altitude. We can only make a correlation assumption between variables according to their projected angle if the cos2 of both variables are fairly high, in that case a small projected angle correctly represent a small original angle hence correlation.</p>
+
+<h5 id="varcontrib">$var$contrib</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>						 Dim.1        Dim.2       Dim.3      Dim.4       Dim.5      Dim.6        Dim.7
+Block.size.median        12.9277707 1.095245e+01  0.20543973  8.0327657  2.27049649 37.7151189 8.536027e+00
+Altitude                 20.1996716 1.363651e+00 15.62687922  0.1000091  2.56474147  3.1078736 4.658538e+00
+p20                       8.1715760 1.622204e+00 12.44435700 22.0549355  9.47272038  2.4759281 3.782411e+01
+Wetness.index             5.1167544 2.588997e+01  7.32262274 12.7210962  0.03615206  4.3647009 5.417427e-04
+</code></pre></div></div>
+
+<p>WIP</p>
