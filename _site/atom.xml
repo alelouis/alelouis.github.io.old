@@ -4,7 +4,7 @@
  <title>alelouis</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-11-12T21:22:06+01:00</updated>
+ <updated>2017-11-13T23:21:18+01:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Alexis LOUIS</name>
@@ -14,11 +14,11 @@
  
  <entry>
    <title>Latent Space Interpolations</title>
-   <link href="http://localhost:4000/2017/10/28/latent-space-interpolations/"/>
-   <updated>2017-10-28T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2017/10/28/latent-space-interpolations</id>
+   <link href="http://localhost:4000/2017/11/12/latent-space-interpolations/"/>
+   <updated>2017-11-12T00:00:00+01:00</updated>
+   <id>http://localhost:4000/2017/11/12/latent-space-interpolations</id>
    <content type="html">
-&lt;p&gt;My intent with this post is to formalize thoughts I came accross while playing with generative models and especially VAEs. Firstly interested by visual aspects of latent space interpolation, I found myself digging deeper to gain high-dimensionnal intuitions and share here my understanding.&lt;/p&gt;
+&lt;p&gt;My intent with this post is to formalize thoughts I came across while playing with generative models and especially VAEs. Firstly interested by visual aspects of latent space interpolation, I found myself digging deeper to gain high-dimensionnal intuitions and share here my understanding.&lt;/p&gt;
 
 &lt;p&gt;The toy we’ll be playing with is a simple VAE. I will start by making a brief summary of AE and VAE principles and then move to latent space interpolations (where beautiful things happen).&lt;/p&gt;
 
@@ -28,59 +28,61 @@
 
 &lt;p&gt;Unlike typical supervised tasks, an auto-encoder learns an identity function between its inputs and outputs. While in the former a neural network typically learns a mapping between input samples and output labels, the latter is optimized to reconstruct the input the best it can.&lt;/p&gt;
 
-&lt;p&gt;This objective is not inherently useful : what is interesting here lies in the hidden layers, or more simply in this example the middle layer &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt;. We call &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; the encoded or latent vector. The left part of the graph is the encoder part, it encodes the input into the latent space. The latent vector is then decoded by the decoder and outputs the input reconstruction. By setting the length of the middle vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; to a smaller value than the input dimension, the mapping has to find an efficient way to compress input samples into a smaller representations. The mapping (set of neural weights and biases) is learnt during training phase by minimizing the reconstruction error. The loss is often chosen between MSE and cross-entropy.&lt;/p&gt;
+&lt;p&gt;This objective is not inherently useful, we are more interested in what lies in the hidden layers, or for this example the middle layer &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt;. We call &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; the &lt;strong&gt;encoded&lt;/strong&gt; or &lt;strong&gt;latent&lt;/strong&gt; vector. The left part of the graph is the encoder part, it encodes the input into the latent space. The latent vector is then decoded by the decoder and outputs the input reconstruction. By setting the length of the middle vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; to a smaller value than the input dimension, the mapping has to find an efficient way to compress input samples into a smaller representations. The mapping (set of neural weights and biases) is learned during training phase by minimizing the reconstruction error. The loss is often chosen between MSE (Mean Squared Error) and cross-entropy.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../images/ae.svg&quot; alt=&quot;dim&quot; /&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+&lt;img src=&quot;../images/ae.svg&quot; width=&quot;50%&quot; /&gt;
+&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Usage example&lt;/em&gt; : one wants to encode digits from their &lt;em&gt;28x28&lt;/em&gt; 2D representation to a more compact representation, i.e a vector of length 2. During training phase, many samples are proposed to the network with the reconstruction error between the original image and the reconstructed output image being minimized. In the middle of the network is specified an hidden layer - the 2-dim vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; - so that all information &lt;em&gt;has&lt;/em&gt; to be compressed into 2 values at some point. Obviously going from 784 dimensions to 2 is quite a drastic reduction, it forces the network to converge to efficient compression solutions. What we hope is that the low-dimensional representation is learning in an unsupervised way underlying concepts about the data (there are 10 digits, some orientation, thickness…) and encode each one of this concept into a dimension of the latent space.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Usage example&lt;/em&gt; : one wants to encode images of digits from their &lt;em&gt;28x28&lt;/em&gt; pixels 2D representation to a more compact representation, i.e. a vector of length 2. During training phase, many samples are proposed to the network with the reconstruction error between the original image and the reconstructed output image being minimized. In the middle of the network is specified an hidden layer - the 2-dim vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; - so that all information &lt;em&gt;has&lt;/em&gt; to be compressed into 2 values at some point. Going from 784 dimensions to 2 is quite a drastic reduction, it forces the network to converge to efficient compression solutions. What we hope here is that the low-dimensional representation will learn in an unsupervised way underlying concepts about the data (there are 10 digits, some orientation, thickness…) and encode each one of this concepts into a dimension of the latent space.&lt;/p&gt;
 
-&lt;p&gt;It makes sense, but it can cheat.&lt;/p&gt;
+&lt;p&gt;It makes sense, but the auto-encoder &lt;em&gt;can&lt;/em&gt; cheat.&lt;/p&gt;
 
-&lt;p&gt;Suppose the dimension of &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; is slightly higher. What mecanism can ensure that the learnt representation is not a dumb mapping between far apart regions of latent space and all input samples. Well nothing. For example the latent vector could easily encode each sample into binary positions and have very good reconstruction performance while having learn nothing about data structure.&lt;/p&gt;
+&lt;p&gt;Suppose the dimension of &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; is slightly higher. What mecanism can ensure that the learned representation is not a dumb mapping between far apart regions of latent space and all input samples. Well nothing. For example, the latent vector could easily encode each sample into binary positions (0001, 0010, 0011…) and have excellent reconstruction performance while having learn &lt;strong&gt;nothing&lt;/strong&gt; about data structure.&lt;/p&gt;
 
-&lt;p&gt;Because the network finds its own ways to compress data, we can’t understand fully its representation by looking at it. Nothing ensures that the vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_1} = [2.2,1.3]&lt;/script&gt; is decoded as an image of a 3 and &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_2} = [2.2,1.3]&lt;/script&gt;, while very close in latent space, is &lt;em&gt;also&lt;/em&gt; decoded as a 3. Any interpretation of what latent dimensions represent is here very difficult.&lt;/p&gt;
+&lt;p&gt;Because the network finds its own ways to compress data, we can’t understand fully its representation by looking at it. Nothing ensures that the vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_1} = [2.2,1.3]&lt;/script&gt; is decoded as an image of a 3 and &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_2} = [2.1,1.4]&lt;/script&gt;, while very close in latent space, is decoded as an image &lt;em&gt;also&lt;/em&gt; looking like a 3. Any interpretation of what latent dimensions represent is here arduous.&lt;/p&gt;
 
-&lt;p&gt;Moreover, its hard to generate samples from this type of network. To generate a sample you have to find a latent vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; that will produce, once decoded, a plausible output (in the sense similar to inputs on which the AE was trained). The manifold represented by all the latent vectors associated to input samples is probably not covering the entire &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; space and sampling randomly will probably lead you into dead zones.&lt;/p&gt;
+&lt;p&gt;Moreover, its hard to generate samples from this type of network. In order to generate a sample you have to find a latent vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; that will produce, once decoded, a plausible output (in the sense similar to inputs on which the AE was trained). The manifold represented by all the latent vectors associated to input samples is probably not covering the entire &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; space and sampling randomly will probably yields unprobable results.&lt;/p&gt;
 
 &lt;p&gt;These limitations, latent space interpretation and generation, are trying to be solved with VAEs.&lt;/p&gt;
 
 &lt;h2 id=&quot;variational-auto-encoders&quot;&gt;Variational Auto-Encoders&lt;/h2&gt;
 
-&lt;p&gt;I was lately interesed in VAEs or Variational Auto-Encoder. This name is actually a contraction of two fields not typically associated : variationnal inference and deep learning auto-encoders. Here is my attempt to explain VAEs as clearly as possible (a bit of math but nothing too complicated).&lt;/p&gt;
+&lt;p&gt;I was lately interesed in VAEs or Variational Auto-Encoder. This name is actually a contraction of two fields not typically associated : variational inference and deep learning auto-encoders. Here is my attempt to explain VAEs basic necessary principles to understand latent space exploration (a bit of math but nothing too nerdy).&lt;/p&gt;
 
 &lt;p&gt;A VAE is an auto-encoder with stochastic components. The main motivation behind this design is to provide generative capabilities to the model by constraining the latent space shape.&lt;/p&gt;
 
-&lt;p&gt;It would be nice to be able to sample latent vectors from well known distributions and get from the decoding network plausible samples. VAEs precisely to that : in addition to regular AE behaviour i.e identity reconstruction, we constrain the latent space with a specified distribution, or prior (often noted as &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt;). The new loss function now has to penalize bad reconstruction performance (same as in AEs) and unconstrained latent representation. To make sure the latent representation is well contrained by our prior we can compute a distance between actual latent space distribution &lt;script type=&quot;math/tex&quot;&gt;Q(z\mid x)&lt;/script&gt; and our chosen prior &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt; and minimize it.&lt;/p&gt;
+&lt;p&gt;The nice feature we want is to be able to sample latent vectors from well known distributions and get from the decoding network plausible samples. VAEs precisely to that : in addition to regular AE behaviour i.e. identity reconstruction, we constrain the latent space with a specified distribution, or prior (often noted as &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt;). The new loss function now has to penalize &lt;strong&gt;bad reconstruction&lt;/strong&gt; performance (same as in AEs) and &lt;strong&gt;unconstrained latent representation&lt;/strong&gt;. To make sure the latent representation is well contrained by our prior we minimize a distance between actual latent space distribution &lt;script type=&quot;math/tex&quot;&gt;Q(z\mid x)&lt;/script&gt; and our chosen prior &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt;.&lt;/p&gt;
 
-&lt;p&gt;An easy to sample from and simple prior we can use is the unit centered multivariate normal  &lt;script type=&quot;math/tex&quot;&gt;P(z) \sim \mathcal{N}(\textbf{0}, I)&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;An easy to sample from and simple prior we use is the unit centered multivariate normal.&lt;/p&gt;
 
-&lt;p&gt;KL-divergence is often used to compare two distribution. Our final loss can then be expressed as :&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(z) \sim \mathcal{N}(\textbf{0}, I)&lt;/script&gt;
+
+&lt;p&gt;KL-divergence is often used to compare two distribution. Considering all elements, our final loss can then be expressed as :&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\mathcal{L} =  -E_{z\sim Q(z\mid x)}[log(p(x\mid z))] + KL(Q(z\mid x)\mid \mid P(z))&lt;/script&gt;
 
-&lt;p&gt;We then take the assumption that the posterior is following a isotropic Gaussian distribution to simplify the KL divergence calculus (&lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; has dimension &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;):&lt;/p&gt;
+&lt;p&gt;We then take the assumption that the posterior is following an isotropic Gaussian distribution to simplify the KL divergence calculus (&lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; has dimension &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;). If you want details you can check the demonstration in the &lt;a href=&quot;[https://arxiv.org/abs/1312.6114]&quot;&gt;original paper&lt;/a&gt;&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;Q(\textbf{z}\mid x) \sim \mathcal{N}(\mu(x), \sigma^{2}(x) I)&lt;/script&gt;
+&lt;p&gt;It also has the avantage to simplify our architecture : the encoder network only encodes two vectors for each sample : one of means and one of variances. The real latent vector is then sampled from the multivariate normal distribution. The training phase ensure that the posterior &lt;script type=&quot;math/tex&quot;&gt;Q(z\mid x)&lt;/script&gt; doesn’t get too far from the prior &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt; while also giving good reconstruction performance.&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;KL(Q(z\mid x)\mid \mid P(z)) = -\frac{1}{2}\sum_{d=1}^{D}(1+log(\sigma^{2}_d)-\mu^{2}_d-\sigma^{2}_d)&lt;/script&gt;
-
-&lt;p&gt;It also has the avantage to simplify our architecture : the encoder network only encodes two vectors for each sample : one of means and one of variances . The real latent vector is then sampled from the multivariate normal distribution. The training phase ensure that the posterior &lt;script type=&quot;math/tex&quot;&gt;Q(z\mid x)&lt;/script&gt; doesn’t get too far from the prior &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt; while also giving good reconstruction performance.&lt;/p&gt;
-
-&lt;p&gt;I personnaly consider I don’t fully understand a concept if I can’t make it work in pratice. See a simple VAE implementation in PyTorch. &lt;GIT LINK=&quot;&quot;&gt;&lt;/GIT&gt;&lt;/p&gt;
+&lt;p&gt;I personnally consider I don’t fully understand a concept if I can’t make it work in practice. See this simple VAE implementation in PyTorch at &lt;a href=&quot;https://github.com/alelouis/vae&quot;&gt;github.com/alelouis/vae&lt;/a&gt;. I recommand playing with it and reimplementing it for exercise if you can.&lt;/p&gt;
 
 &lt;p&gt;By running the network on MNIST with a latent space of dimension 2 we can then explore latent space representation, a very visual part.&lt;/p&gt;
 
-&lt;h3 id=&quot;latent-space&quot;&gt;Latent space&lt;/h3&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;Latent variables are not observed variables that are describing the underlying properties of a process. For example, the vector &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; of a observed sequence of &lt;script type=&quot;math/tex&quot;&gt;x \sim \mathcal{N}(\theta, \sigma)&lt;/script&gt; is a latent variable. We only get to see &lt;script type=&quot;math/tex&quot;&gt;x_i&lt;/script&gt; while hidden &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; describe the underlying generating process from which observations are sampled.&lt;/p&gt;
+&lt;h2 id=&quot;latent-space-interpolations&quot;&gt;Latent space interpolations&lt;/h2&gt;
 
-&lt;p&gt;The mean of a Gaussian distribution is not a very interesting latent variable (compared to what we &lt;em&gt;can&lt;/em&gt; find). These days, variational auto-encoders are very popular. A large part of this hype is due to their ability to &lt;em&gt;infer&lt;/em&gt; latent variables for a large scope of problems. Moreover, found latent variable are constrained to be relevant and we, &lt;em&gt;humans&lt;/em&gt;, can sometimes interpret them.&lt;/p&gt;
+&lt;p&gt;Latent variables are &lt;em&gt;not observed&lt;/em&gt; variables that are describing the underlying properties of a process. For example, the vector of means &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; of an observed sequence of observations &lt;script type=&quot;math/tex&quot;&gt;x \sim \mathcal{N}(\theta, \sigma)&lt;/script&gt; is a latent variable. We only get to see &lt;script type=&quot;math/tex&quot;&gt;x_i&lt;/script&gt; while hidden &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; describe the underlying generating process from which observations are sampled.&lt;/p&gt;
+
+&lt;p&gt;The mean of a Gaussian distribution is not a captivating latent variable (compared to what we &lt;em&gt;can&lt;/em&gt; find). Last years have seen a growing hype for latent variable generative models such as variational auto-encoders. A large part of this enthusiasm is due to their ability to &lt;em&gt;infer&lt;/em&gt; latent variables, real explanatory variables, for a large scope of problems. Moreover, found latent variable &lt;a href=&quot;https://docs.google.com/presentation/d/12uZQ_Vbvt3tzQYhWR3BexqOzbZ-8AeT_jZjuuYjPJiY/pub?start=true&amp;amp;loop=true&amp;amp;delayms=30000#slide=id.g1329951dde_0_0&quot;&gt;can be constrained&lt;/a&gt; to be relevant and we, &lt;em&gt;humans&lt;/em&gt;, can sometimes interpret them.&lt;/p&gt;
 
 &lt;p&gt;We can use visual tools to explore latent space and understand what the model is doing.&lt;/p&gt;
 
-&lt;h2 id=&quot;2d-latent-space-on-mnist-vae&quot;&gt;2D Latent Space on MNIST VAE&lt;/h2&gt;
+&lt;h3 id=&quot;2d-latent-space-on-mnist-vae&quot;&gt;2D Latent Space on MNIST VAE&lt;/h3&gt;
 
-&lt;p&gt;Humans are very limited because we can visualize things up to 3 dimensions naturaly. Let’s see what a 2-dimensional latent space looks like on a VAE trained on MNIST samples. As explained previously, we can generate latent vector by sampling from our prior &lt;script type=&quot;math/tex&quot;&gt;P(z) \sim \mathcal{N}(\textbf{0}, I)&lt;/script&gt;. Sampling from this distribution will yield to random samples belonging to the 2D plane with many samples being generated near the mean &lt;script type=&quot;math/tex&quot;&gt;[0,0]&lt;/script&gt;. If we want to explore the latent space smoothly we can ignore gaussian sampling and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.&lt;/p&gt;
+&lt;p&gt;Humans are very limited (yes), one reason why is that we can’t visually conceptualize objects in more than 3 dimensions. The good news is that we have a tool to understand hidden behavior even if we can’t &lt;em&gt;see&lt;/em&gt; it, it’s called &lt;strong&gt;maths&lt;/strong&gt; (sorry). But for now let’s stick to our comfort zone. We will sneak peek into a 2-dimensional latent space from a VAE trained on MNIST samples. As explained previously, we can generate latent vector by sampling from our prior &lt;script type=&quot;math/tex&quot;&gt;P(z) \sim \mathcal{N}(\textbf{0}, I)&lt;/script&gt;. Sampling from this distribution gives us random samples belonging to the 2D plane with many samples being generated near the mean &lt;script type=&quot;math/tex&quot;&gt;[0,0]&lt;/script&gt;. If we want to explore the latent space smoothly we can ignore gaussian sampling for a moment and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
       &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -93,13 +95,18 @@
 &lt;span class=&quot;n&quot;&gt;y_pixel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../images/latent_space.png&quot; alt=&quot;dim&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/latent_space.png&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Beautiful isn’t it ? The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; encodes a bit the orientation attribute. See how negative value are tilted right, while positive values are tilted right. Obviously, 2 dimensions is very small, so the network has to encode other concepts in this dimension introducing correlated attributes.&lt;/p&gt;
+&lt;p&gt;Beautiful isn’t it ? The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; encodes a bit the orientation attribute. See how negative value are tilted right, while positive values are tilted right. By setting intentionnally 2 latent dimensions thee network has to encode many concepts within the same space introducing correlated attributes.&lt;/p&gt;
 
 &lt;p&gt;The grid sampling is pretty but static, how is it like to move inside this space ?&lt;/p&gt;
 
-&lt;p&gt;We can set up a simple parametric curve describing a spiral inside the domain &lt;script type=&quot;math/tex&quot;&gt;x, y \in [-2,2]&lt;/script&gt; and decode at regular interval (in parametric space) the latent vector to output the image. We visualize the curve overlayed on the gaussian prior, the latent vector at time t and the corresponding decoded image.&lt;/p&gt;
+&lt;p&gt;We can set up a simple parametric curve describing a spiral inside the domain &lt;script type=&quot;math/tex&quot;&gt;x, y \in [-2,2]&lt;/script&gt; and decode at regular interval (in parametric space) the latent vector to output the image.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{array}{lcl} x(t) &amp; = &amp; (0.1\cdot t\cdot 2 - 2)\cdot \sin(t) \\ y(t) &amp; = &amp; (0.1\cdot t\cdot 2 - 2)\cdot \cos(t) \\ t &amp; \in &amp; [0,3\pi]\end{array} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;We visualize the trace of &lt;script type=&quot;math/tex&quot;&gt;(x(t), y(t))&lt;/script&gt; overlayed on the gaussian prior, the latent vector components at time &lt;script type=&quot;math/tex&quot;&gt;t&lt;/script&gt; and the corresponding decoded image.&lt;/p&gt;
 
 &lt;div style=&quot;text-align:center;&quot;&gt;
 &lt;video style=&quot;margin: 0 auto; width: 100%; max-width: 1020px;&quot; autoplay=&quot;&quot; loop=&quot;loop&quot;&gt;
@@ -111,27 +118,29 @@
    &lt;/video&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;what-about-higher-dimension-&quot;&gt;What about higher dimension ?&lt;/h3&gt;
+&lt;h3 id=&quot;what-about-higher-dimensions-&quot;&gt;What about higher dimensions ?&lt;/h3&gt;
 
 &lt;p&gt;Going up in dimensions for &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; is fairly easy in code, but we have to be careful when exploring high-dimensional spaces. After seeing the 2D grid, it’s easy to think about a 3D box. Now think about a 100D box. Hard right ? Not only it’s impossible for us to have a visual representation of such objects, but our intuition in low dimensional spaces are just wrong as we go up in dimensions.&lt;/p&gt;
 
 &lt;p&gt;Let’s think about a simple object : all its points are at the same distance of another center point. In 2D it’s called a circle, in 2D a sphere … Now let’s compute a basic property of this object :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Area of the unit-circle : &lt;script type=&quot;math/tex&quot;&gt;V_2 = \pi&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Volume of unit-sphere : &lt;script type=&quot;math/tex&quot;&gt;V_3 = \frac{4}{3}\pi​&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Volume of unit 4-sphere : &lt;script type=&quot;math/tex&quot;&gt;V_4 = \frac{1}{2}\pi^{2}&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Area of the unit-circle : &lt;script type=&quot;math/tex&quot;&gt;V_2 = \pi&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;The volume seems to increase, nothing strange.
+Funny things happen when considering the general expression :&lt;/p&gt;
 
-&lt;p&gt;3D : Volume of unit-sphere : &lt;script type=&quot;math/tex&quot;&gt;V_3 = \frac{4}{3}\pi​&lt;/script&gt;&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;V_n={\pi^{n/2}\over \Gamma(n/2+1)}&lt;/script&gt;
 
-&lt;p&gt;4D : Volume of unit 4-sphere : &lt;script type=&quot;math/tex&quot;&gt;V_4 = \frac{1}{2}\pi^{2}&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/sphere.svg&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The volume seems to increase, nothing strange.&lt;/p&gt;
+&lt;p&gt;Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, gaussian sampling is a bit &lt;em&gt;different&lt;/em&gt;. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to the domain delimited by an unit &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere centered at origin we would integrate the density on the hypersphere volume, which is very close to 0 for large &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, as we have to increase the radius of the &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere for it to have a sufficient volume and therefore a bit of gaussian integrated density, there is a gap where almost no sample are sampled. All sampling is concentrated within a slice of the space. We can see it in action by plotting the norm of sampled vector for multivariate normal of various dimensions :&lt;/p&gt;
 
-&lt;p&gt;General expression : &lt;script type=&quot;math/tex&quot;&gt;V_n={\pi^{n/2}\over \Gamma(n/2+1)}&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/dim.svg&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../images/sphere.svg&quot; alt=&quot;dim&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Oops. This is something our intuition has struggles dealing with. How does it have consequences in high-dimensionnal space exploration ? Well because the volume of hyperspheres goes to 0 as dimensions increase, gaussian sampling is a bit &lt;em&gt;different&lt;/em&gt;. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that samples belong to a n-sphere centered at origin we would integrate the density on the hypersphere volume, as to say 0. Hmm. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimension). More precisely, as we have to increase the radius of the n-sphere for it to have a sufficient volume and therefore a bit of gaussian integrated density, there is a gap where almost no sample are sampled. All sampling is concentrated within a slice a the space. We can see it in action by plotting the norm of sampled vector for multivariate normal of various dimensions :&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../images/dim.svg&quot; alt=&quot;dim&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;This is what is called the norm concentration, for large dimensions &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; all the samples have their &lt;script type=&quot;math/tex&quot;&gt;L^{p}&lt;/script&gt; norms concentrated in an annulus of radius &lt;script type=&quot;math/tex&quot;&gt;\sqrt{D}&lt;/script&gt;. This is very similar to what a uniform spherical distribution would give us. This has serious implication when latent space interpolation is used in high dimensions. As we were wandering around within a grid in 2D space or a box in 3D, we were actually &lt;em&gt;covering&lt;/em&gt; the prior distribution used by our model. With gaussians behaving like spherical uniform distributions in high dimensions, we have to make sure we are exploring space &lt;em&gt;within&lt;/em&gt; high probability spaces. One way is to only decode latent vector having an &lt;script type=&quot;math/tex&quot;&gt;L^{p}&lt;/script&gt; norm of &lt;script type=&quot;math/tex&quot;&gt;\sqrt{p}&lt;/script&gt; (or belonging to a &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;-sphere of radius &lt;script type=&quot;math/tex&quot;&gt;\sqrt{p}&lt;/script&gt;).&lt;/p&gt;
 
 </content>
  </entry>
