@@ -46,7 +46,7 @@ $$\mathcal{L} =  -E_{z\sim Q(z\mid x)}[log(p(x\mid z))] + KL(Q(z\mid x)\mid \mid
 
 We then take the assumption that the posterior is following an isotropic Gaussian distribution to simplify the KL divergence calculus ($$\mathbf{z}$$ has dimension $$D$$). If you want details you can check the demonstration in the [original paper]([https://arxiv.org/abs/1312.6114])
 
-It also has the avantage to simplify our architecture : the encoder network only encodes two vectors for each sample : one of means and one of variances (the gaussian components are supposed independent hence the need for only one variance **vector**). Many realizations of latent vectors can then sampled from the multivariate normal distribution. The training phase ensures that the posterior $$Q(z\mid x)$$ doesn't get too far from the prior $$P(z)$$ while also giving good reconstruction performance.
+It also has the avantage to simplify our architecture : the encoder network only encodes two vectors for each sample : one of means and one of variances (the Gaussian components are supposed independent hence the need for only one variance **vector**). Many realizations of latent vectors can then sampled from the multivariate normal distribution. The training phase ensures that the posterior $$Q(z\mid x)$$ doesn't get too far from the prior $$P(z)$$ while also giving good reconstruction performance.
 
 I personnally consider I don't fully understand a concept if I can't make it work in practice. See this simple VAE implementation in PyTorch at [github.com/alelouis/vae](https://github.com/alelouis/vae). I recommand playing with it and reimplementing it as an exercise. 
 
@@ -64,7 +64,7 @@ We can use visual tools to explore latent space and understand what the model is
 
 ### 2D Latent Space on MNIST VAE
 
-Humans are very limited (yes), one reason why is that we can't visually conceptualize objects in more than 3 dimensions. The good news is that we have a tool to understand hidden behavior even if we can't *see* it, it's called **maths** (sorry). But for now let's stick to our comfort zone. We will sneak peek into a 2-dimensional latent space from a VAE trained on MNIST samples. As explained previously, we can generate latent vector by sampling from our prior $$P(z) \sim \mathcal{N}(\textbf{0}, I)$$. Sampling from this distribution gives us random samples belonging to the 2D plane with many samples being generated near the mean $$[0,0]$$. If we want to explore the latent space smoothly we can ignore gaussian sampling for a moment and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.
+Humans are very limited (yes), one reason why is that we can't visually conceptualize objects in more than 3 dimensions. The good news is that we have a tool to understand hidden behavior even if we can't *see* it, it's called **maths** (sorry). But for now let's stick to our comfort zone. We will sneak peek into a 2-dimensional latent space from a VAE trained on MNIST samples. As explained previously, we can generate latent vector by sampling from our prior $$P(z) \sim \mathcal{N}(\textbf{0}, I)$$. Sampling from this distribution gives us random samples belonging to the 2D plane with many samples being generated near the mean $$[0,0]$$. If we want to explore the latent space smoothly we can ignore Gaussian sampling for a moment and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.
 
 ```python
 for i in x:
@@ -88,7 +88,7 @@ We can set up a simple parametric curve describing a spiral inside the domain $$
 
 $$\begin{array}{lcl} x(t) & = & (0.1\cdot t\cdot 2 - 2)\cdot \sin(t) \\ y(t) & = & (0.1\cdot t\cdot 2 - 2)\cdot \cos(t) \\ t & \in & [0,3\pi]\end{array}$$
 
-We visualize the trace of $$(x(t), y(t))$$ overlayed on the gaussian prior, the latent vector components at time $$t$$ and the corresponding decoded image.
+We visualize the trace of $$(x(t), y(t))$$ overlayed on the Gaussian prior, the latent vector components at time $$t$$ and the corresponding decoded image.
 
 <div style="text-align:center;">
 <video  style="margin: 0 auto; width: 100%; max-width: 1020px;" autoplay loop="loop">
@@ -116,11 +116,11 @@ $$V_n={\pi^{n/2}\over \Gamma(n/2+1)}$$
 
 ![dim](../images/sphere.svg){: .center-image }
 
-Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, gaussian sampling is a bit *different*. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to a given domain, like a unit $$n$$-sphere centered at origin, we would integrate the density on the hypersphere volume (an hyperball ? puns.), which is very close to 0 for large $$D$$. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, for the very reason we have to increase the radius of the $$n$$-sphere significantly for it to have a sufficient volume and therefore a bit of gaussian integrated density, there is a gap with almost zero probabilty. All sampling is concentrated within a slice of the space. We can check this phenomenon by plotting the norm of sampled vectors for multivariate normal of various dimensions :
+Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, Gaussian sampling is a bit *different*. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to a given domain, like a unit $$n$$-sphere centered at origin, we would integrate the density on the hypersphere volume (an hyperball ? puns.), which is very close to 0 for large $$D$$. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, for the very reason we have to increase the radius of the $$n$$-sphere significantly for it to have a sufficient volume and therefore a bit of Gaussian integrated density, there is a gap with almost zero probabilty. All sampling is concentrated within a slice of the space. We can check this phenomenon by plotting the norm of sampled vectors for multivariate normal of various dimensions :
 
 ![dim](../images/dim.svg){: .center-image }
 
-This is what is called the **norm concentration** : for large dimensions $$p$$ all the samples have their $$L^{p}$$ norms concentrated in an annulus of radius $$\sqrt{p}$$. This is very similar to what a uniform spherical distribution would give us. This has serious implication when latent space interpolation is used in high dimensions. As we were wandering around within a grid in 2D space or a box in 3D, we were actually *covering* the prior distribution used by our model. With gaussians behaving like spherical uniform distributions in high dimensions, we have to make sure we are exploring space *within* high probability spaces. One way is to only decode latent vector having an $$L^{p}$$ norm of $$\sqrt{p}$$ (or belonging to a $$p$$-sphere of radius $$\sqrt{p}$$). Said differently we can move on the surface of an $$n$$-sphere. The use of spherical coordinates is well suited here. Everyone is well aware of 2 (maybe 3) dimensions equations systems, but here is the $$n > 3$$ version :
+This is what is called the **norm concentration** : for large dimensions $$p$$ all the samples have their $$L^{p}$$ norms concentrated in an annulus of radius $$\sqrt{p}$$. This is very similar to what a uniform spherical distribution would give us. This has serious implication when latent space interpolation is used in high dimensions. As we were wandering around within a grid in 2D space or a box in 3D, we were actually *covering* the prior distribution used by our model. With Gaussians behaving like spherical uniform distributions in high dimensions, we have to make sure we are exploring space *within* high probability spaces. One way is to only decode latent vector having an $$L^{p}$$ norm of $$\sqrt{p}$$ (or belonging to a $$p$$-sphere of radius $$\sqrt{p}$$). Said differently we can move on the surface of an $$n$$-sphere. The use of spherical coordinates is well suited here. Everyone is well aware of 2 (maybe 3) dimensions equations systems, but here is the $$n > 3$$ version :
 
 $$\begin{align}
 x_1 &= r \cos(\theta_1) \\
@@ -149,6 +149,17 @@ x_5 &= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2}) \sin(\theta_{3})\s
 \end{align}
 $$
 
-I can't really figure out what movement theses equations are actually doing in high-dimensionnal space, what I can do however is plot the $${\rm I\!R^3}$$ system. The blue line is the 3D version path we will likely take to explore high dimensional $$\mathbf{z}$$ spaces while all blue scatter points are potential realization of a spherical uniform distribution (approximation to what an high-dimensionnal gaussian really is).
+I can't really figure out what movement theses equations are actually doing in $${\rm I\!R^n}$$ spaces, what I can do however is plot the $${\rm I\!R^3}$$ system. By setting all $$\theta_{1...n-2}$$ between $$[0,\pi]$$ **with** $$\theta_{n-1}$$ covering a multiple of $$2\pi$$ I can explore the sphere in a continuous spiraling effect. The blue line is the 3D version path we will likely take to explore high dimensional $$\mathbf{z}$$ spaces while all blue scatter points are potential realization of a spherical uniform distribution (approximation to what an $${\rm I\!R^n}$$ Gaussian really is).
 
 <img style="margin: 0 auto; display: block; width : 75%;" src="../images/sphere_3d.svg">
+
+
+I trained another VAE with this time 10 dimensions for $$\mathbf{z}$$. Because I can't plot the path taken, I want to be sure I cover a large part of the $$n$$-sphere surface as I did in the $${\rm I\!R^3}$$ version by making many loops around the ball. To really understand what the equations are describing I find it usefull to look the 3 projections of the previous path. It's easy to see how $$\theta_{2}$$ is parameterizing a circle ($$\cos(\theta_{2})$$ and $$\sin(\theta_{2})$$) which is scaled by the $$\sin$$ sequence preceding it. The two other planes simply cover a semi-circle modulated on one component by the spiral amplitude. Simiar things happens in higher dimensions, with only the last two $$x_{n}$$ and $$x_{n-1}$$ describing a spiral (which is why we will make $$\theta_{n-1}$$ cover of large multiple of $$2\pi$$) and all the other planes covering the $$n-1$$ $$[0,\pi]$$ intervals. 
+
+<img style="margin: 0 auto; display: block; width : 100%;" src="../images/slices.svg">
+
+Here are the 6 slices of a $$4$$-sphere : 
+
+<img style="margin: 0 auto; display: block; width : 75%;" src="../images/4d.svg">
+
+To increase the length of the interpolation animation we can explore a denser mesh on the hypersphere surface. The interval covered by $$\theta_{n-1}$$ determines the number of loops done. A period of $$2\pi$$ means that the start point is reached at the end point. A period of $$2n\pi$$ means the start point is reached $$n$$ time forming $$n$$ loops. Therefore, the mesh density can be tweaked with the number of $$\theta_{n-1}$$ periods done while $$\theta_{1...n-2}$$ go through $$[0,\pi]$$. 
