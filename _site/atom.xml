@@ -4,7 +4,7 @@
  <title>alelouis</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-11-13T23:21:18+01:00</updated>
+ <updated>2017-11-14T20:23:51+01:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Alexis LOUIS</name>
@@ -38,11 +38,11 @@
 
 &lt;p&gt;It makes sense, but the auto-encoder &lt;em&gt;can&lt;/em&gt; cheat.&lt;/p&gt;
 
-&lt;p&gt;Suppose the dimension of &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; is slightly higher. What mecanism can ensure that the learned representation is not a dumb mapping between far apart regions of latent space and all input samples. Well nothing. For example, the latent vector could easily encode each sample into binary positions (0001, 0010, 0011…) and have excellent reconstruction performance while having learn &lt;strong&gt;nothing&lt;/strong&gt; about data structure.&lt;/p&gt;
+&lt;p&gt;Suppose the dimension of &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; is slightly higher. What mecanism can ensure that the learned representation is not a trivial mapping between far apart regions of latent space and all input samples. Well, nothing. For example, the latent vector could easily encode each sample into binary positions (0001, 0010, 0011…) and have excellent reconstruction performance while having learn &lt;strong&gt;nothing&lt;/strong&gt; about data structure.&lt;/p&gt;
 
-&lt;p&gt;Because the network finds its own ways to compress data, we can’t understand fully its representation by looking at it. Nothing ensures that the vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_1} = [2.2,1.3]&lt;/script&gt; is decoded as an image of a 3 and &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_2} = [2.1,1.4]&lt;/script&gt;, while very close in latent space, is decoded as an image &lt;em&gt;also&lt;/em&gt; looking like a 3. Any interpretation of what latent dimensions represent is here arduous.&lt;/p&gt;
+&lt;p&gt;Because the network finds its own ways to compress data, we can’t understand fully its representation by looking at it. Nothing guarantees that the vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_1} = [2.2,1.3]&lt;/script&gt; is decoded as an image of a 3 and &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_2} = [2.1,1.4]&lt;/script&gt;, while very close in latent space, is decoded as an image &lt;em&gt;also&lt;/em&gt; looking like a 3. Any interpretation of what latent dimensions represent is here arduous.&lt;/p&gt;
 
-&lt;p&gt;Moreover, its hard to generate samples from this type of network. In order to generate a sample you have to find a latent vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; that will produce, once decoded, a plausible output (in the sense similar to inputs on which the AE was trained). The manifold represented by all the latent vectors associated to input samples is probably not covering the entire &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; space and sampling randomly will probably yields unprobable results.&lt;/p&gt;
+&lt;p&gt;Moreover, its hard to generate samples from this type of network. In order to generate a sample you have to find a latent vector &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; that will produce, once decoded, a plausible output (in the sense similar to inputs on which the AE was trained). The manifold represented by all the latent vectors associated to input samples is probably not covering the entire &lt;script type=&quot;math/tex&quot;&gt;\textbf{z}&lt;/script&gt; space and sampling randomly will surely yields unprobable results.&lt;/p&gt;
 
 &lt;p&gt;These limitations, latent space interpretation and generation, are trying to be solved with VAEs.&lt;/p&gt;
 
@@ -64,11 +64,11 @@
 
 &lt;p&gt;We then take the assumption that the posterior is following an isotropic Gaussian distribution to simplify the KL divergence calculus (&lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; has dimension &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;). If you want details you can check the demonstration in the &lt;a href=&quot;[https://arxiv.org/abs/1312.6114]&quot;&gt;original paper&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;It also has the avantage to simplify our architecture : the encoder network only encodes two vectors for each sample : one of means and one of variances. The real latent vector is then sampled from the multivariate normal distribution. The training phase ensure that the posterior &lt;script type=&quot;math/tex&quot;&gt;Q(z\mid x)&lt;/script&gt; doesn’t get too far from the prior &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt; while also giving good reconstruction performance.&lt;/p&gt;
+&lt;p&gt;It also has the avantage to simplify our architecture : the encoder network only encodes two vectors for each sample : one of means and one of variances (the gaussian components are supposed independent hence the need for only one variance &lt;strong&gt;vector&lt;/strong&gt;). Many realizations of latent vectors can then sampled from the multivariate normal distribution. The training phase ensures that the posterior &lt;script type=&quot;math/tex&quot;&gt;Q(z\mid x)&lt;/script&gt; doesn’t get too far from the prior &lt;script type=&quot;math/tex&quot;&gt;P(z)&lt;/script&gt; while also giving good reconstruction performance.&lt;/p&gt;
 
-&lt;p&gt;I personnally consider I don’t fully understand a concept if I can’t make it work in practice. See this simple VAE implementation in PyTorch at &lt;a href=&quot;https://github.com/alelouis/vae&quot;&gt;github.com/alelouis/vae&lt;/a&gt;. I recommand playing with it and reimplementing it for exercise if you can.&lt;/p&gt;
+&lt;p&gt;I personnally consider I don’t fully understand a concept if I can’t make it work in practice. See this simple VAE implementation in PyTorch at &lt;a href=&quot;https://github.com/alelouis/vae&quot;&gt;github.com/alelouis/vae&lt;/a&gt;. I recommand playing with it and reimplementing it as an exercise.&lt;/p&gt;
 
-&lt;p&gt;By running the network on MNIST with a latent space of dimension 2 we can then explore latent space representation, a very visual part.&lt;/p&gt;
+&lt;p&gt;By running the network on MNIST with a latent space of dimension 2 we can explore the latent space manifold, a very visual part.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -97,9 +97,9 @@
 
 &lt;p&gt;&lt;img src=&quot;../images/latent_space.png&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Beautiful isn’t it ? The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; encodes a bit the orientation attribute. See how negative value are tilted right, while positive values are tilted right. By setting intentionnally 2 latent dimensions thee network has to encode many concepts within the same space introducing correlated attributes.&lt;/p&gt;
+&lt;p&gt;Beautiful isn’t it ? The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; encodes a bit the orientation attribute. See how generated images in the negative &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_1}&lt;/script&gt;values are tilted left, while positive values are tilted right. By setting intentionnally 2 latent dimensions thee network has to encode many concepts within the same dimensions introducing correlated attributes.&lt;/p&gt;
 
-&lt;p&gt;The grid sampling is pretty but static, how is it like to move inside this space ?&lt;/p&gt;
+&lt;p&gt;The grid sampling is pretty but static, how is it like to &lt;em&gt;move&lt;/em&gt; inside this space ?&lt;/p&gt;
 
 &lt;p&gt;We can set up a simple parametric curve describing a spiral inside the domain &lt;script type=&quot;math/tex&quot;&gt;x, y \in [-2,2]&lt;/script&gt; and decode at regular interval (in parametric space) the latent vector to output the image.&lt;/p&gt;
 
@@ -122,7 +122,7 @@
 
 &lt;p&gt;Going up in dimensions for &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; is fairly easy in code, but we have to be careful when exploring high-dimensional spaces. After seeing the 2D grid, it’s easy to think about a 3D box. Now think about a 100D box. Hard right ? Not only it’s impossible for us to have a visual representation of such objects, but our intuition in low dimensional spaces are just wrong as we go up in dimensions.&lt;/p&gt;
 
-&lt;p&gt;Let’s think about a simple object : all its points are at the same distance of another center point. In 2D it’s called a circle, in 2D a sphere … Now let’s compute a basic property of this object :&lt;/p&gt;
+&lt;p&gt;To demonstrate how bad our intuitions can be let’s think about a simple object : all its forming points are at the same distance of another point, called the center. In &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^2}&lt;/script&gt; it corresponds to a circle, in &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^3}&lt;/script&gt; a sphere … Now let’s compute a basic property of this object :&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Area of the unit-circle : &lt;script type=&quot;math/tex&quot;&gt;V_2 = \pi&lt;/script&gt;&lt;/li&gt;
   &lt;li&gt;Volume of unit-sphere : &lt;script type=&quot;math/tex&quot;&gt;V_3 = \frac{4}{3}\pi​&lt;/script&gt;&lt;/li&gt;
@@ -136,12 +136,42 @@ Funny things happen when considering the general expression :&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/sphere.svg&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, gaussian sampling is a bit &lt;em&gt;different&lt;/em&gt;. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to the domain delimited by an unit &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere centered at origin we would integrate the density on the hypersphere volume, which is very close to 0 for large &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, as we have to increase the radius of the &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere for it to have a sufficient volume and therefore a bit of gaussian integrated density, there is a gap where almost no sample are sampled. All sampling is concentrated within a slice of the space. We can see it in action by plotting the norm of sampled vector for multivariate normal of various dimensions :&lt;/p&gt;
+&lt;p&gt;Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, gaussian sampling is a bit &lt;em&gt;different&lt;/em&gt;. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to a given domain, like a unit &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere centered at origin, we would integrate the density on the hypersphere volume (an hyperball ? puns.), which is very close to 0 for large &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, for the very reason we have to increase the radius of the &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere significantly for it to have a sufficient volume and therefore a bit of gaussian integrated density, there is a gap with almost zero probabilty. All sampling is concentrated within a slice of the space. We can check this phenomenon by plotting the norm of sampled vectors for multivariate normal of various dimensions :&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/dim.svg&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;This is what is called the norm concentration, for large dimensions &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; all the samples have their &lt;script type=&quot;math/tex&quot;&gt;L^{p}&lt;/script&gt; norms concentrated in an annulus of radius &lt;script type=&quot;math/tex&quot;&gt;\sqrt{D}&lt;/script&gt;. This is very similar to what a uniform spherical distribution would give us. This has serious implication when latent space interpolation is used in high dimensions. As we were wandering around within a grid in 2D space or a box in 3D, we were actually &lt;em&gt;covering&lt;/em&gt; the prior distribution used by our model. With gaussians behaving like spherical uniform distributions in high dimensions, we have to make sure we are exploring space &lt;em&gt;within&lt;/em&gt; high probability spaces. One way is to only decode latent vector having an &lt;script type=&quot;math/tex&quot;&gt;L^{p}&lt;/script&gt; norm of &lt;script type=&quot;math/tex&quot;&gt;\sqrt{p}&lt;/script&gt; (or belonging to a &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;-sphere of radius &lt;script type=&quot;math/tex&quot;&gt;\sqrt{p}&lt;/script&gt;).&lt;/p&gt;
+&lt;p&gt;This is what is called the &lt;strong&gt;norm concentration&lt;/strong&gt; : for large dimensions &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; all the samples have their &lt;script type=&quot;math/tex&quot;&gt;L^{p}&lt;/script&gt; norms concentrated in an annulus of radius &lt;script type=&quot;math/tex&quot;&gt;\sqrt{p}&lt;/script&gt;. This is very similar to what a uniform spherical distribution would give us. This has serious implication when latent space interpolation is used in high dimensions. As we were wandering around within a grid in 2D space or a box in 3D, we were actually &lt;em&gt;covering&lt;/em&gt; the prior distribution used by our model. With gaussians behaving like spherical uniform distributions in high dimensions, we have to make sure we are exploring space &lt;em&gt;within&lt;/em&gt; high probability spaces. One way is to only decode latent vector having an &lt;script type=&quot;math/tex&quot;&gt;L^{p}&lt;/script&gt; norm of &lt;script type=&quot;math/tex&quot;&gt;\sqrt{p}&lt;/script&gt; (or belonging to a &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;-sphere of radius &lt;script type=&quot;math/tex&quot;&gt;\sqrt{p}&lt;/script&gt;). Said differently we can move on the surface of an &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere. The use of spherical coordinates is well suited here. Everyone is well aware of 2 (maybe 3) dimensions equations systems, but here is the &lt;script type=&quot;math/tex&quot;&gt;n &gt; 3&lt;/script&gt; version :&lt;/p&gt;
 
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+x_1 &amp;= r \cos(\theta_1) \\
+    &amp;\vdots\\
+x_{n-1} &amp;= r \sin(\theta_1) \cdots \sin(\theta_{n-2}) \cos(\theta_{n-1}) \\
+x_n &amp;= r \sin(\theta_1) \cdots \sin(\theta_{n-2}) \sin(\theta_{n-1})\\
+\theta_{1...n-2} &amp;\in [0,\pi]\\
+\theta_{n-1} &amp;\in [0,2\pi]
+\end{align} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;For instance, the surface of a &lt;script type=&quot;math/tex&quot;&gt;5&lt;/script&gt;-sphere of radius &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; can be parameterized with these 5 cartesian coordinates
+(the color coding shows how I remember the structure):&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\definecolor{r}{RGB}{18,110,213}
+\definecolor{sin}{RGB}{217,70,70}
+\definecolor{cos}{RGB}{10,150,40}
+
+
+x_1 &amp;= \color{r} r \color{cos} \cos(\theta_1) \\
+x_2 &amp;= \color{r} r \color{sin} \sin(\theta_1)\color{cos} \cos(\theta_2) \\
+x_3 &amp;= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2})\color{cos}\cos(\theta_{3}) \\
+x_4 &amp;= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2}) \sin(\theta_{3})\color{cos}\cos(\theta_{4})\\
+x_5 &amp;= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2}) \sin(\theta_{3})\sin(\theta_{4})
+\end{align} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;I can’t really figure out what movement theses equations are actually doing in high-dimensionnal space, what I can do however is plot the &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^3}&lt;/script&gt; system. The blue line is the 3D version path we will likely take to explore high dimensional &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; spaces while all blue scatter points are potential realization of a spherical uniform distribution (approximation to what an high-dimensionnal gaussian really is).&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 75%;&quot; src=&quot;../images/sphere_3d.svg&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
