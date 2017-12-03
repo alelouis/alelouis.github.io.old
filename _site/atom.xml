@@ -4,7 +4,7 @@
  <title>alelouis</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-12-03T21:39:32+01:00</updated>
+ <updated>2017-12-03T21:46:03+01:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Alexis LOUIS</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Latent Space Interpolations</title>
-   <link href="http://localhost:4000/2017/11/12/latent-space-interpolations/"/>
-   <updated>2017-11-12T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2017/11/12/latent-space-interpolations</id>
+   <link href="http://localhost:4000/2017/12/03/latent-space-interpolations/"/>
+   <updated>2017-12-03T00:00:00+01:00</updated>
+   <id>http://localhost:4000/2017/12/03/latent-space-interpolations</id>
    <content type="html">
 &lt;p&gt;My intent with this post is to formalize thoughts I came across while playing with generative models and especially VAEs. Firstly interested by visual aspects of latent space interpolation, I found myself digging deeper to gain high-dimensionnal intuitions and share here my understanding.&lt;/p&gt;
 
