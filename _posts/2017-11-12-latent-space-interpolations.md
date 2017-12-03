@@ -64,7 +64,7 @@ We can use visual tools to explore latent space and understand what the model is
 
 ### 2D Latent Space on MNIST VAE
 
-Humans are very limited (yes), one reason why is that we can't visually conceptualize objects in more than 3 dimensions. The good news is that we have a tool to understand hidden behavior even if we can't *see* it, it's called **maths** (sorry). But for now let's stick to our comfort zone. We will sneak peek into a 2-dimensional latent space from a VAE trained on MNIST samples. As explained previously, we can generate latent vector by sampling from our prior $$P(z) \sim \mathcal{N}(\textbf{0}, I)$$. Sampling from this distribution gives us random samples belonging to the 2D plane with many samples being generated near the mean $$[0,0]$$. If we want to explore the latent space smoothly we can ignore Gaussian sampling for a moment and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.
+Humans are very limited (yes), one reason why is that we can't visually conceptualize objects in more than 3 dimensions. Fortunatly we can use maths to understand hidden behaviors even if we can't *see* the phenomenons. But to start let's stick to our comfort zone. We will sneak peek into a 2-dimensional latent space from a VAE trained on MNIST samples. As explained previously, we can generate latent vectors by sampling from our prior $$P(z) \sim \mathcal{N}(\textbf{0}, I)$$. Sampling from this distribution gives us random samples belonging to the 2D plane with many samples being generated near the mean $$[0,0]$$. If we want to explore the latent space smoothly we can ignore Gaussian sampling for a moment and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.
 
 ```python
 for i in x:
@@ -80,7 +80,7 @@ y_pixel = 0
 
 ![dim](../images/latent_space.png){: .center-image }
 
-Beautiful isn't it ? The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of $$\mathbf{z}$$ encodes a bit the orientation attribute. See how generated images in the negative $$\mathbf{z_1}$$values are tilted left, while positive values are tilted right. By setting intentionnally 2 latent dimensions thee network has to encode many concepts within the same dimensions introducing correlated attributes.
+That's pretty. The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of $$\mathbf{z}$$ encodes a bit the orientation attribute. See how generated images in the negative $$\mathbf{z_1}$$values are tilted left, while positive values are tilted right. By setting intentionnally 2 latent dimensions thee network has to encode many concepts within the same dimensions introducing correlated attributes.
 
 The grid sampling is pretty but static, how is it like to *move* inside this space ?
 
@@ -104,7 +104,7 @@ We visualize the trace of $$(x(t), y(t))$$ overlayed on the Gaussian prior, the 
 
 Going up in dimensions for $$\mathbf{z}$$ is fairly easy in code, but we have to be careful when exploring high-dimensional spaces. After seeing the 2D grid, it's easy to think about a 3D box. Now think about a 100D box. Hard right ? Not only it's impossible for us to have a visual representation of such objects, but our intuition in low dimensional spaces are just wrong as we go up in dimensions.
 
-To demonstrate how bad our intuitions can be let's think about a simple object : all its forming points are at the same distance of another point, called the center. In $${\rm I\!R^2}$$ it corresponds to a circle, in $${\rm I\!R^3}$$ a sphere ... Now let's compute a basic property of this object :
+To demonstrate how bad our intuitions can be let's think about a simple object : all its forming points are at the same distance of another point, called the center. In $${\rm I\!R^2}$$ it's called a circle, in $${\rm I\!R^3}$$ a sphere ... Now let's compute a basic property of this object :
 - Area of the unit-circle : $$V_2 = \pi$$
 - Volume of unit-sphere : $$V_3 = \frac{4}{3}\pi​$$ 
 - Volume of unit 4-sphere : $$V_4 = \frac{1}{2}\pi^{2}$$ 
@@ -116,7 +116,7 @@ $$V_n={\pi^{n/2}\over \Gamma(n/2+1)}$$
 
 ![dim](../images/sphere.svg){: .center-image }
 
-Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, Gaussian sampling is a bit *different*. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to a given domain, like a unit $$n$$-sphere centered at origin, we would integrate the density on the hypersphere volume (an hyperball ? puns.), which is very close to 0 for large $$D$$. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, for the very reason we have to increase the radius of the $$n$$-sphere significantly for it to have a sufficient volume and therefore a bit of Gaussian integrated density, there is a gap with almost zero probabilty. All sampling is concentrated within a slice of the space. We can check this phenomenon by plotting the norm of sampled vectors for multivariate normal of various dimensions :
+Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, Gaussian sampling is a bit *different*. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to a given domain, like a unit $$n$$-sphere centered at origin, we would integrate the density on the hypersphere volume (an hyperball ? puns.), which is very close to 0 for large $$D$$. This means we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, for the very reason we have to increase the radius of the $$n$$-sphere significantly for it to have a sufficient volume and therefore a bit of Gaussian integrated density, there is a gap with almost zero probabilty. All sampling is concentrated within a slice of the space. We can check this phenomenon by plotting the norm of sampled vectors for multivariate normal of various dimensions :
 
 ![dim](../images/dim.svg){: .center-image }
 
@@ -149,10 +149,12 @@ x_5 &= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2}) \sin(\theta_{3})\s
 \end{align}
 $$
 
-I can't really figure out what movement theses equations are actually doing in $${\rm I\!R^n}$$ spaces, what I can do however is plot the $${\rm I\!R^3}$$ system. By setting all $$\theta_{1...n-2}$$ between $$[0,\pi]$$ **with** $$\theta_{n-1}$$ covering a multiple of $$2\pi$$ I can explore the sphere in a continuous spiraling effect. The blue line is the 3D version path we will likely take to explore high dimensional $$\mathbf{z}$$ spaces while all blue scatter points are potential realization of a spherical uniform distribution (approximation to what an $${\rm I\!R^n}$$ Gaussian really is).
+I can't really figure out what individual dimensions in theses equations are actually doing in $${\rm I\!R^n}$$ spaces, what I can do however is plot the $${\rm I\!R^3}$$ system. By setting all $$\theta_{1...n-2}$$ between $$[0,\pi]$$ with $$\theta_{n-1}$$ covering a multiple of $$2\pi$$ I can explore the sphere in a continuous spiraling effect. The blue line is the 3D version path we will likely take to explore high dimensional $$\mathbf{z}$$ spaces while all blue scatter points are potential realization of a spherical uniform distribution (approximation to what an $${\rm I\!R^n}$$ Gaussian really is).
 
 <img style="margin: 0 auto; display: block; width : 75%;" src="../images/sphere_3d.svg">
 
+
+### Exploring the entire space 
 
 I trained another VAE with this time 10 dimensions for $$\mathbf{z}$$. Because I can't plot the path taken, I want to be sure I cover a large part of the $$n$$-sphere surface as I did in the $${\rm I\!R^3}$$ version by making many loops around the ball. To really understand what the equations are describing I find it usefull to look the 3 projections of the previous path. It's easy to see how $$\theta_{2}$$ is parameterizing a circle ($$\cos(\theta_{2})$$ and $$\sin(\theta_{2})$$) which is scaled by the $$\sin$$ sequence preceding it. The two other planes simply cover a semi-circle modulated on one component by the spiral amplitude. Simiar things happens in higher dimensions, with only the last two $$x_{n}$$ and $$x_{n-1}$$ describing a spiral (which is why we will make $$\theta_{n-1}$$ cover of large multiple of $$2\pi$$) and all the other planes covering the $$n-1$$ $$[0,\pi]$$ intervals. 
 
@@ -162,4 +164,28 @@ Here are the 6 slices of a $$4$$-sphere :
 
 <img style="margin: 0 auto; display: block; width : 75%;" src="../images/4d.svg">
 
-To increase the length of the interpolation animation we can explore a denser mesh on the hypersphere surface. The interval covered by $$\theta_{n-1}$$ determines the number of loops done. A period of $$2\pi$$ means that the start point is reached at the end point. A period of $$2n\pi$$ means the start point is reached $$n$$ time forming $$n$$ loops. Therefore, the mesh density can be tweaked with the number of $$\theta_{n-1}$$ periods done while $$\theta_{1...n-2}$$ go through $$[0,\pi]$$. 
+
+
+One way to increase the length of the interpolation animation is to explore a denser mesh on the hypersphere surface. The interval covered by $$\theta_{n-1}$$ determines the number of loops done. A period of $$2\pi$$ means that the start point is reached at the end point. A period of $$2n\pi$$ means the start point is reached $$n$$ time forming $$n$$ loops. Therefore, the mesh density could be tweaked with the number of $$\theta_{n-1}$$ periods done while $$\theta_{1...n-2}$$ go through $$[0,\pi]$$. This is useful to create fluid and continuous interpolations in high dimensional latent spaces and is a generalization of the animated plot saw earlier.
+
+### Interpolating between two points 
+
+To illustrate low probabilty space bad representation we can interpolate throught latent space via linear and spherical methods. Linear methods will inevitably yields to sampling *inside* the hypersphere while spherical will stay on the surface. Here we go for the slerp & lerp :  
+
+$$ \textbf{lerp}(i,j,t) = i + t(j-i) $$  
+  
+$$ \textbf{slerp}(i,j,t) = i\frac{\sin((1-t)\theta)}{\sin(\theta)} + j\frac{\sin(t\theta)}{\sin(\theta)}$$
+
+<img style="margin: 0 auto; display: block; width : 75%;" src="../images/slerp.svg">
+
+I generated two random gaussians samples from the prior, normalized, scaled them and then interpolated between the two using lerp and slerp methods.
+<img style="margin: 0 auto; display: block; width : 125%;" src="../images/interpol_samples.svg">
+
+The top row are samples belonging to the lerp segment while the bottom is taken from the slerp arc. The VAE was trained with 500 (!) latent dimensions so that the Gaussian distribution can be though as an uniform hyperspherical of radius $$\sqrt{500} \approx 22$$. While the VAE has fairly bad representations, the aim here is to show that the top row has *noisier* representations during lerp interpolation. It's easy to compare images from the middle of the rows and notice on lerp path that digits are more blurry and not well defined compared to the slerp path results. We can plot for the two last paths the norms of the interpolated latent vectors. Without surprise the lerp goes way below the annulus of radius 22 and we can expect (and we saw that) worst reconstructions at mid-interpolation.
+
+<img style="margin: 0 auto; display: block; width : 60%;" src="../images/norm_interpolation.svg">
+
+**Personnal reminder** : high dimensions are weird and intuitive ideas are often bad.
+
+## Conclusion 
+I hope you found this post interesting, that it raised questions that you didn't necessarly think about and stimulated your curiosity. Stay curious ! 

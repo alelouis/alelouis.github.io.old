@@ -4,7 +4,7 @@
  <title>alelouis</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-11-14T23:35:28+01:00</updated>
+ <updated>2017-12-03T21:39:32+01:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Alexis LOUIS</name>
@@ -82,7 +82,7 @@
 
 &lt;h3 id=&quot;2d-latent-space-on-mnist-vae&quot;&gt;2D Latent Space on MNIST VAE&lt;/h3&gt;
 
-&lt;p&gt;Humans are very limited (yes), one reason why is that we can’t visually conceptualize objects in more than 3 dimensions. The good news is that we have a tool to understand hidden behavior even if we can’t &lt;em&gt;see&lt;/em&gt; it, it’s called &lt;strong&gt;maths&lt;/strong&gt; (sorry). But for now let’s stick to our comfort zone. We will sneak peek into a 2-dimensional latent space from a VAE trained on MNIST samples. As explained previously, we can generate latent vector by sampling from our prior &lt;script type=&quot;math/tex&quot;&gt;P(z) \sim \mathcal{N}(\textbf{0}, I)&lt;/script&gt;. Sampling from this distribution gives us random samples belonging to the 2D plane with many samples being generated near the mean &lt;script type=&quot;math/tex&quot;&gt;[0,0]&lt;/script&gt;. If we want to explore the latent space smoothly we can ignore Gaussian sampling for a moment and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.&lt;/p&gt;
+&lt;p&gt;Humans are very limited (yes), one reason why is that we can’t visually conceptualize objects in more than 3 dimensions. Fortunatly we can use maths to understand hidden behaviors even if we can’t &lt;em&gt;see&lt;/em&gt; the phenomenons. But to start let’s stick to our comfort zone. We will sneak peek into a 2-dimensional latent space from a VAE trained on MNIST samples. As explained previously, we can generate latent vectors by sampling from our prior &lt;script type=&quot;math/tex&quot;&gt;P(z) \sim \mathcal{N}(\textbf{0}, I)&lt;/script&gt;. Sampling from this distribution gives us random samples belonging to the 2D plane with many samples being generated near the mean &lt;script type=&quot;math/tex&quot;&gt;[0,0]&lt;/script&gt;. If we want to explore the latent space smoothly we can ignore Gaussian sampling for a moment and follow a continuous path on the 2D plane where our prior has high probability. The first idea we can get is to decode latent vectors belonging to a centered grid in latent space. In Python / PyTorch we could decode each grid point (latent vector) and display each output and the 2D plane.&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
       &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -97,7 +97,7 @@
 
 &lt;p&gt;&lt;img src=&quot;../images/latent_space.png&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Beautiful isn’t it ? The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; encodes a bit the orientation attribute. See how generated images in the negative &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_1}&lt;/script&gt;values are tilted left, while positive values are tilted right. By setting intentionnally 2 latent dimensions thee network has to encode many concepts within the same dimensions introducing correlated attributes.&lt;/p&gt;
+&lt;p&gt;That’s pretty. The most fascinating thing is the smooth transitions between each of our human concepts (digits). Even if we have only two dimension, we can already see glimpses of the learned structure. The first dimension of &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; encodes a bit the orientation attribute. See how generated images in the negative &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z_1}&lt;/script&gt;values are tilted left, while positive values are tilted right. By setting intentionnally 2 latent dimensions thee network has to encode many concepts within the same dimensions introducing correlated attributes.&lt;/p&gt;
 
 &lt;p&gt;The grid sampling is pretty but static, how is it like to &lt;em&gt;move&lt;/em&gt; inside this space ?&lt;/p&gt;
 
@@ -122,7 +122,7 @@
 
 &lt;p&gt;Going up in dimensions for &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; is fairly easy in code, but we have to be careful when exploring high-dimensional spaces. After seeing the 2D grid, it’s easy to think about a 3D box. Now think about a 100D box. Hard right ? Not only it’s impossible for us to have a visual representation of such objects, but our intuition in low dimensional spaces are just wrong as we go up in dimensions.&lt;/p&gt;
 
-&lt;p&gt;To demonstrate how bad our intuitions can be let’s think about a simple object : all its forming points are at the same distance of another point, called the center. In &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^2}&lt;/script&gt; it corresponds to a circle, in &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^3}&lt;/script&gt; a sphere … Now let’s compute a basic property of this object :&lt;/p&gt;
+&lt;p&gt;To demonstrate how bad our intuitions can be let’s think about a simple object : all its forming points are at the same distance of another point, called the center. In &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^2}&lt;/script&gt; it’s called a circle, in &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^3}&lt;/script&gt; a sphere … Now let’s compute a basic property of this object :&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Area of the unit-circle : &lt;script type=&quot;math/tex&quot;&gt;V_2 = \pi&lt;/script&gt;&lt;/li&gt;
   &lt;li&gt;Volume of unit-sphere : &lt;script type=&quot;math/tex&quot;&gt;V_3 = \frac{4}{3}\pi​&lt;/script&gt;&lt;/li&gt;
@@ -136,7 +136,7 @@ Funny things happen when considering the general expression :&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/sphere.svg&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, Gaussian sampling is a bit &lt;em&gt;different&lt;/em&gt;. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to a given domain, like a unit &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere centered at origin, we would integrate the density on the hypersphere volume (an hyperball ? puns.), which is very close to 0 for large &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;. This mean we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, for the very reason we have to increase the radius of the &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere significantly for it to have a sufficient volume and therefore a bit of Gaussian integrated density, there is a gap with almost zero probabilty. All sampling is concentrated within a slice of the space. We can check this phenomenon by plotting the norm of sampled vectors for multivariate normal of various dimensions :&lt;/p&gt;
+&lt;p&gt;Oops. This is something our intuition has struggles dealing with. Now, this surely has consequences in high-dimensionnal space exploration. In fact, because the volume of hyperspheres goes to 0 as dimensions increase, Gaussian sampling is a bit &lt;em&gt;different&lt;/em&gt;. While a multivariate normal still has its maximum at the origin, if we were to compute the probability that a sample belongs to a given domain, like a unit &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere centered at origin, we would integrate the density on the hypersphere volume (an hyperball ? puns.), which is very close to 0 for large &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt;. This means we have a very low probability of having samples close to origin (which is not the case in low-dimensions). More precisely, for the very reason we have to increase the radius of the &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere significantly for it to have a sufficient volume and therefore a bit of Gaussian integrated density, there is a gap with almost zero probabilty. All sampling is concentrated within a slice of the space. We can check this phenomenon by plotting the norm of sampled vectors for multivariate normal of various dimensions :&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/dim.svg&quot; alt=&quot;dim&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
@@ -169,9 +169,11 @@ x_4 &amp;= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2}) \sin(\theta_{3
 x_5 &amp;= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2}) \sin(\theta_{3})\sin(\theta_{4})
 \end{align} %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;I can’t really figure out what movement theses equations are actually doing in &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^n}&lt;/script&gt; spaces, what I can do however is plot the &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^3}&lt;/script&gt; system. By setting all &lt;script type=&quot;math/tex&quot;&gt;\theta_{1...n-2}&lt;/script&gt; between &lt;script type=&quot;math/tex&quot;&gt;[0,\pi]&lt;/script&gt; &lt;strong&gt;with&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;\theta_{n-1}&lt;/script&gt; covering a multiple of &lt;script type=&quot;math/tex&quot;&gt;2\pi&lt;/script&gt; I can explore the sphere in a continuous spiraling effect. The blue line is the 3D version path we will likely take to explore high dimensional &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; spaces while all blue scatter points are potential realization of a spherical uniform distribution (approximation to what an &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^n}&lt;/script&gt; Gaussian really is).&lt;/p&gt;
+&lt;p&gt;I can’t really figure out what individual dimensions in theses equations are actually doing in &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^n}&lt;/script&gt; spaces, what I can do however is plot the &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^3}&lt;/script&gt; system. By setting all &lt;script type=&quot;math/tex&quot;&gt;\theta_{1...n-2}&lt;/script&gt; between &lt;script type=&quot;math/tex&quot;&gt;[0,\pi]&lt;/script&gt; with &lt;script type=&quot;math/tex&quot;&gt;\theta_{n-1}&lt;/script&gt; covering a multiple of &lt;script type=&quot;math/tex&quot;&gt;2\pi&lt;/script&gt; I can explore the sphere in a continuous spiraling effect. The blue line is the 3D version path we will likely take to explore high dimensional &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt; spaces while all blue scatter points are potential realization of a spherical uniform distribution (approximation to what an &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^n}&lt;/script&gt; Gaussian really is).&lt;/p&gt;
 
 &lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 75%;&quot; src=&quot;../images/sphere_3d.svg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;exploring-the-entire-space&quot;&gt;Exploring the entire space&lt;/h3&gt;
 
 &lt;p&gt;I trained another VAE with this time 10 dimensions for &lt;script type=&quot;math/tex&quot;&gt;\mathbf{z}&lt;/script&gt;. Because I can’t plot the path taken, I want to be sure I cover a large part of the &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;-sphere surface as I did in the &lt;script type=&quot;math/tex&quot;&gt;{\rm I\!R^3}&lt;/script&gt; version by making many loops around the ball. To really understand what the equations are describing I find it usefull to look the 3 projections of the previous path. It’s easy to see how &lt;script type=&quot;math/tex&quot;&gt;\theta_{2}&lt;/script&gt; is parameterizing a circle (&lt;script type=&quot;math/tex&quot;&gt;\cos(\theta_{2})&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\sin(\theta_{2})&lt;/script&gt;) which is scaled by the &lt;script type=&quot;math/tex&quot;&gt;\sin&lt;/script&gt; sequence preceding it. The two other planes simply cover a semi-circle modulated on one component by the spiral amplitude. Simiar things happens in higher dimensions, with only the last two &lt;script type=&quot;math/tex&quot;&gt;x_{n}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;x_{n-1}&lt;/script&gt; describing a spiral (which is why we will make &lt;script type=&quot;math/tex&quot;&gt;\theta_{n-1}&lt;/script&gt; cover of large multiple of &lt;script type=&quot;math/tex&quot;&gt;2\pi&lt;/script&gt;) and all the other planes covering the &lt;script type=&quot;math/tex&quot;&gt;n-1&lt;/script&gt; &lt;script type=&quot;math/tex&quot;&gt;[0,\pi]&lt;/script&gt; intervals.&lt;/p&gt;
 
@@ -181,7 +183,40 @@ x_5 &amp;= \color{r} r \color{sin} \sin(\theta_1)\sin(\theta_{2}) \sin(\theta_{3
 
 &lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 75%;&quot; src=&quot;../images/4d.svg&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;To increase the length of the interpolation animation we can explore a denser mesh on the hypersphere surface. The interval covered by &lt;script type=&quot;math/tex&quot;&gt;\theta_{n-1}&lt;/script&gt; determines the number of loops done. A period of &lt;script type=&quot;math/tex&quot;&gt;2\pi&lt;/script&gt; means that the start point is reached at the end point. A period of &lt;script type=&quot;math/tex&quot;&gt;2n\pi&lt;/script&gt; means the start point is reached &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; time forming &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; loops. Therefore, the mesh density can be tweaked with the number of &lt;script type=&quot;math/tex&quot;&gt;\theta_{n-1}&lt;/script&gt; periods done while &lt;script type=&quot;math/tex&quot;&gt;\theta_{1...n-2}&lt;/script&gt; go through &lt;script type=&quot;math/tex&quot;&gt;[0,\pi]&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;One way to increase the length of the interpolation animation is to explore a denser mesh on the hypersphere surface. The interval covered by &lt;script type=&quot;math/tex&quot;&gt;\theta_{n-1}&lt;/script&gt; determines the number of loops done. A period of &lt;script type=&quot;math/tex&quot;&gt;2\pi&lt;/script&gt; means that the start point is reached at the end point. A period of &lt;script type=&quot;math/tex&quot;&gt;2n\pi&lt;/script&gt; means the start point is reached &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; time forming &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; loops. Therefore, the mesh density could be tweaked with the number of &lt;script type=&quot;math/tex&quot;&gt;\theta_{n-1}&lt;/script&gt; periods done while &lt;script type=&quot;math/tex&quot;&gt;\theta_{1...n-2}&lt;/script&gt; go through &lt;script type=&quot;math/tex&quot;&gt;[0,\pi]&lt;/script&gt;. This is useful to create fluid and continuous interpolations in high dimensional latent spaces and is a generalization of the animated plot saw earlier.&lt;/p&gt;
+
+&lt;h3 id=&quot;interpolating-between-two-points&quot;&gt;Interpolating between two points&lt;/h3&gt;
+
+&lt;p&gt;To illustrate low probabilty space bad representation we can interpolate throught latent space via linear and spherical methods. Linear methods will inevitably yields to sampling &lt;em&gt;inside&lt;/em&gt; the hypersphere while spherical will stay on the surface. Here we go for the slerp &amp;amp; lerp :&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\textbf{lerp}(i,j,t) = i + t(j-i)&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\textbf{slerp}(i,j,t) = i\frac{\sin((1-t)\theta)}{\sin(\theta)} + j\frac{\sin(t\theta)}{\sin(\theta)}&lt;/script&gt;
+
+&lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 75%;&quot; src=&quot;../images/slerp.svg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I generated two random gaussians samples from the prior, normalized, scaled them and then interpolated between the two using lerp and slerp methods.
+&lt;img style=&quot;margin: 0 auto; display: block; width : 125%;&quot; src=&quot;../images/interpol_samples.svg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The top row are samples belonging to the lerp segment while the bottom is taken from the slerp arc. The VAE was trained with 500 (!) latent dimensions so that the Gaussian distribution can be though as an uniform hyperspherical of radius &lt;script type=&quot;math/tex&quot;&gt;\sqrt{500} \approx 22&lt;/script&gt;. While the VAE has fairly bad representations, the aim here is to show that the top row has &lt;em&gt;noisier&lt;/em&gt; representations during lerp interpolation. It’s easy to compare images from the middle of the rows and notice on lerp path that digits are more blurry and not well defined compared to the slerp path results. We can plot for the two last paths the norms of the interpolated latent vectors. Without surprise the lerp goes way below the annulus of radius 22 and we can expect (and we saw that) worst reconstructions at mid-interpolation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 60%;&quot; src=&quot;../images/norm_interpolation.svg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Personnal reminder&lt;/strong&gt; : high dimensions are weird and intuitive ideas are often bad.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I hope you found this post interesting, that it raised questions that you didn’t necessarly think about and stimulated your curiosity. Stay curious !&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Vocabulary</title>
+   <link href="http://localhost:4000/2017/11/11/vocabulary/"/>
+   <updated>2017-11-11T00:00:00+01:00</updated>
+   <id>http://localhost:4000/2017/11/11/vocabulary</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;Bagging&lt;/strong&gt;: train n models on randomly chosen subsamples of data and taking mean prediction.
+&lt;strong&gt;Boosting&lt;/strong&gt;: sequentially train from weak classifiers strong boosted models with data weight updates, take weighted average for prediction
+&lt;strong&gt;Bootstrap&lt;/strong&gt;: inference statistical technique consiting in resampling original data to infer statistics. Can be used in ML context, sub sampling datasets to aggregate different prediction. Bootstrap + aggreation = baggingœ:&lt;/p&gt;
 </content>
  </entry>
  
