@@ -1,6 +1,6 @@
 ## Joint, marginal and conditional, probabilities visualized
 
-Being a visual type of person (if that's actually a thing), I like thinking about concept visualy. It's not rare to have many interpretations of the same concepts and each one of us choose a mental model that suits us the best when learning new things.  
+Being a visual type of person (if that's actually a thing), I like thinking about concepts visually. It's not rare to have many interpretations of the same concepts and each one chooses a mental model that suits us the best when learning new things.  
 
 I remember struggling to get my visual mental models right about probabiliy densities at first. While this is not typically the way it is teached, I find it easier to mentally understand and anticipate probability mechanics by visual means. I share here a graphical approach for theses concepts : 
 - Joint probability density : $$p(x, \theta)$$
