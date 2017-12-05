@@ -4,13 +4,84 @@
  <title>alelouis</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-12-03T21:46:03+01:00</updated>
+ <updated>2017-12-05T23:40:21+01:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Alexis LOUIS</name>
    <email>wimacod@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Visual Probabilities</title>
+   <link href="http://localhost:4000/2017/12/05/visual-probabilities/"/>
+   <updated>2017-12-05T00:00:00+01:00</updated>
+   <id>http://localhost:4000/2017/12/05/visual-probabilities</id>
+   <content type="html">&lt;h2 id=&quot;joint-marginal-and-conditional-probabilities-visualized&quot;&gt;Joint, marginal and conditional, probabilities visualized&lt;/h2&gt;
+
+&lt;p&gt;Being a visual type of person (if that’s actually a thing), I like thinking about concept visualy. It’s not rare to have many interpretations of the same concepts and each one of us choose a mental model that suits us the best when learning new things.&lt;/p&gt;
+
+&lt;p&gt;I remember struggling to get my visual mental models right about probabiliy densities at first. While this is not typically the way it is teached, I find it easier to mentally understand and anticipate probability mechanics by visual means. I share here a graphical approach for theses concepts :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Joint probability density : &lt;script type=&quot;math/tex&quot;&gt;p(x, \theta)&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Marginal density : &lt;script type=&quot;math/tex&quot;&gt;p(x)&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Conditional density : &lt;script type=&quot;math/tex&quot;&gt;p(x\mid \theta)&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Likelihood : &lt;script type=&quot;math/tex&quot;&gt;L(\theta\mid x)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;joint-probability-density&quot;&gt;Joint probability density&lt;/h2&gt;
+&lt;p&gt;Joint distribution describre co-occurence of events. In terms of continuous distributions they are often noted as follow :&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 100%;&quot; src=&quot;../images/visual_prob/joint.svg&quot; /&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(x,\theta)&lt;/script&gt;
+
+&lt;p&gt;That is the distribution describing the joint probability of random variables &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;. For univariate RV &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;, the bivariate joint density &lt;script type=&quot;math/tex&quot;&gt;p(x,\theta)&lt;/script&gt; can be represented as a surface (see fig.1). Integrating a joint distribution on the whole domains of definition of its variables gives one.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\iint p(x,\theta)\;dxd\theta= 1&lt;/script&gt;
+
+&lt;p&gt;We can fix any of the random variables and see the behavior of the other variables by &lt;strong&gt;slicing&lt;/strong&gt; the joint distribution (red and blue lines).
+Note that &lt;script type=&quot;math/tex&quot;&gt;p(x=0,\theta)&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;p(x,\theta=0)&lt;/script&gt; are not probability densities as they don’t integrate to 1.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 60%;&quot; src=&quot;../images/visual_prob/joint_slices.svg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The whole shape of the curve is nonetheless interesting as we will see in conditional densities part.
+If we were to integrate either of those curves it would give us the &lt;strong&gt;marginal&lt;/strong&gt; probabilities of the fixed parameters at the fixed value. For instance :&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(x=0) = \int p(x=0,\theta)\;d\theta&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(\theta=0) = \int p(x,\theta=0)\;dx&lt;/script&gt;
+
+&lt;p&gt;We saw here a glimpse of what actually are marginal probabilities which are developed in the next section.&lt;/p&gt;
+&lt;h2 id=&quot;marginal-density&quot;&gt;Marginal density&lt;/h2&gt;
+&lt;p&gt;A marginal density represents the density of a unique random variable.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(x), p(\theta)&lt;/script&gt;
+
+&lt;p&gt;In case where the marginal is not specified, we can (in theory) fully recover it from the joint density. As noted earlier, integrating a slice of joint density at a given point equals the marginal at the very same point. The whole marginal density can be computed in a similar fashion. By taking many slices over a parameter and calculating the corresponding integral, we recover for each &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; value the corresponding area value / marginal value.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;margin: 0 auto; display: block; width : 100%;&quot; src=&quot;../images/visual_prob/integration_marginal.svg&quot; /&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(x) = \int p(x,\theta)\;d\theta&lt;/script&gt;
+
+&lt;p&gt;On the above graph are drawn many &lt;script type=&quot;math/tex&quot;&gt;p(x=k,\theta)&lt;/script&gt; which once integrated / marginalized w.r.t &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; equals &lt;script type=&quot;math/tex&quot;&gt;p(x=k)&lt;/script&gt;. If we were to plot &lt;script type=&quot;math/tex&quot;&gt;p(x=k)&lt;/script&gt; for infinitesimal &lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt; values we would obtain &lt;script type=&quot;math/tex&quot;&gt;p(x)&lt;/script&gt; :&lt;/p&gt;
+
+&lt;p&gt;GRAPH&lt;/p&gt;
+
+&lt;p&gt;Some properties appear obvious while reasoning geometrically :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;p(x)&lt;/script&gt; integrates to one as integrating over all the slices effectively integrates the whole joint density.&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;p(x)&lt;/script&gt; doesn’t depend on any other variable, as they have been &lt;strong&gt;integrated&lt;/strong&gt; into the marginal.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Caution&lt;/em&gt; : &lt;script type=&quot;math/tex&quot;&gt;p(x)&lt;/script&gt; computation seems straight forward geometrically but can actually be intractable analytically (and hard numerically too).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conditional-density&quot;&gt;Conditional density&lt;/h2&gt;
+
+&lt;p&gt;WIP&lt;/p&gt;
+&lt;h2 id=&quot;appendice--likelihood&quot;&gt;Appendice : Likelihood&lt;/h2&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Latent Space Interpolations</title>
