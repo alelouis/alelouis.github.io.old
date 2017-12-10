@@ -87,4 +87,4 @@ $$L(\theta\mid x) = p(x\mid \theta)$$
 
 A nice intuition you can take from this is that it is now **obvious** that likelihood is **not** a probability distribution (even if its confusing looking at the definition).
 
-## Appendice : Conclusion
+##Conclusion
