@@ -1,4 +1,10 @@
-## Joint, marginal and conditional, probabilities visualized
+---
+title: Joint, marginal and conditional probabilities visualized
+date: 2017-12-5 19:00:00 -00:00
+layout: post
+---
+
+## Joint, marginal and conditional probabilities visualized
 
 Being a visual type of person (if that's actually a thing), I like thinking about concepts visually. It's not rare to have many interpretations of the same concepts and each one chooses a mental model that suits us the best when learning new things.  
 
@@ -8,7 +14,7 @@ I remember struggling to get my visual mental models right about probabiliy dens
 - Conditional density : $$p(x\mid \theta)$$
 - Likelihood : $$L(\theta\mid x)$$
 
-<span style="color:red">**Warning** : this is not supposed to be a rigorous approach to theses concepts, just intermediates mental models that can help some of you gaining intuitions about theses ideas.</span>
+<span style="color:red">Warning : this is not supposed to be a rigorous approach to theses concepts, just intermediates mental models that can help some of you gaining intuitions about theses ideas.</span>
 
 ## Joint probability density
 Joint distribution describre co-occurence of events. In terms of continuous distributions they are often noted as follow :  
@@ -87,4 +93,4 @@ $$L(\theta\mid x) = p(x\mid \theta)$$
 
 A nice intuition you can take from this is that it is now **obvious** that likelihood is **not** a probability distribution (even if its confusing looking at the definition).
 
-##Conclusion
+## Conclusion

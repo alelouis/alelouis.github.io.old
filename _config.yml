@@ -1,32 +1,27 @@
-# Permalinks
-permalink:           pretty
-
-# Setup
-title:               alelouis
-tagline:             cool stuff
-url:                 http://alelouis.github.io
-paginate:            1
-baseurl:             ""
-
-# Assets
-#
-# We specify the directory for Jekyll so we can use @imports.
+---
+title: alelouis.github.io
+timezone: France/Paris
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
+permalink: "/blog/:title"
+name: alelouis
+description: cool stuff
+google_verification: 
+include:
+- ".htaccess"
+exclude:
+- README.md
+- LICENSE
 sass:
-  sass_dir:          _sass
-  style:            :compressed
-
-# About/contact
-author:
-  name:              Alexis LOUIS
-  url:               https://twitter.com/wimacod
-  email:             wimacod@gmail.com
-
-# Custom vars
-version:             2.0.0
-github:
-  repo:              https://github.com/alelouis
-
-# Gems
-gems:
-  - jekyll-paginate
-  - jekyll-gist
+  style: compressed
+  sass_dir: _sass
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+highlighter: rouge

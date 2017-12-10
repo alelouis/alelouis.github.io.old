@@ -2,24 +2,34 @@
 layout: default
 ---
 
-<article class="post">
-  <h1 class="post-title">{{ page.title }}</h1>
-  <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">{{ page.date | date_to_string }}</time>
-  {{ content }}
-</article>
+<div class="header">
+    <h1><a href="/">{{ site.name }}</a></h1>
+    <ul>
+        {% for item in site.data.navigation %}
+        <li>
+            <a href="{{ item.url }}">{{ item.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 
-{% if site.related_posts != empty %}
-<aside class="related">
-  <h3>Related posts</h3>
-  <ul class="related-posts">
-    {% for post in site.related_posts limit:3 %}
-      <li>
-        <a href="{{ site.baseurl }}{{ post.url }}">
-          {{ post.title }}
-          <small><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time></small>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
-</aside>
-{% endif %}
+<div class="post">
+	
+    	
+    <div class="post__title">
+    	<h1>{{ page.title }}</h1>
+    </div>
+    <div class="post__date">
+    	<p>{{ page.date | date: '%B %-d, %Y' }}</p>
+    </div>
+    <div class="post__meta">
+    	<p>{{ tags_content }}</p>
+    </div>
+    <div class="post__content"?>
+        {{ content }}
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2017 <a href="http://alelouis.github.io">Alexis LOUIS</a></p>
+</div>
