@@ -17,9 +17,7 @@ Unlike typical supervised tasks, an auto-encoder learns an identity function bet
 
 This objective is not inherently useful, we are more interested in what lies in the hidden layers, or for this example the middle layer $$\textbf{z}$$. We call $$\textbf{z}$$ the **encoded** or **latent** vector. The left part of the graph is the encoder part, it encodes the input into the latent space. The latent vector is then decoded by the decoder and outputs the input reconstruction. By setting the length of the middle vector $$\textbf{z}$$ to a smaller value than the input dimension, the mapping has to find an efficient way to compress input samples into a smaller representations. The mapping (set of neural weights and biases) is learned during training phase by minimizing the reconstruction error. The loss is often chosen between MSE (Mean Squared Error) and cross-entropy.
 
-<p align="center">
-<img src="../images/ae.svg" width="50%" >
-</p>
+<img style="margin: 0 auto; display: block; width : 50%;" src="../images/ae.svg">
 
 *Usage example* : one wants to encode images of digits from their _28x28_ pixels 2D representation to a more compact representation, i.e. a vector of length 2. During training phase, many samples are proposed to the network with the reconstruction error between the original image and the reconstructed output image being minimized. In the middle of the network is specified an hidden layer - the 2-dim vector $$\textbf{z}$$ - so that all information *has* to be compressed into 2 values at some point. Going from 784 dimensions to 2 is quite a drastic reduction, it forces the network to converge to efficient compression solutions. What we hope here is that the low-dimensional representation will learn in an unsupervised way underlying concepts about the data (there are 10 digits, some orientation, thickness…) and encode each one of this concepts into a dimension of the latent space. 
 
@@ -184,7 +182,7 @@ $$ \textbf{slerp}(i,j,t) = i\frac{\sin((1-t)\theta)}{\sin(\theta)} + j\frac{\sin
 <img style="margin: 0 auto; display: block; width : 75%;" src="../images/slerp.svg">
 
 I generated two random gaussians samples from the prior, normalized, scaled them and then interpolated between the two using lerp and slerp methods.
-<img style="margin: 0 auto; display: block; width : 125%;" src="../images/interpol_samples.svg">
+<img style="margin: 0 auto; display: block; width : 80%;" src="../images/interpol_samples.svg">
 
 The top row are samples belonging to the lerp segment while the bottom is taken from the slerp arc. The VAE was trained with 500 (!) latent dimensions so that the Gaussian distribution can be though as an uniform hyperspherical of radius $$\sqrt{500} \approx 22$$. While the VAE has fairly bad representations, the aim here is to show that the top row has *noisier* representations during lerp interpolation. It's easy to compare images from the middle of the rows and notice on lerp path that digits are more blurry and not well defined compared to the slerp path results. We can plot for the two last paths the norms of the interpolated latent vectors. Without surprise the lerp goes way below the annulus of radius 22 and we can expect (and we saw that) worst reconstructions at mid-interpolation.
 
