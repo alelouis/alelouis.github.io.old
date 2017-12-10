@@ -8,6 +8,8 @@ I remember struggling to get my visual mental models right about probabiliy dens
 - Conditional density : $$p(x\mid \theta)$$
 - Likelihood : $$L(\theta\mid x)$$
 
+<span style="color:red">**Warning** : this is not supposed to be a rigorous approach to theses concepts, just intermediates mental models that can help some of you gaining intuitions about theses ideas.</span>
+
 ## Joint probability density
 Joint distribution describre co-occurence of events. In terms of continuous distributions they are often noted as follow :  
 
@@ -43,9 +45,9 @@ In case where the marginal is not specified, we can (in theory) fully recover it
 
 $$p(x) = \int p(x,\theta)\;d\theta$$  
 
-On the above graph are drawn many $$p(x=k,\theta)$$ which once integrated / marginalized w.r.t $$\theta$$ equals $$p(x=k)$$. If we were to plot $$p(x=k)$$ for infinitesimal $$k$$ values we would obtain $$p(x)$$ :  
+On the above graph are drawn many $$p(x=k,\theta)$$ which once integrated / marginalized w.r.t $$\theta$$ equals $$p(x=k)$$. If we were to plot $$p(x=k)$$ for infinitesimal $$k$$ values we would obtain $$p(x)$$, similar operation for $$p(\theta)$$ :  
 
-GRAPH  
+<img style="margin: 0 auto; display: block; width : 60%;" src="../images/visual_prob/marginal.svg">   
 
 Some properties appear obvious while reasoning geometrically : 
 - $$p(x)$$ integrates to one as integrating over all the slices effectively integrates the whole joint density. 
@@ -55,6 +57,34 @@ Some properties appear obvious while reasoning geometrically :
 
 ## Conditional density
 
-WIP
+Conditional densities will appear here very easy with what we already saw. Remember the slices we were taking inside the joint distributions, they weren't really distributions because they didn't integrated to one. Now if we normalize the slices by its areas, we obtain the conditional distributions of a variable **given** the other.  
+
+<img style="margin: 0 auto; display: block; width : 60%;" src="../images/visual_prob/conditional.svg">  
+
+For example, consider the slice $$p(x,\theta=0)$$, in order to make it integrate to one we normalize this function by its area (which is also the marginal taken at slice point that is to say $$p(\theta=0)$$, we then obtain $$p(x\mid \theta=0)$$. This is obviously generalizable to all $$\theta$$ values. This actually gives us the definition of a conditional probability :  
+
+$$p(x\mid \theta) = \frac{p(x,\theta)}{p(\theta)}$$
+
+Notice how they have exactly the same shape as joint slices, the only difference being that they are normalized. We can wonder what looks like $$p(x\mid \theta)$$ over all the different $$\theta$$ : 
+
+<img style="margin: 0 auto; display: block; width : 100%;" src="../images/visual_prob/pxmidtheta.svg">  
+
+$$p(x\mid \theta)$$  
+
+With a bit a training this type of result can easily become intuitional. All we did to obtain this surface (and not a real probability distribution as it does *not* integrates to one) from the joint is divide the whole joint distribution by the marginal of $$\theta$$. I represented it in **orange** on the graph so you can mentally understand how the marginal division affected the whole shape of the joint. From this surface each slice along the $$\theta$$ axis represents the conditional distribution of $$x$$ given the $$\theta$$ slice point. But what does represent a slice along this $$x$$ axis into this surface ?
+
 ## Appendice : Likelihood
 
+The word likelihood is used in many contexts and often exchanged without precaution to mean probability. I will show you here how to visualize likelihood and how we can derive some properties of it. The previous surface we plotted represented the conditional distributions $$p(x\mid \theta)$$ when considering fixed $$\theta$$. We obtained it by dividing the joint distribution by the marginal of $$\theta$$. Slicing along the $$\theta$$ axis for different $$\theta$$ values gives us many contional probabilities given the chosen $$\theta$$. Now if we were to consider cutting along the $$x$$ axis, what would we get ? It is not a distribution by construction since we only normalized along the $$\theta$$ axis. This slice represents the likelihood of $$\theta$$ given $$x$$. 
+
+<img style="margin: 0 auto; display: block; width : 100%;" src="../images/visual_prob/likelihood.svg">  
+
+When considering $$p(x\mid \theta)$$ visually, each slice direction represents respectively a conditional probability and a likelihood. The likelihood definition can be thought as two way to describe the same surface. For conditional probability we travel along the $$x$$ axis fixing the $$\theta$$ while for likelihood we travel along the $$\theta$$ axis fixing the $$x$$.
+
+$$L(\theta\mid x) = p(x\mid \theta)$$  
+
+<img style="margin: 0 auto; display: block; width : 60%;" src="../images/visual_prob/likeliarea.svg">  
+
+A nice intuition you can take from this is that it is now **obvious** that likelihood is **not** a probability distribution (even if its confusing looking at the definition).
+
+## Appendice : Conclusion
