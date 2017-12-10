@@ -8,7 +8,9 @@ layout: post
 
 Being a visual type of person (if that's actually a thing), I like thinking about concepts visually. It's not rare to have many interpretations of the same concepts and each one chooses a mental model that suits us the best when learning new things.  
 
-I remember struggling to get my visual mental models right about probabiliy densities at first. While this is not typically the way it is teached, I find it easier to mentally understand and anticipate probability mechanics by visual means. I share here a graphical approach for theses concepts : 
+> A mental model is an explanation of someone's thought process about how something works in the real world. -Wikipedia
+
+Mental models also involves linking and seeing the same concepts from various perspectives. It can help us in our daily lives by decreasing the mental charge needed for regular tasks to focus on harder ones. I remember struggling to get my visual mental models right about probabiliy densities at first. While this is not typically the way it is teached, I find it easier to mentally understand and anticipate probability mechanics by visual means. I share here a graphical approach for theses concepts : 
 - Joint probability density : $$p(x, \theta)$$
 - Marginal density : $$p(x)$$
 - Conditional density : $$p(x\mid \theta)$$
