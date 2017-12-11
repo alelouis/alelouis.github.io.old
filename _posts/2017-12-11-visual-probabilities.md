@@ -1,5 +1,5 @@
 ---
-title: Joint, marginal and conditional densities visualized (and likelihood)
+title: Joint, marginal and conditional densities visualized
 date: 2017-12-5 19:00:00 -00:00
 layout: post
 ---
