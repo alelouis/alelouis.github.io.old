@@ -14,7 +14,7 @@
     <script src="live.js" type="text/javascript"></script>
 
     
-        <title>Joint, marginal and conditional probabilities visualized</title>
+        <title>Joint, marginal and conditional densities visualized (and likelihood)</title>
     
 
     <meta name="description" content="cool stuff">
@@ -24,6 +24,7 @@
     <link rel="icon" href="/assets/img/blog.png">
     <link href="https://fonts.googleapis.com/css?family=Alegreya|Roboto|Roboto+Mono" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <meta name="google-site-verification" content="LEaYA_oCmx4g4gMQz871bITFvI7gepc2iwSsQIvwD_Q" />
 </head>
 
 <body>
@@ -44,7 +45,7 @@
 	
     	
     <div class="post__title">
-    	<h1>Joint, marginal and conditional probabilities visualized</h1>
+    	<h1>Joint, marginal and conditional densities visualized (and likelihood)</h1>
     </div>
     <div class="post__date">
     	<p>December 5, 2017</p>
@@ -55,40 +56,40 @@
     <div class="post__content"?>
         <h2 id="joint-marginal-and-conditional-probabilities-visualized">Joint, marginal and conditional probabilities visualized</h2>
 
-<p>Being a visual type of person (if that’s actually a thing), I like thinking about concepts visually. It’s not rare to have many interpretations of the same concepts and each one chooses a mental model that suits us the best when learning new things.</p>
+<p>Being a visual type of person (if that’s actually a thing), I like thinking about concepts visually. It’s not rare to have many interpretations of the same concepts and each one of us chooses a mental model that suits the best our ways to learn new things.</p>
 
 <blockquote>
   <p>A mental model is an explanation of someone’s thought process about how something works in the real world. -Wikipedia</p>
 </blockquote>
 
-<p>Mental models also involves linking and seeing the same concepts from various perspectives. It can help us in our daily lives by decreasing the mental charge needed for regular tasks to focus on harder ones. I remember struggling to get my visual mental models right about probabiliy densities at first. While this is not typically the way it is teached, I find it easier to mentally understand and anticipate probability mechanics by visual means. I share here a graphical approach for theses concepts :</p>
+<p>Mental models also involves linking and viewing the same ideas from various perspectives. Taking the time to consolidate our own mental processes can help us in our daily lives by decreasing the cognitive charge needed for regular tasks in order to focus on harder ones. I remember struggling to get my visual mental models right about probability densities at first. While this is not typically the way it is taught, I find it easier to understand and play with probability mechanics by visual means (at least for low dimensions). I share here a graphical approach for theses concepts :</p>
 <ul>
-  <li>Joint probability density : <script type="math/tex">p(x, \theta)</script></li>
+  <li>Joint probability density : $$p(x, \theta)$</li>
   <li>Marginal density : <script type="math/tex">p(x)</script></li>
   <li>Conditional density : <script type="math/tex">p(x\mid \theta)</script></li>
   <li>Likelihood : <script type="math/tex">L(\theta\mid x)</script></li>
 </ul>
 
-<p><span style="color:red">Warning : this is not supposed to be a rigorous approach to theses concepts, just intermediates mental models that can help some of you gaining intuitions about theses ideas.</span></p>
+<p><span style="color:red">Warning : this is not supposed to be a rigorous approach by any means, just intermediates mental models that could help some of you gaining intuitions about the formulas.</span></p>
 
 <h2 id="joint-probability-density">Joint probability density</h2>
-<p>Joint distribution describre co-occurence of events. In terms of continuous distributions they are often noted as follow :</p>
+<p>Joint density describe co-occurrence of events. In terms of continuous densities they are often noted as follow :</p>
 
 <p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/visual_prob/joint.svg" /></p>
 
 <script type="math/tex; mode=display">p(x,\theta)</script>
 
-<p>That is the distribution describing the joint probability of random variables <script type="math/tex">x</script> and <script type="math/tex">\theta</script>. For univariate RV <script type="math/tex">x</script> and <script type="math/tex">\theta</script>, the bivariate joint density <script type="math/tex">p(x,\theta)</script> can be represented as a surface (see fig.1). Integrating a joint distribution on the whole domains of definition of its variables gives one.</p>
+<p>That is the density describing the joint probability of random variables <script type="math/tex">x</script> and <script type="math/tex">\theta</script>. For the random variables <script type="math/tex">x</script> and <script type="math/tex">\theta</script>, the bivariate joint density <script type="math/tex">p(x,\theta)</script> can be represented as a surface (see above figure). Integrating a joint density on the whole domains of definition of its variables equals one.</p>
 
 <script type="math/tex; mode=display">\iint p(x,\theta)\;dxd\theta= 1</script>
 
-<p>We can fix any of the random variables and see the behavior of the other variables by <strong>slicing</strong> the joint distribution (red and blue lines).
+<p>We can fix any of the random variables and see the behavior of the other variables by <strong>slicing</strong> the joint density (red and blue lines).
 Note that <script type="math/tex">p(x=0,\theta)</script> and <script type="math/tex">p(x,\theta=0)</script> are not probability densities as they don’t integrate to 1.</p>
 
 <p><img style="margin: 0 auto; display: block; width : 60%;" src="../images/visual_prob/joint_slices.svg" /></p>
 
 <p>The whole shape of the curve is nonetheless interesting as we will see in conditional densities part.
-If we were to integrate either of those curves it would give us the <strong>marginal</strong> probabilities of the fixed parameters at the fixed value. For instance :</p>
+If we were to integrate either of those curves it would give us the <strong>marginal</strong> probabilities of the parameters at the fixed value. For instance :</p>
 
 <script type="math/tex; mode=display">p(x=0) = \int p(x=0,\theta)\;d\theta</script>
 
@@ -96,17 +97,17 @@ If we were to integrate either of those curves it would give us the <strong>marg
 
 <p>We saw here a glimpse of what actually are marginal probabilities which are developed in the next section.</p>
 <h2 id="marginal-density">Marginal density</h2>
-<p>A marginal density represents the density of a unique random variable.</p>
+<p>A marginal density represents the probability density of a unique random variable.</p>
 
 <script type="math/tex; mode=display">p(x), p(\theta)</script>
 
-<p>In case where the marginal is not specified, we can (in theory) fully recover it from the joint density. As noted earlier, integrating a slice of joint density at a given point equals the marginal at the very same point. The whole marginal density can be computed in a similar fashion. By taking many slices over a parameter and calculating the corresponding integral, we recover for each <script type="math/tex">x</script> value the corresponding area value / marginal value.</p>
+<p>When the marginal is not specified, we can (in simple cases) fully recover it from the joint density. As noted earlier, integrating a slice of joint density at a given point equals the marginal at the very same point. The whole marginal density can be computed in a similar fashion. By taking many slices over a parameter and calculating the corresponding integral we recover for each <script type="math/tex">x</script> value the corresponding area value / marginal value.</p>
 
 <p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/visual_prob/integration_marginal.svg" /></p>
 
 <script type="math/tex; mode=display">p(x) = \int p(x,\theta)\;d\theta</script>
 
-<p>On the above graph are drawn many <script type="math/tex">p(x=k,\theta)</script> which once integrated / marginalized w.r.t <script type="math/tex">\theta</script> equals <script type="math/tex">p(x=k)</script>. If we were to plot <script type="math/tex">p(x=k)</script> for infinitesimal <script type="math/tex">k</script> values we would obtain <script type="math/tex">p(x)</script>, similar operation for <script type="math/tex">p(\theta)</script> :</p>
+<p>On the above graph are drawn many <script type="math/tex">p(x=k,\theta)</script> which once integrated (marginalized) w.r.t <script type="math/tex">\theta</script> equals <script type="math/tex">p(x=k)</script>. If we were to plot <script type="math/tex">p(x=k)</script> for infinitesimal <script type="math/tex">k</script> values we would obtain <script type="math/tex">p(x)</script>, similar operation for <script type="math/tex">p(\theta)</script> :</p>
 
 <p><img style="margin: 0 auto; display: block; width : 60%;" src="../images/visual_prob/marginal.svg" /></p>
 
@@ -119,25 +120,25 @@ If we were to integrate either of those curves it would give us the <strong>marg
 
 <h2 id="conditional-density">Conditional density</h2>
 
-<p>Conditional densities will appear here very easy with what we already saw. Remember the slices we were taking inside the joint distributions, they weren’t really distributions because they didn’t integrated to one. Now if we normalize the slices by its areas, we obtain the conditional distributions of a variable <strong>given</strong> the other.</p>
+<p>Conditional densities will appear here very straight-forward considering what we already saw. Remember the slices we were taking inside the joint density, they weren’t really densities as they didn’t integrated to one. One indirect way to approach things is to normalize this lasts slices by their areas and wonder what probability density it represents. They are without suspense conditional densities.</p>
 
 <p><img style="margin: 0 auto; display: block; width : 60%;" src="../images/visual_prob/conditional.svg" /></p>
 
-<p>For example, consider the slice <script type="math/tex">p(x,\theta=0)</script>, in order to make it integrate to one we normalize this function by its area (which is also the marginal taken at slice point that is to say <script type="math/tex">p(\theta=0)</script>, we then obtain <script type="math/tex">p(x\mid \theta=0)</script>. This is obviously generalizable to all <script type="math/tex">\theta</script> values. This actually gives us the definition of a conditional probability :</p>
+<p>For example, consider the slice <script type="math/tex">p(x,\theta=0)</script>, in order to make it integrate to one we normalize this function by its area (which is also the marginal taken at slice point that is to say <script type="math/tex">p(\theta=0)</script>, we then obtain <script type="math/tex">p(x\mid \theta=0)</script>. This is obviously generalizable to all <script type="math/tex">\theta</script> values. Moreover theses operation completely define conditional probabilities :</p>
 
 <script type="math/tex; mode=display">p(x\mid \theta) = \frac{p(x,\theta)}{p(\theta)}</script>
 
-<p>Notice how they have exactly the same shape as joint slices, the only difference being that they are normalized. We can wonder what looks like <script type="math/tex">p(x\mid \theta)</script> over all the different <script type="math/tex">\theta</script> :</p>
+<p>Notice how they have exactly the same shape as joint slices, the only difference being that they are normalized. By diving by the area (or the marginal of <script type="math/tex">\theta</script>) we are considering the density of <script type="math/tex">x</script> given we have <script type="math/tex">\theta</script>. We can wonder what looks like <script type="math/tex">p(x\mid \theta)</script> over all the different <script type="math/tex">\theta</script> :</p>
 
 <p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/visual_prob/pxmidtheta.svg" /></p>
 
 <script type="math/tex; mode=display">p(x\mid \theta)</script>
 
-<p>With a bit a training this type of result can easily become intuitional. All we did to obtain this surface (and not a real probability distribution as it does <em>not</em> integrates to one) from the joint is divide the whole joint distribution by the marginal of <script type="math/tex">\theta</script>. I represented it in <strong>orange</strong> on the graph so you can mentally understand how the marginal division affected the whole shape of the joint. From this surface each slice along the <script type="math/tex">\theta</script> axis represents the conditional distribution of <script type="math/tex">x</script> given the <script type="math/tex">\theta</script> slice point. But what does represent a slice along this <script type="math/tex">x</script> axis into this surface ?</p>
+<p>With a bit a training this type of result can become highly intuitive. All we did to obtain this surface (and <strong>not</strong> a real probability density as it does <em>not</em> integrates to one) from the joint is divide the whole joint density by the marginal of <script type="math/tex">\theta</script>. I represented <script type="math/tex">p(\theta)</script> in <strong>orange</strong> on the graph so you can try yourself to understand how the marginal division affected the whole shape of the joint. Slicing this surface parallel to the <script type="math/tex">\theta</script> axis represents the conditional density of <script type="math/tex">x</script> given the <script type="math/tex">\theta</script> slice point. But you may wonder what does represent a parallel to the <script type="math/tex">\theta</script> axis into this surface ?</p>
 
-<h2 id="appendice--likelihood">Appendice : Likelihood</h2>
+<h2 id="appendix--likelihood">Appendix : Likelihood</h2>
 
-<p>The word likelihood is used in many contexts and often exchanged without precaution to mean probability. I will show you here how to visualize likelihood and how we can derive some properties of it. The previous surface we plotted represented the conditional distributions <script type="math/tex">p(x\mid \theta)</script> when considering fixed <script type="math/tex">\theta</script>. We obtained it by dividing the joint distribution by the marginal of <script type="math/tex">\theta</script>. Slicing along the <script type="math/tex">\theta</script> axis for different <script type="math/tex">\theta</script> values gives us many contional probabilities given the chosen <script type="math/tex">\theta</script>. Now if we were to consider cutting along the <script type="math/tex">x</script> axis, what would we get ? It is not a distribution by construction since we only normalized along the <script type="math/tex">\theta</script> axis. This slice represents the likelihood of <script type="math/tex">\theta</script> given <script type="math/tex">x</script>.</p>
+<p>The word likelihood is used in many contexts and often exchanged without precaution to mean probability. I will show you here how to visualize likelihood and how we can derive some properties of it. The previous surface we plotted represented the conditional density <script type="math/tex">p(x\mid \theta)</script> when considering fixed <script type="math/tex">\theta</script>. We obtained it by dividing the joint density by the marginal of <script type="math/tex">\theta</script>. Slicing along the <script type="math/tex">\theta</script> axis for different <script type="math/tex">\theta</script> values gives us many conditional probabilities given the chosen <script type="math/tex">\theta</script>. Now if we were to consider cutting along the <script type="math/tex">x</script> axis, what would we get ? It is not a density by construction since we only normalized along the <script type="math/tex">\theta</script> axis. This slice represents the likelihood of <script type="math/tex">\theta</script> given <script type="math/tex">x</script>.</p>
 
 <p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/visual_prob/likelihood.svg" /></p>
 
@@ -147,9 +148,11 @@ If we were to integrate either of those curves it would give us the <strong>marg
 
 <p><img style="margin: 0 auto; display: block; width : 60%;" src="../images/visual_prob/likeliarea.svg" /></p>
 
-<p>A nice intuition you can take from this is that it is now <strong>obvious</strong> that likelihood is <strong>not</strong> a probability distribution (even if its confusing looking at the definition).</p>
+<p>A nice intuition you can take from this is that it is now <strong>obvious</strong> that likelihood is <strong>not</strong> a probability density (even if its confusing looking at the definition).</p>
 
 <h2 id="conclusion">Conclusion</h2>
+
+<p>I hope you found this post interesting and that it gave you another <strong>viewing</strong> points about theses probability densities. Stay curious.</p>
 
     </div>
 </div>
