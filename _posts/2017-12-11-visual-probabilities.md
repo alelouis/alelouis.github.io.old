@@ -1,6 +1,6 @@
 ---
 title: Joint, marginal and conditional densities visualized
-date: 2017-12-5 19:00:00 -00:00
+date: 2017-12-11 19:00:00 -00:00
 layout: post
 ---
 
