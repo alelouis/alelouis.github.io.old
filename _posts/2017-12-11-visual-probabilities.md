@@ -11,7 +11,7 @@ Being a visual type of person (if that's actually a thing), I like thinking abou
 > A mental model is an explanation of someone's thought process about how something works in the real world. -Wikipedia
 
 Mental models also involves linking and viewing the same ideas from various perspectives. Taking the time to consolidate our own mental processes can help us in our daily lives by decreasing the cognitive charge needed for regular tasks in order to focus on harder ones. I remember struggling to get my visual mental models right about probability densities at first. While this is not typically the way it is taught, I find it easier to understand and play with probability mechanics by visual means (at least for low dimensions). I share here a graphical approach for theses concepts : 
-- Joint probability density : $$p(x, \theta)$
+- Joint probability density : $$p(x, \theta)$$
 - Marginal density : $$p(x)$$
 - Conditional density : $$p(x\mid \theta)$$
 - Likelihood : $$L(\theta\mid x)$$
