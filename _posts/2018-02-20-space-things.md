@@ -14,6 +14,8 @@ To better understand all these moving parts and predict what will show up in the
 
 A simple way to indicate any position and Earth is the Latitude / Longitude coordinates system. A similar approach can be applied to stars: we imagine a celestial sphere around Earth (with a big radius) which surface contains all the stars. Any object can be expressed as two angles: Right Ascension and Declination. These are analogs to Latitude and Longitude except for the fact that the 0° meridian for Declination is not related to the Greenwich meridian (which would make the coordinates Earth-rotation dependent) but pointed towards a fixed point in the sky. As a consequence, each object in the sky can be described by two values for all Earth observers independent of their positions.
 
+<img style="margin: 0 auto; display: block; width : 50%;" src="../images/sky-plot/radec.svg">
+
 ## Azimuth and Altitude (AZ & ALT)
 
 It's nice to have the absolute position of objects in the sky, but what if I want to know where to look and when to look from my city to see that ISS thing? We often use another set of coordinates which is observer dependent. Any object is again described by two values: Azimuth and Altitude. Altazimutal values are converted from Right Ascension and Declination values taking into account time and observer position on Earth. Altitude and Azimuth coordinates are very convenient to work with for any observer as they indicated angles relative to the local horizon. Azimuth makes you turn around, Altitude makes you raise your head.
