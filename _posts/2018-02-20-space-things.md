@@ -44,7 +44,7 @@ Yes, this is static. Because I only computed for one date there is not much happ
    </video>
 </div>
 
-Oh, what's that? I told you unexpected thing happens while looking at the sky. To be honest, it wasn't random. I chose specifically a time when an ISS transit would occur above Toulouse. For each frame, I also plotted and evenly spaced time trace of the ISS which give us a sense of the apparent at which the transit will display. The end of the trail represents a lag of 50 seconds. (The big white point at the centered is the Zenith).
+Oh, what's that? I told you unexpected thing happens while looking at the sky. To be honest, it wasn't random. I chose specifically a time when an ISS transit would occur above Toulouse. For each frame, I also plotted and evenly spaced time trace of the ISS which give us a sense of the apparent speed displayed by the satellite. The end of the trail represents a lag of 50 seconds. (The big white point at the centered is the Zenith).
 
 # What about satellites?
 
