@@ -1,0 +1,49 @@
+---
+title: The chaotic ephemeris of Trisolarians
+date: 2018-04-20 12:00:00 -00:00
+layout: post
+---
+
+<span style="color:#ff6872">Spoiler alert : before reading this post, you should read the [Three Body Problem from Cixin Liu](https://www.amazon.fr/dp/B00S8FCJCQ/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1). This post contains spoilers.</span>
+
+Following a first contact with a distant alien civilization, a secret organization launches a virtual reality simulation of an irrational world. What we call Stable and Chaotic Eras follows one after another without any apparent logic. While in chaotic eras, day’s durations are unpredictable. Temperatures can drop or rise in a matter of minutes setting ablaze the entire planet surface. New players have one goal : explaining rationally the incomprehensible.
+
+The first novel of the great trilogy immerses us on Trisolaris inhabited by Trisolarians. This planet belongs to a 3-solar system, guaranteeing mind blowing ephemeris. The dance of those three celestial bodies appears messy and random from the [wandering planet](https://www.amazon.com/Wandering-Earth-Cixin-Liu-ebook/dp/B01DMCBAW4/ref=sr_1_1?s=digital-text&ie=UTF8&qid=1524301774&sr=1-1&keywords=wandering+earth). Due to atmospheric properties, a Trisolarian can’t actually see three suns in its sky but only one at a time.
+
+>“It’s a phenomenon akin to polarization or destructive interference. As a result, when we view the sun from within our atmosphere and it gets a certain distance from us, the gaseous outer layer suddenly becomes completely transparent and invisible, and all we can see is its bright inner core. The sun then appears to be only the size of the inner core, a flying star.”
+
+Those who’ve have seen more suns than one at a time are no longer here for the record. After thoughtful observations and many ends of the world, one of the main characters understands the special celestial configuration.
+
+>“It’s actually pretty simple. The reason why the sun’s motion seems patternless is because our world has three suns. Under the influence of their mutually perturbing gravitational attraction, their movements are unpredictable — the three-body problem.”
+
+The 3-body problem studies a chaotic physical system, in which slight variations of initial conditions lead to unpredictable patterns. That does not mean it’s not deterministic, just unpredictable. Infinitesimal errors made on initial conditions measurement exponentially affect the behaviour of the system with time. So because we can’t simulate the actual (non-real) trisolar system even if it existed, we will stick to run the physics of 3 gravitational bodies — actually 4 if we count Trisolaris.
+
+I was eager to find out if Stable and Chaotic Eras would be reproduced, as well as flying stars scenarii.
+
+>“When two flying stars appear, it means a Stable Era is about to begin. [...]
+— If three flying stars appears, does that herald an even better era ?  [...]
+— What are you talking about ? Three flying stars.. pray that such a thing never happens.”
+
+Blender and Python scripts were used because I’m lazy and their 3D engine largely fulfill my needs.
+
+By logging the distances between Trisolaris and its three suns we can define Stable Eras and Chaotic Eras. A Stable Era corresponds to Trisolaris orbiting one Sun for a given period of time. Once pulled out of its regular orbit by other suns, the day-night cycle interrupts and chaos follows.
+
+>“That the sun will not rise tomorrow is no less intelligible a proposition, and implies no more contradiction, than the affirmation, that it will rise.”  Hume (1772)
+A Trisolarian kindergarten could have said that, [what are you talking about](https://bblais.github.io/will-the-sun-rise-tomorrow.html) ?
+
+
+PLOT
+
+We can also compute the average energy received by Trisolaris by applying inverse-square law. See theses spikes ? It’s global barbecue time.
+
+>“The ground glowed red like a piece of iron in a blacksmith’s furnace. Bright rivulets of lava snaked across the dim red earth, forming a net of fire that stretched to the horizon.”
+
+PLOT
+
+Another fun thing is to compute energy in all points of space and estimate the habitable zone, where the energy received belong to a reasonable band  — but who needs liquid water anyway when you can dehydrate ?
+
+PLOT
+
+If you want to invest a few hours worth of your life in something, start reading — anything really — but the Three-Body problem is a good book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the depossession of its history and the inevitable sink into oblivion. The second novel, The Dark Forest, also shines by introducing the eponymous hypothesis about the civilized universe and its attempt to solve Fermi paradox.
+
+The spoilers of this post were soft and will not ruin — if you were to engage it — your reading experience.

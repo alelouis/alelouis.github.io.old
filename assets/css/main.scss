@@ -7,29 +7,27 @@
 body {
 	color: $color-black;
 	background: $color-white;
-	font-family: 'Barlow Semi Condensed', serif;
-	font-size: 110%;
+	font-size: 100%;
 	font-weight: 400;
 	margin-top: 25px;
+	width: 45%;
+	margin: auto;
 }
 h1 {
 	margin-bottom: 5px;
 }
 p {
 	font-size: 1em;
-	line-height: 150%;
 }
 a {
-  color: inherit;
+  color: $color-link-blue;
   text-decoration: none;
   background-repeat: no-repeat;
   background-position: bottom;
-  background-size: 100% 6px;
-  background-image: linear-gradient(transparent, transparent 5px, #ccc 5px, #ccc);
 }
 
 a:hover {
-  background-image: linear-gradient(transparent, transparent 4px, #000 4px, #000);
+	color: #0a67ff;
 }
 
 h1 a,
@@ -66,12 +64,10 @@ ul {
 	}
 }
 blockquote {
-  color: $color-black;
-  border-left: 4px solid $color-black;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
+  color: #aaaaaa;
+  font-size: 100%;
+	font-family: "Roboto";
+	font-style: italic;
 }
 
 .wrapper {
@@ -85,6 +81,8 @@ blockquote {
 
 
 .header {
+	font-family: 'Roboto', serif;
+	font-weight: 900;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
@@ -114,6 +112,7 @@ hr {
 }
 
 .footer {
+	font-family: 'Roboto', serif;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
@@ -121,7 +120,7 @@ hr {
 	padding-top: 10px;
 	color: #777;
 	margin-top: 5rem;
-	
+
 	@media screen and (max-width: $br) {
 		display: block;
 	}
@@ -137,7 +136,7 @@ hr {
 			padding-left: 5px;
 		}
 	}
-	
+
 		p {
 		font-size: 1em;
 		line-height: 150%;
@@ -147,6 +146,7 @@ hr {
 
 
 .blog {
+	font-family: 'Roboto', serif;
 	padding-bottom: 30px;
 	h1 {
 		font-size: 1.4em;
@@ -156,20 +156,23 @@ hr {
 }
 
 .post {
+	font-family: 'Roboto', serif;
 	padding-bottom: 30px;
 	&__back {
 		a {
-		
+
 		}
 	}
 	&__title {
 		display: block;
 		margin-top: 20px;
 		margin-bottom: 6px;
+		text-align: center;
+
 		h1 {
 			display: inline-block;
 			font-size: 1.6em;
-			font-weight: 700;
+			font-weight:900;
 			padding-right: 10px;
 			padding-bottom: 2px;
 			text-decoration: none;
@@ -177,8 +180,10 @@ hr {
 	}
 	&__date {
 		p {
+			margin: auto;
 			font-size: 1em;
-			font-style: italic;
+			color: #aaaaaa;
+			text-align: center;
 		}
 	}
 	&__meta {
@@ -202,12 +207,12 @@ hr {
 		}
 		p {
 			font-size: 1em;
-			line-height: 150%;
+			line-height: 140%;
 			margin-bottom: 15px;
 		}
 		a {
-			padding-bottom: 1px;			
-			&:hover {			
+			padding-bottom: 1px;
+			&:hover {
 				text-decoration: none;
 			}
 		}
