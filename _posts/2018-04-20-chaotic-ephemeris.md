@@ -40,7 +40,7 @@ We can also compute the average energy received by Trisolaris by applying invers
 
 PLOT
 
-Another fun thing is to compute energy in all points of space and estimate the habitable zone, where the energy received belong to a reasonable band  — but who needs liquid water anyway when you can dehydrate ?
+Another fun thing is to compute energy in all points of space and estimate the habitable zone, where the energy received belongs to a reasonable band  — but who needs liquid water anyway when you can dehydrate ?
 
 PLOT
 
