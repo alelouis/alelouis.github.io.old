@@ -12,6 +12,9 @@ body {
 	margin-top: 25px;
 	width: 625px;
 	margin: auto;
+	@media screen and (max-width: $br) {
+		width: 100%;
+	}
 }
 h1 {
 	margin-bottom: 5px;
