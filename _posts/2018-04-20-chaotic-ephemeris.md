@@ -52,10 +52,13 @@ We can also compute the average energy received by Trisolaris by applying invers
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/bbc.svg">
 
-If you want to invest a few hours worth of your life in something, start reading — anything really — but the Three-Body problem is a good book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the dispossession of its history and the inevitable sink into oblivion. The second novel, The Dark Forest, also shines by introducing the eponymous hypothesis about the civilized universe and its attempt to solve Fermi paradox.
+I regret to say that I didn't manage to find recovery from unstable Era and confirm the theory of two flying star. Concerning the three flying star theory it probably means that Trisolaris will dive at great velocity into a dense formation of the three suns. This event is actually experienced virtually in the book as the Trisolar theory is being proposed by a character in-game. The other players, highly skeptical about its theory, finally believe him as the Trisolar day burn them to death.
 
+If you want to invest a few hours worth of your life in something, you can start reading the Three-Body problem as it is widely regarded as a good SF book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the dispossession of its history and the inevitable sink into oblivion. The second novel, [The Dark Forest](https://www.amazon.fr/dp/B00U7G0UYI/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1), also shines by introducing the eponymous hypothesis about a civilized universe and its attempt to solve Fermi paradox.
 
-Finally, here is the Trisolar dance animated :
+The elements disclosed in this post are details compared to the whole plot of the series and knowing them will not ruin — if you were to engage it — your reading experience.
+
+Finally, here is the magnificent Trisolar dance animated :
 
 <div style="text-align:center;">
 <video  style="margin: 0 auto; width: 100%; max-width: 1020px; border-style: dotted;" autoplay loop="loop">
@@ -66,5 +69,3 @@ Finally, here is the Trisolar dance animated :
 
    </video>
 </div>
-
-The spoilers of this post were soft and will not ruin — if you were to engage it — your reading experience.
