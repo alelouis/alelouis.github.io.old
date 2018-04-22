@@ -5,7 +5,7 @@ layout: post
 ---
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/trajectories.svg">  
-
+<br/>
 <span style="color:#ff6872">Spoiler alert : before reading this post, you should read the [Three Body Problem from Cixin Liu](https://www.amazon.fr/dp/B00S8FCJCQ/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1?target="_blank"). This post contains spoilers.</span>
 
 Following a first contact with a distant alien civilization, a secret organization launches a virtual reality simulation of an irrational world. What we call Stable and Chaotic Eras follows one after another without any apparent logic. While in chaotic eras, day’s durations are unpredictable. Temperatures can drop or rise in a matter of minutes setting ablaze the entire planet surface. New players have one goal : explaining rationally the incomprehensible.
@@ -26,7 +26,13 @@ I was eager to find out if Stable and Chaotic Eras would be reproduced, as well 
 — If three flying stars appears, does that herald an even better era ?  [...]
 — What are you talking about ? Three flying stars.. pray that such a thing never happens.”
 
-There are little tricks to know to reproduce physically correct behaviors on computers. For n-body simulations the standard approach is to apply forces (accelerations) and integrate on small timesteps to obtain velocities or positions of objects. We can use various integration methods and while I’m far from an expert in this domain, Verlet integrator gave me the best results. I also slightly modified the gravitational force equation by adding an $$\epsilon$$ to ensure that we never reach (or approach) singularity.
+There are little tricks to know to reproduce physically correct behaviors on computers. For n-body simulations the standard approach is to apply forces (accelerations) and integrate on small timesteps to obtain velocities or positions of objects. We can use various integration methods and it's generally a good idea to discard the Euler method, in my case I couldn't produce a system not collapsing after a few iterations. The Verlet integration gave me satisfying results.
+
+$$x_{t+\Delta t} = 2 x_{t} - x_{t-\Delta t} + a {\Delta t}^2$$
+
+I also slightly modified the gravitational force equation by adding an $$\epsilon$$ to ensure that we never reach (or approach) singularity.
+
+$$\vec{F} = G\frac{m_A m_B}{(d+\varepsilon)^2}\vec{u}$$
 
 By logging the distances between Trisolaris and its three suns we can define Stable Eras and Chaotic Eras. A Stable Era corresponds to Trisolaris orbiting one Sun for a given period of time. The orbit can be seen as the oscillation of the distance between Trisolaris and one of its suns. In the referential of the Sun 3 we notice the Stable Era of Trisolaris with regular orbits.
 <br/><br/><br/><br/>
@@ -40,16 +46,11 @@ Once pulled out of its regular orbit by other suns, the day-night cycle interrup
 >“That the sun will not rise tomorrow is no less intelligible a proposition, and implies no more contradiction, than the affirmation, that it will rise.”  Hume (1772)
 A Trisolarian kindergarten could have said that, [what are you talking about](https://bblais.github.io/will-the-sun-rise-tomorrow.html) ?
 
-
 We can also compute the average energy received by Trisolaris by applying inverse-square law. See theses spikes ? It’s global barbecue time.
 
 >“The ground glowed red like a piece of iron in a blacksmith’s furnace. Bright rivulets of lava snaked across the dim red earth, forming a net of fire that stretched to the horizon.”
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/bbc.svg">
-
-Another fun thing is to compute energy in all points of space and estimate the habitable zone, where the energy received belongs to a reasonable band  — but who needs liquid water anyway when you can dehydrate ?
-
-PLOT
 
 If you want to invest a few hours worth of your life in something, start reading — anything really — but the Three-Body problem is a good book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the depossession of its history and the inevitable sink into oblivion. The second novel, The Dark Forest, also shines by introducing the eponymous hypothesis about the civilized universe and its attempt to solve Fermi paradox.
 
