@@ -18,7 +18,7 @@ Those who’ve have seen more suns than one at a time are no longer here for the
 
 >“It’s actually pretty simple. The reason why the sun’s motion seems patternless is because our world has three suns. Under the influence of their mutually perturbing gravitational attraction, their movements are unpredictable — the three-body problem.”
 
-The 3-body problem studies a chaotic physical system, in which slight variations of initial conditions lead to unpredictable patterns. That does not mean it’s not deterministic, just unpredictable. Infinitesimal errors made on initial conditions measurement exponentially affect the behaviour of the system with time. So because we can’t simulate the actual (non-real) trisolar system even if it existed, we will stick to run the physics of 3 gravitational bodies — actually 4 if we count Trisolaris.
+The 3-body problem studies a chaotic physical system, in which slight variations of initial conditions lead to unpredictable patterns. That does not mean it’s not deterministic, just unpredictable. Infinitesimal errors made on initial conditions measurement exponentially affect the behavior of the system with time. So because we can’t simulate the actual (non-real) trisolar system even if it existed, we will stick to run the physics of 3 gravitational bodies — actually 4 if we count Trisolaris.
 
 I was eager to find out if Stable and Chaotic Eras would be reproduced, as well as flying stars scenarii.
 
@@ -26,7 +26,7 @@ I was eager to find out if Stable and Chaotic Eras would be reproduced, as well 
 — If three flying stars appears, does that herald an even better era ?  [...]
 — What are you talking about ? Three flying stars.. pray that such a thing never happens.”
 
-There are little tricks to know to reproduce physically correct behaviors on computers. For n-body simulations the standard approach is to apply forces (accelerations) and integrate on small timesteps to obtain velocities or positions of objects. We can use various integration methods and it's generally a good idea to discard the Euler method, in my case I couldn't produce a system not collapsing after a few iterations. The Verlet integration gave me satisfying results.
+There are little tricks to know to reproduce physically correct behaviors on computers. For n-body simulations the standard approach is to apply forces (accelerations) and integrate on small time-steps to obtain velocities or positions of objects. We can use various integration methods and it's generally a good idea to discard the Euler method, in my case I couldn't produce a system not collapsing after a few iterations. The Verlet integration gave me satisfying results.
 
 $$x_{t+\Delta t} = 2 x_{t} - x_{t-\Delta t} + a {\Delta t}^2$$
 
@@ -41,18 +41,18 @@ By logging the distances between Trisolaris and its three suns we can define Sta
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/oscill.svg">  
 
 <br/>
-Once pulled out of its regular orbit by other suns, the day-night cycle interrupts and chaos follows.
+We see that the periods/amplitudes of the orbits vary at discrete times, this phenomenon is caused by the other suns closing-by and perturbing the stable system — the animation at the end of the post demonstrates it. Once pulled out of its regular orbit by other suns, the day-night cycle interrupts and chaos follows — until a new stable configuration is reached.
 
 >“That the sun will not rise tomorrow is no less intelligible a proposition, and implies no more contradiction, than the affirmation, that it will rise.”  Hume (1772)
 A Trisolarian kindergarten could have said that, [what are you talking about](https://bblais.github.io/will-the-sun-rise-tomorrow.html) ?
 
-We can also compute the average energy received by Trisolaris by applying inverse-square law. See theses spikes ? It’s global barbecue time.
+We can also compute the average energy received by Trisolaris by applying inverse-square law. See theses spikes ? It’s global barbecue time. Fortunatly, Trisolarians can desydrate and, if reactive enough, survive.
 
 >“The ground glowed red like a piece of iron in a blacksmith’s furnace. Bright rivulets of lava snaked across the dim red earth, forming a net of fire that stretched to the horizon.”
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/bbc.svg">
 
-If you want to invest a few hours worth of your life in something, start reading — anything really — but the Three-Body problem is a good book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the depossession of its history and the inevitable sink into oblivion. The second novel, The Dark Forest, also shines by introducing the eponymous hypothesis about the civilized universe and its attempt to solve Fermi paradox.
+If you want to invest a few hours worth of your life in something, start reading — anything really — but the Three-Body problem is a good book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the dispossession of its history and the inevitable sink into oblivion. The second novel, The Dark Forest, also shines by introducing the eponymous hypothesis about the civilized universe and its attempt to solve Fermi paradox.
 
 
 Finally, here is the Trisolar dance animated :
