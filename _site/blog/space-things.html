@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>alelouis &mdash; cool stuff</title>
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+    </script>
+    <script src="live.js" type="text/javascript"></script>
+
+    
+        <title>Moving stars (in fact Earth but who cares)</title>
+    
+
+    <meta name="description" content="cool stuff">
+
+    
+
+    <link rel="icon" href="/assets/img/blog.png">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya|Roboto|Roboto+Mono|Merriweather|Noto+Serif|Vollkorn" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <meta name="google-site-verification" content="LEaYA_oCmx4g4gMQz871bITFvI7gepc2iwSsQIvwD_Q" />
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <base target="_blank">
+<div class="header">
+    <h1><a href="/">alelouis</a></h1>
+    <ul>
+        
+        <li>
+            <a href="/me">About</a>
+        </li>
+        
+        <li>
+            <a href="https://twitter.com/Wimacod">Twitter</a>
+        </li>
+        
+    </ul>
+</div>
+
+<div class="post">
+
+
+    <div class="post__title">
+    	<h1>Moving stars (in fact Earth but who cares)</h1>
+    </div>
+    <div class="post__date">
+    	<p>alelouis – February 19, 2018</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+        <p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/sky-plot/starbanner.svg" /></p>
+
+<p>Only a few things are better than just looking at a clear sky for bright stars. In this what seems to be a perfectly still deep space picture, many things are in fact happening. Those who have played with long exposure photography know that the imperceptible earth rotation can reveal beautiful star movements patterns. We may also observe fast transiting bright spots, satellites. Some of what we call stars are in fact planets, or even geostationary satellites.</p>
+
+<p>To better understand all these moving parts and predict what will show up in the sky we can now rely on computations. I will show you how by using simple libraries to plot beautiful stars and predict the future (regarding astronomy of course). Without further ado let’s remember together the basics.</p>
+
+<h1 id="where-am-i">Where am I?</h1>
+<h2 id="right-ascension-and-declination-ra--dec">Right Ascension and Declination (RA &amp; DEC)</h2>
+
+<p>A simple way to indicate any position and Earth is the Latitude / Longitude coordinates system. A similar approach can be applied to stars: we imagine a celestial sphere around Earth (with a big radius) which surface contains all the stars. Any object can be expressed as two angles: Right Ascension and Declination. These are analogs to Latitude and Longitude except for the fact that the 0° meridian for Declination is not related to the Greenwich meridian (which would make the coordinates Earth-rotation dependent) but pointed towards a fixed point in the sky. As a consequence, each object in the sky can be described by two values for all Earth observers independent of their positions.</p>
+
+<p><img style="margin: 0 auto; display: block; width : 50%;" src="../images/sky-plot/radec.svg" /></p>
+
+<h2 id="azimuth-and-altitude-az--alt">Azimuth and Altitude (AZ &amp; ALT)</h2>
+
+<p>It’s nice to have the absolute position of objects in the sky, but what if I want to know where to look and when to look from my city to see that ISS thing? We often use another set of coordinates which is observer dependent. Any object is again described by two values: Azimuth and Altitude. Altazimutal values are converted from Right Ascension and Declination values taking into account time and observer position on Earth. Altitude and Azimuth coordinates are very convenient to work with for any observer as they indicated angles relative to the local horizon. Azimuth makes you turn around, Altitude makes you raise your head.</p>
+
+<p><img style="margin: 0 auto; display: block; width : 50%;" src="../images/sky-plot/altaz.svg" /></p>
+
+<h1 id="make-it-roll">Make it roll</h1>
+
+<p>Since the 16-17th century, it is socially acceptable to say that the Earth is in rotation. This rotation is fairly slow (somewhere near 1600 km/h at equator), but who want shorter days anyway?</p>
+
+<p>By summoning the power of trigonometry and well-written implementations we will fast forward sky movements and save you the bargain of doing 5 hours time-lapses in the outside world. <a href="http://rhodesmill.org/pyephem/">PyEphem</a> is a library making it easy for a five y.o. to execute several astronomy computations, like convert RA / DEC to AZ / ALT coordinates. The first step is to gather a collection of star coordinates (here’s one). The second step is to compute the actual position of these star in the sky of an observer (let’s say me).
+I live in Toulouse (43.6, 1.44) and I will go out on the 28th of February in the night, let’s say 5:07:00 AM (obviously chosen randomly).</p>
+
+<p>What I can do is plot each AZ / ALT coordinates on a polar plot with <script type="math/tex">\theta</script> corresponding to Azimuth and <script type="math/tex">r</script> corresponding to Altitude. I only care about plotting positive Altitude values, as I can’t see (yet) through the dirt. I can also set a variable size for each star based on their magnitude for extra fanciness and voilà:</p>
+
+<p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/sky-plot/stars.svg" /></p>
+
+<p>Yes, this is static. Because I only computed for one date there is not much happening. I can plot exactly the same plot but at a different time, or make it a sequence. Let’s compute one frame every 30 seconds of real-time.</p>
+
+<div style="text-align:center;">
+<video style="margin: 0 auto; width: 100%; max-width: 1020px;" autoplay="" loop="loop">
+
+```
+   <source src="../images/sky-plot/iss.webm" type="video/mp4" />
+```
+
+   </video>
+</div>
+
+<p>Oh, what’s that? I told you unexpected thing happens while looking at the sky. To be honest, it wasn’t random. I chose specifically a time when an ISS transit would occur above Toulouse. For each frame, I also plotted and evenly spaced time trace of the ISS which give us a sense of the apparent speed displayed by the satellite. The end of the trail represents a lag of 50 seconds. (The big white point at the centered is the Zenith).</p>
+
+<h1 id="what-about-satellites">What about satellites?</h1>
+
+<p>Satellites do not have fixed RA and DEC coordinates, so how do we know where to look? An easy way to describe satellites orbits is by using TLE (Two-Line Elements). Each satellite has a TLE, valid for a given time, specifying its launch and orbital characteristics. These TLE can be given as inputs to pyEphem to create a moving object. At any given time (within the limit of the TLE validity) we can then fetch the RA and DEC of the satellite. The website <a href="https://celestrak.com/">celestrak</a> references more satellites than you need, including the last 30 days launches, exciting!</p>
+
+<p>As an example, here is the last TLE of our beloved ISS:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ISS <span class="o">(</span>ZARYA<span class="o">)</span>             
+1 25544U 98067A   18049.96745694  .00002668  00000-0  47552-4 0  9991
+2 25544  51.6414 248.0688 0003322 111.2880 342.9259 15.54113204100135</code></pre></figure>
+
+<h1 id="i-want-to-play-too-show-me-your-magic-tricks">I want to play too, show me your magic tricks!</h1>
+
+<p>All the code used in this blog post is available as a Jupyter Notebook in this <a href="https://github.com/alelouis/moving-stars/">Github repository</a>.</p>
+
+<p>Have a lot of fun, plot many satellites at once (I suggest you Galileo), vary positions at extravagant speeds or compute your next ISS transits!</p>
+
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2018 <a href="http://alelouis.github.io">Alexis LOUIS</a></p>
+</div>
+
+    </div>
+    
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>alelouis &mdash; cool stuff</title>
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+    </script>
+    <script src="live.js" type="text/javascript"></script>
+
+    
+        <title>The chaotic ephemeris of Trisolarians</title>
+    
+
+    <meta name="description" content="cool stuff">
+
+    
+
+    <link rel="icon" href="/assets/img/blog.png">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya|Roboto|Roboto+Mono|Merriweather|Noto+Serif|Vollkorn" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <meta name="google-site-verification" content="LEaYA_oCmx4g4gMQz871bITFvI7gepc2iwSsQIvwD_Q" />
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <base target="_blank">
+<div class="header">
+    <h1><a href="/">alelouis</a></h1>
+    <ul>
+        
+        <li>
+            <a href="/me">About</a>
+        </li>
+        
+        <li>
+            <a href="https://twitter.com/Wimacod">Twitter</a>
+        </li>
+        
+    </ul>
+</div>
+
+<div class="post">
+
+
+    <div class="post__title">
+    	<h1>The chaotic ephemeris of Trisolarians</h1>
+    </div>
+    <div class="post__date">
+    	<p>alelouis – April 20, 2018</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+        <p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/trajectories.svg" /></p>
+
+<p><span style="color:#ff6872">Spoiler alert : before reading this post, you should read the <a href="https://www.amazon.fr/dp/B00S8FCJCQ/ref=dp-kindle-redirect?_encoding=UTF8&amp;btkr=1?target=&quot;_blank&quot;">Three Body Problem from Cixin Liu</a>. This post contains spoilers.</span></p>
+
+<p>Following a first contact with a distant alien civilization, a secret organization launches a virtual reality simulation of an irrational world. What we call Stable and Chaotic Eras follows one after another without any apparent logic. While in chaotic eras, day’s durations are unpredictable. Temperatures can drop or rise in a matter of minutes setting ablaze the entire planet surface. New players have one goal : explaining rationally the incomprehensible.</p>
+
+<p>The first novel of the great trilogy immerses us on Trisolaris inhabited by Trisolarians. This planet belongs to a 3-solar system, guaranteeing mind blowing ephemeris. The dance of those three celestial bodies appears messy and random from the <a href="https://www.amazon.com/Wandering-Earth-Cixin-Liu-ebook/dp/B01DMCBAW4/ref=sr_1_1?s=digital-text&amp;ie=UTF8&amp;qid=1524301774&amp;sr=1-1&amp;keywords=wandering+earth">wandering planet</a>. Due to atmospheric properties, a Trisolarian can’t actually see three suns in its sky but only one at a time.</p>
+
+<blockquote>
+  <p>“It’s a phenomenon akin to polarization or destructive interference. As a result, when we view the sun from within our atmosphere and it gets a certain distance from us, the gaseous outer layer suddenly becomes completely transparent and invisible, and all we can see is its bright inner core. The sun then appears to be only the size of the inner core, a flying star.”</p>
+</blockquote>
+
+<p>Those who’ve have seen more suns than one at a time are no longer here for the record. After thoughtful observations and many ends of the world, one of the main characters understands the special celestial configuration.</p>
+
+<blockquote>
+  <p>“It’s actually pretty simple. The reason why the sun’s motion seems patternless is because our world has three suns. Under the influence of their mutually perturbing gravitational attraction, their movements are unpredictable — the three-body problem.”</p>
+</blockquote>
+
+<p>The 3-body problem studies a chaotic physical system, in which slight variations of initial conditions lead to unpredictable patterns. That does not mean it’s not deterministic, just unpredictable. Infinitesimal errors made on initial conditions measurement exponentially affect the behaviour of the system with time. So because we can’t simulate the actual (non-real) trisolar system even if it existed, we will stick to run the physics of 3 gravitational bodies — actually 4 if we count Trisolaris.</p>
+
+<p>I was eager to find out if Stable and Chaotic Eras would be reproduced, as well as flying stars scenarii.</p>
+
+<blockquote>
+  <p>“When two flying stars appear, it means a Stable Era is about to begin. […]
+— If three flying stars appears, does that herald an even better era ?  […]
+— What are you talking about ? Three flying stars.. pray that such a thing never happens.”</p>
+</blockquote>
+
+<p>There are little tricks to know to reproduce physically correct behaviors on computers. For n-body simulations the standard approach is to apply forces (accelerations) and integrate on small timesteps to obtain velocities or positions of objects. We can use various integration methods and while I’m far from an expert in this domain, Verlet integrator gave me the best results. I also slightly modified the gravitational force equation by adding an <script type="math/tex">\epsilon</script> to ensure that we never reach (or approach) singularity.</p>
+
+<p>By logging the distances between Trisolaris and its three suns we can define Stable Eras and Chaotic Eras. A Stable Era corresponds to Trisolaris orbiting one Sun for a given period of time. The orbit can be seen as the oscillation of the distance between Trisolaris and one of its suns. In the referential of the Sun 3 we notice the Stable Era of Trisolaris with regular orbits.
+<br /><br /><br /><br />
+<img style="margin: 0 auto; display: block; width : 90%;" src="../images/trisolaris/referentiel.svg" /></p>
+
+<p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/oscill.svg" /></p>
+
+<p><br />
+Once pulled out of its regular orbit by other suns, the day-night cycle interrupts and chaos follows.</p>
+
+<blockquote>
+  <p>“That the sun will not rise tomorrow is no less intelligible a proposition, and implies no more contradiction, than the affirmation, that it will rise.”  Hume (1772)
+A Trisolarian kindergarten could have said that, <a href="https://bblais.github.io/will-the-sun-rise-tomorrow.html">what are you talking about</a> ?</p>
+</blockquote>
+
+<p>We can also compute the average energy received by Trisolaris by applying inverse-square law. See theses spikes ? It’s global barbecue time.</p>
+
+<blockquote>
+  <p>“The ground glowed red like a piece of iron in a blacksmith’s furnace. Bright rivulets of lava snaked across the dim red earth, forming a net of fire that stretched to the horizon.”</p>
+</blockquote>
+
+<p><img style="margin: 0 auto; display: block; width : 100%;" src="../images/trisolaris/bbc.svg" /></p>
+
+<p>Another fun thing is to compute energy in all points of space and estimate the habitable zone, where the energy received belongs to a reasonable band  — but who needs liquid water anyway when you can dehydrate ?</p>
+
+<p>PLOT</p>
+
+<p>If you want to invest a few hours worth of your life in something, start reading — anything really — but the Three-Body problem is a good book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the depossession of its history and the inevitable sink into oblivion. The second novel, The Dark Forest, also shines by introducing the eponymous hypothesis about the civilized universe and its attempt to solve Fermi paradox.</p>
+
+<p>The spoilers of this post were soft and will not ruin — if you were to engage it — your reading experience.</p>
+
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2018 <a href="http://alelouis.github.io">Alexis LOUIS</a></p>
+</div>
+
+    </div>
+    
+</body>
+
+</html>
