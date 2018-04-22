@@ -54,4 +54,17 @@ We can also compute the average energy received by Trisolaris by applying invers
 
 If you want to invest a few hours worth of your life in something, start reading — anything really — but the Three-Body problem is a good book. The Trisolaris system set apart, the story mainly deals with humanity reaction to a long term but certain threat. We assist to a radical and short spanned shift in mentality induced by the possible extinction of the entire human species, the depossession of its history and the inevitable sink into oblivion. The second novel, The Dark Forest, also shines by introducing the eponymous hypothesis about the civilized universe and its attempt to solve Fermi paradox.
 
+
+Finally, here is the Trisolar dance animated :
+
+<div style="text-align:center;">
+<video  style="margin: 0 auto; width: 100%; max-width: 1020px; border-style: dotted;" autoplay loop="loop">
+
+```
+   <source src="../images/trisolaris/dance.mp4" type="video/mp4" />
+```
+
+   </video>
+</div>
+
 The spoilers of this post were soft and will not ruin — if you were to engage it — your reading experience.
