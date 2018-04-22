@@ -34,6 +34,26 @@ I also slightly modified the gravitational force equation by adding an $$\epsilo
 
 $$\vec{F} = G\frac{m_A m_B}{(d+\varepsilon)^2}\vec{u}$$
 
+The simulation was implemented in Python in pure numpy. For each body we apply the gravitational forces from all the other interacting objects.
+
+{% highlight python %}
+
+import numpy as np
+timestep = 1e-5
+for t in time_vector:
+  for body_id, body in enumerate(bodies):
+    acc = np.zeros(2)
+    for interact_id, interact in enumerate(bodies):
+      if interact_id != body_id:
+        diff_vector =  interact.position - body.position
+        norm = np.linalg.norm(diff_vector)
+        diff_vector /= norm
+        acc += force*diff_vector*interact.mass/(norm + 0.1)**2
+    position = 2 * body.position - body.previous + acc * timestep**2
+    body.previous = body.position
+    body.position = position
+{% endhighlight %}
+
 By logging the distances between Trisolaris and its three suns we can define Stable Eras and Chaotic Eras. A Stable Era corresponds to Trisolaris orbiting one Sun for a given period of time. The orbit can be seen as the oscillation of the distance between Trisolaris and one of its suns. In the referential of the Sun 3 we notice the Stable Era of Trisolaris with regular orbits.
 <br/><br/><br/><br/>
 <img style="margin: 0 auto; display: block; width : 90%;" src="../images/trisolaris/referentiel.svg">  
