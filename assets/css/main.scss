@@ -3,6 +3,7 @@
 
 @import "reset";
 @import "config";
+@import url(pastie.css);
 
 body {
 	color: $color-black;
@@ -251,20 +252,17 @@ hr {
 			}
 		}
 		code {
-			padding: 3px;
-			font-family: 'Roboto', sans-serif;
+			font-family: 'Roboto Mono', sans-serif;
 			font-size: 0.8em;
-			background: $color-grey;
+			background: $color-black;
 		}
 		.highlight {
-			margin: 10px;
 			margin-bottom: 15px;
 			padding: 10px;
 			line-height: 1.5;
 			border-radius: 3px;
-			background: $color-grey;
+			background: #343642;
 			code {
-				color: $color-black;
 				background: none;
 			}
 		}
