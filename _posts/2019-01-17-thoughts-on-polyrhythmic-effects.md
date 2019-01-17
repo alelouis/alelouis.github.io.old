@@ -1,7 +1,7 @@
 *def*. Polyrhythm : literally means multiples rhythmes at the same time (I made up this definition).
-But as the word doesn't mean anything today (because people use it in every situation) so we will use it only to refer to phenomenon related to the very definition above.
+But because the word doesn't mean anything today (because people use it in every situation) we will use it only to refer to phenomenon related to the very definition above.
 
-Consider my beat as a quarter note. I can divide my beat into two eight notes, four sixteenth note, eight 32-th or n n*4-th notes (shit it already got mathy).
+Consider my beat as being a quarter note. I can divide my beat into two eighth notes, four sixteenth note, eight $$32-th$$ or $$n n*4-th$$ notes (shit it already got mathy).
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/split_poly-1.svg">
 
@@ -9,11 +9,11 @@ I can also divide my beat into three (or any number), obtaining 3 notes, non amb
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/triplet-1.svg">
 
-Now if I divide the same beat (that is to say one fixed physical time duration) in two different ways, one in 3 and the other in 2, playing those two subdivisions against each other produce a 3:2 polyrhyhm (obvious you smartass ?).
+Now if I divide the same beat (that is to say one fixed physical time duration) in two different ways, one in 3 and the other in 2, playing those two subdivisions against each other produce a $$3:2$$ polyrhyhm (obvious you smartass ?).
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/3a2-1.svg">
 
-This way, on a beat level, I can make any polyrhythm. Just play different beat divisions at the same time. Dividing one beat into four sixteenth notes and five quintuplet sixteenth notes leads to a 5:4 polyrhythm. 
+This way, on a beat level, I can make any polyrhythm. Just play different beat divisions at the same time. Dividing one beat into four sixteenth notes and five quintuplet sixteenth notes leads to a $$5:4$$ polyrhythm. 
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/5a4-1-1.svg">
 
@@ -86,7 +86,7 @@ If I repeat a phrase in 4/4 against a phrase in 5/4, the repetition produces a u
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/4454-1.svg">
 
-While it's clear that the two phrase are not polyrhythms against each other, the whole pattern of 20 beats IS a polyrhythm. The observation that you can play 4 phrase of 5 beats in the same amount of time that you can play 5 phrases of 4 beats is trivial. If we were to play the first beat of every phrase, we would observe a 5:4 *macro* polyrhythm (or 4:5 depending on the chosen reference). 
+While it's clear that the two phrase are not polyrhythms against each other, the whole pattern of 20 beats IS a polyrhythm. The observation that you can play 4 phrase of 5 beats in the same amount of time that you can play 5 phrases of 4 beats is trivial. If we were to play the first beat of every phrase, we would observe a $$5:4$$ *macro* polyrhythm (or $$4:5$$ depending on the chosen reference). 
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/4454_poly-1.svg">
 
