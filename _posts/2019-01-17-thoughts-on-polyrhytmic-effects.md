@@ -1,15 +1,13 @@
-# Thoughts on polyrhythmic effects
-
 *def*. Polyrhythm : literally means multiples rhythmes at the same time (I made up this definition).
 But as the word doesn't mean anything today (because people use it in every situation) so we will use it only to refer to phenomenon related to the very definition above.
 
 Consider my beat as a quarter note. I can divide my beat into two eight notes, four sixteenth note, eight 32-th or n n*4-th notes (shit it already got mathy).
 
-<img style="margin: 0 auto; display: block; width : 75%;" src="../images/pol-ef/split_poly-1.svg">
+<img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/split_poly-1.svg">
 
 I can also divide my beat into three (or any number), obtaining 3 notes, non ambiguously named triplet eight notes (but really twelth notes would have been a better name that all this lower power of two equivalent time occupation non sense).
 
-<img style="margin: 0 auto; display: block; width : 75%;" src="../images/pol-ef/triplet-1.svg">
+<img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/triplet-1.svg">
 
 Now if I divide the same beat (that is to say one fixed physical time duration) in two different ways, one in 3 and the other in 2, playing those two subdivisions against each other produce a 3:2 polyrhyhm (obvious you smartass ?).
 
