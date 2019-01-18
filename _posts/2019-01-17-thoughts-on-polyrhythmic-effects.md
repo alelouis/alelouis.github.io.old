@@ -1,7 +1,7 @@
 *def*. Polyrhythm : literally means multiples rhythmes at the same time (I made up this definition).
 But because the word doesn't mean anything today (because people use it in every situation) we will use it only to refer to phenomenon related to the very definition above.
 
-Consider my beat as being a quarter note. I can divide my beat into two eighth notes, four sixteenth note, eight 32-th$$ or n n*4-th notes (shit it already got mathy).
+Consider my beat as being a quarter note. I can divide my beat into two eighth notes, four sixteenth note, eight 32-th or n n*4-th notes (shit it already got mathy).
 
 <img style="margin: 0 auto; display: block; width : 100%;" src="../images/pol-ef/split_poly-1.svg">
 
