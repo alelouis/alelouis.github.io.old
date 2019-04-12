@@ -22,7 +22,7 @@ ORCΛ encourages you to automate thing as well as interact with the interface. S
 
 ## Program implementation
 
-The twelve tones that can are understood by orca are defined as : {C, c, D, d, E, e, F, f, G, g, A, a, B, b}. It doesn't adds up to twelve because e (=E#) is enharmonic to F, as well as b (=B#) to C. It makes no difference to use one or another in the actual implementation. 
+The twelve tones that can be understood by ORCΛ are defined as : {C, c, D, d, E, e, F, f, G, g, A, a, B, b}. It doesn't adds up to twelve because e (=E#) is enharmonic to F, as well as b (=B#) to C. It makes no difference to use one or another in the actual implementation. 
 
 Because you can count from 0 to z  in ORCΛ and that uppercases are interpreted as lowercases in value, you can't simply add 4 to C to get a D, you would get the result of the operation c + 4, which is d. We can bypass this limitation by first assigning 12 ascending variables to the 12 semitones starting from C, which we will manipulate to create chords. For simplification, let's call this ordering the 12-tone array.
 
