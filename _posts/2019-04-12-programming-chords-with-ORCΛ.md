@@ -29,11 +29,11 @@ By defining those variables in ascending order, we can fetch the actual 12 tones
 
 With this 12-tone array, one can go from C (var 0) to D (var 2) by adding 2 (semitones) to the variables names (or index), which is correct according to music theory. The addition operator (A) outputs the variable name (index) which has to be looked up from the 12-tone array to get the correct note. But if I add 3 to var 9 (which corresponds to the note A), I get 9+3 = var d which is not assigned to a variable. Caution here : because we use variables names that could also be note names (like the d here), we shall be careful in the separation of the two concepts. This is the reason we have to only stay in the interval [0, b] when outputting variables indexes. We can constraint the addition result to this interval by adding a Modulo operator 12(c) after each addition result. If we do not use the quotient to correct to actual octave skip, this effectively wraps every interval into the same octave. This sequence of addition/modulo defines the interval unit logic.
 
-<img style="margin: 0 auto; display: block; width : 20%;" src="../images/orcainterval.png">
+<img style="margin: 0 auto; display: block; width : 20%;" src="../images/orca/interval.png">
 
 The number of notes in a chord only depend on how many times you repeat this interval unit. Here is an example of 4-notes chord, a Cmin7 (Root : C (var 0), Intervals = [3, 7, 10(=a)])
 
-<img style="margin: 0 auto; display: block; width : 50%;" src="../images/orcachord.png">
+<img style="margin: 0 auto; display: block; width : 50%;" src="../images/orca/chord.png">
 
 And there you have it, by correctly defining the twelve tones as ascending variables, doing modulus addition of interval values, we just implemented a compact program yielding chords. Send the resulting notes as MIDI messages into your favorite DAW and hear the chord change as you wonder over roots and interval values.
 
@@ -43,7 +43,7 @@ Building chord progressions is a simple extension to chords where you automate t
 <video  style="margin: 0 auto; width: 100%; max-width: 1020px;" autoplay loop="loop">
 
 ```
-   <source src="../images/orca/demo.mp4" type="video/mp4" />
+   <source src="../images/orca/orca.mp4" type="video/mp4" />
 ```
 
    </video>
