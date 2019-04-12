@@ -1,7 +1,3 @@
-# Programming chords with ORCΛ
-
-#### *by Alexis LOUIS*
-
 ORCΛ is a live programming environment, a bit like a cellular automata, where a grid of operators are triggered and/or triggering state changes. The originality of ORCΛ is that every operator are represented as letter (from A to Z), each one having a particular role [(list here)](https://github.com/hundredrabbits/Orca). If you ever played Factorio, programming in ORCΛ feels a bit like playing Factorio. The build-in capabilities of MIDI and UDP sends clearly shows that it was developed in the objective of serving some musical production purpose, but really you could illuminate LEDs, controls motors or do anything interactive with it. It still has to be demonstrated that you can code nearly every function with it (work in progress...) but I'm pretty confident you could (at the cost of a lot of time and dedication).
 
 I won't review the basics of how ORCΛ works (it's fairly intuitive) but go in depth about how to create chords with it, a pilar concept of music theory that is not directly implemented in ORCΛ. At the moment, only tokens from C to G (with lowercases being sharps, c is C#) have a musical concept attached to them usable directly in MIDI, UDP or OSC commands.
