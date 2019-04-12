@@ -40,7 +40,7 @@ And there you have it, by correctly defining the twelve tones as ascending varia
 Building chord progressions is a simple extension to chords where you automate the changes in root values and interval values. Example of code progression :
 
 <div style="text-align:center;">
-<video  style="margin: 0 auto; width: 100%; max-width: 1020px;" autoplay loop="loop">
+<video  style="margin: 0 auto; width: 100%; max-width: 1020px;" controls>
 
 ```
    <source src="../images/orca/orca.mp4" type="video/mp4" />
