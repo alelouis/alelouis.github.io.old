@@ -19,13 +19,13 @@ The twelve tones that can are understood by orca are defined as : {C, c, D, d, E
 
 Because you can count from 0 to z  in ORCΛ and that uppercases are interpreted as lowercases in value, you can't simply add 4 to C to get a D, you would get the result of the operation c +4, which is d. We can bypass this limitation by first assigning 12 ascending variables to the 12 semitones starting from C, which we will manipulate to create chords. For simplification, let's call this ordering the 12-tone array.
 
-<img style="margin: 0 auto; display: block; width : 25%;" src="../images/orca/12array.png">
+<img style="margin: 0 auto; display: block; width : 50%;" src="../images/orca/12array.png">
 
 By defining those variables in ascending order, we can fetch the actual 12 tones ordering of notes by executing operations on variables names. We could also choose not to use 12 tones but a particular scale, in which case all interval combinations would create chords diatonic to that scale. 
 
 With this 12-tone array, one can go from C (var 0) to D (var 2) by adding 2 (semitones) to the variables names (or index), which is correct according to music theory. The addition operator (A) outputs the variable name (index) which has to be looked up from the 12-tone array to get the correct note. But if I add 3 to var 9 (which corresponds to the note A), I get 9+3 = var d which is not assigned to a variable. Caution here : because we use variables names that could also be note names (like the d here), we shall be careful in the separation of the two concepts. This is the reason we have to only stay in the interval [0, b] when outputting variables indexes. We can constraint the addition result to this interval by adding a Modulo operator 12(c) after each addition result. If we do not use the quotient to correct to actual octave skip, this effectively wraps every interval into the same octave. This sequence of addition/modulo defines the interval unit logic.
 
-<img style="margin: 0 auto; display: block; width : 20%;" src="../images/orca/interval.png">
+<img style="margin: 0 auto; display: block; width : 50%;" src="../images/orca/interval.png">
 
 The number of notes in a chord only depend on how many times you repeat this interval unit. Here is an example of 4-notes chord, a Cmin7 (Root : C (var 0), Intervals = [3, 7, 10(=a)])
 
