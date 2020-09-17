@@ -10,25 +10,25 @@ ORCΛ is a live programming environment, a bit like a cellular automata, where a
 I won't review the basics of how ORCΛ works (it's fairly intuitive) but go in depth about how to create chords with it, a pilar concept of music theory that is not directly implemented in ORCΛ. At the moment, only tokens from C to G (with lowercases being sharps, c is C#) have a musical concept attached to them usable directly in MIDI, UDP or OSC commands.
 
 ## Chords ?
-Simply put, a chord consists in essence as a root and more than one intervals built upon the root. In tempered 12 tone systems, an octave (from frequency f to 2f) is divided in 12 equal parts. In that sense we often count in semi-tones, the semi-tone being the smallest pitch unit available. Going 12 semitones up from a root gives us an interval of a perfect octave. Going 7 semitones up from a root is what we call a fifth, even if the actual definition of harmonic fifth (being a frequency ratio from $$f$$ to $$3/2f$$) is not quite what we are doing when going 7 semitones up. 
+Simply put, a chord consists in essence as a root and more than one intervals built upon the root. In tempered 12 tone systems, an octave (from frequency f to 2f) is divided in 12 equal parts. In that sense we often count in semi-tones, the semi-tone being the smallest pitch unit available. Going 12 semitones up from a root gives us an interval of a perfect octave. Going 7 semitones up from a root is what we call a fifth, even if the actual definition of harmonic fifth (being a frequency ratio from $$f$$ to $$3/2f$$) is not quite what we are doing when going 7 semitones up.
 
 *This phenomenon occurs because of the way we divided the octave (in 12 equal parts) : going 7 semi-tones up from $$f$$ actually jumps to $$2^{7/12}f$$, which is quite close but not equal to $$3/2f$$. That's why every note you hear nowadays apart from the octave are objectively not in tune, but that's another subject.*
 
 A chord can contain many different intervals, every combination (and their arranging, called voicing) providing some sense of musical color. Moreover, from the succession of chords, called a progression, can arise a context in which two same chords will *feel* different. Rhythm, articulation, tone and more are variables that alter the musical color of a chord, but the set of intervals clearly play the major (no pun intended) role in giving the basic color of a chord.
 
 
-## Defining the ORCΛ program 
-ORCΛ encourages you to automate thing as well as interact with the interface. So my first idea was to implement a program that would compute the right notes, given a root and a list of intervals I could easily change. As an example, I should be able to specify the root note (C for example), with the intervals [4, 7] and get from the output the notes C E G, the C major chord in root position. 
+## Defining the ORCΛ program
+ORCΛ encourages you to automate thing as well as interact with the interface. So my first idea was to implement a program that would compute the right notes, given a root and a list of intervals I could easily change. As an example, I should be able to specify the root note (C for example), with the intervals [4, 7] and get from the output the notes C E G, the C major chord in root position.
 
 ## Program implementation
 
-The twelve tones that can be understood by ORCΛ are defined as : {C, c, D, d, E, e, F, f, G, g, A, a, B, b}. It doesn't adds up to twelve because e (=E#) is enharmonic to F, as well as b (=B#) to C. It makes no difference to use one or another in the actual implementation. 
+The twelve tones that can be understood by ORCΛ are defined as : {C, c, D, d, E, e, F, f, G, g, A, a, B, b}. It doesn't adds up to twelve because e (=E#) is enharmonic to F, as well as b (=B#) to C. It makes no difference to use one or another in the actual implementation.
 
 Because you can count from 0 to z  in ORCΛ and that uppercases are interpreted as lowercases in value, you can't simply add 4 to C to get a D, you would get the result of the operation c + 4, which is d. We can bypass this limitation by first assigning 12 ascending variables to the 12 semitones starting from C, which we will manipulate to create chords. For simplification, let's call this ordering the 12-tone array.
 
 <img style="margin: 0 auto; display: block; width : 50%;" src="../images/orca/12array.png">
 
-By defining those variables in ascending order, we can fetch the actual 12 tones ordering of notes by executing operations on variables names. We could also choose not to use 12 tones but a particular scale, in which case all interval combinations would create chords diatonic to that scale. 
+By defining those variables in ascending order, we can fetch the actual 12 tones ordering of notes by executing operations on variables names. We could also choose not to use 12 tones but a particular scale, in which case all interval combinations would create chords diatonic to that scale.
 
 With this 12-tone array, one can go from C (var 0) to D (var 2) by adding 2 (semitones) to the variables names (or index), which is correct according to music theory. The addition operator (A) outputs the variable name (index) which has to be looked up from the 12-tone array to get the correct note. But if I add 3 to var 9 (which corresponds to the note A), I get 9+3 = var d which is not assigned to a variable. Caution here : because we use variables names that could also be note names (like the d here), we shall be careful in the separation of the two concepts. This is the reason we have to only stay in the interval [0, b] when outputting variables indexes. We can constraint the addition result to this interval by adding a Modulo operator 12(c) after each addition result. If we do not use the quotient to correct to actual octave skip, this effectively wraps every interval into the same octave. This sequence of addition/modulo defines the interval unit logic.
 
@@ -55,4 +55,3 @@ Building chord progressions is a simple extension to chords where you automate t
 You could note that one modulo is inactive (for the root), which keep the bass note steady for 2 measures. This has a nice voice leading effect, but changes the quality of the chord.
 
 Enjoy ! :)
-
