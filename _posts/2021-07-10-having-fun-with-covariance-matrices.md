@@ -134,27 +134,25 @@ Except that in the first approach, we deduced $$R$$ from understanding what $$R$
 Because the main subject of this blog post is not to do a full depth intro to geometric intution of matrices, I will drop a **few fun facts** that could tackle your curiosity when thinking about matrices this way:
 
 - **the determinant $$\det(M)$$ of a matrix is the change factor of the area spanned by $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$**
-    - *e.g.* rotation matrix do not scale $$\hat{\imath}$$ or $$\hat{\jmath}$$ so there is no area change, $$\det(M)=1$$
-    - *e.g.* scaling matrices do scale $$\hat{\imath}$$ or $$\hat{\jmath}$$ by some factors, $$\det(M)=s_x \times s_y$$
+*e.g.* rotation matrix do not scale $$\hat{\imath}$$ or $$\hat{\jmath}$$ so there is no area change, $$\det(M)=1$$  
+*e.g.* scaling matrices do scale $$\hat{\imath}$$ or $$\hat{\jmath}$$ by some factors, $$\det(M)=s_x \times s_y$$
 - **the rank of a matrix is the final dimension of the vector space spanned by $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$**
-    - *e.g.* if $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$ happen to lie on the same line (colinear), the whole 2D plane can't be described by a linear combination of $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$. The whole 2D plane was squashed onto on single line of 1 dimension, hence it's rank is 1.
+*e.g.* if $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$ happen to lie on the same line (colinear), the whole 2D plane can't be described by a linear combination of $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$. The whole 2D plane was squashed onto on single line of 1 dimension, hence it's rank is 1.
 - **the kernel $$\ker(M)$$ of a matrix is the linear subspace (plane, line, point) which is mapped to the zero vector $$\vec0$$.**
-    - *e.g.* if we again consider a matrix with colinear columns (but different), we know that the plane is crushed to a line in a linear fashion. But if you picture in your head such crushing, is it also obvious that a whole line must be squashed into a single point, the zero vector $$\vec0$$. This line is $$\ker(M)$$. 
+*e.g.* if we again consider a matrix with colinear columns (but different), we know that the plane is crushed to a line in a linear fashion. But if you picture in your head such crushing, is it also obvious that a whole line must be squashed into a single point, the zero vector $$\vec0$$. This line is $$\ker(M)$$. 
  - **The kernel dimension added to the image dimension must be equal to the input dimension.**
-    - *e.g.* as we saw before, if the whole plane is flattened to a line, their is also a line that is reduced to the zero vector.
-    - *e.g.* if nothing is squashed, the image dimension is equal to input dimension and $$\ker(M)$$ has 0 dimensions.
-    - *e.g.* if everything is squashed to a point, the image dimension is equal to 0 and the
-    $$\ker(M)$$ dimension is 2 (the whole 2D world).
+*e.g.* as we saw before, if the whole plane is flattened to a line, their is also a line that is reduced to the zero vector.  
+*e.g.* if nothing is squashed, the image dimension is equal to input dimension and $$\ker(M)$$ has 0 dimensions.  
+*e.g.* if everything is squashed to a point, the image dimension is equal to 0 and the $$\ker(M)$$ dimension is 2 (the whole 2D world).  
 - **Eigen vectors are vector that do not change direction when transformed.**
-    - *e.g.* rotation matrice do not have eigen vectors for $$\theta\neq 0\pmod\pi$$
-    - *e.g.* homothety matrices have eigen vectors colinear to input columns.
+*e.g.* rotation matrice do not have eigen vectors for $$\theta\neq 0\pmod\pi$$
+*e.g.* homothety matrices have eigen vectors colinear to input columns.
 - **Eigen values are the scaling factor of the vectors that do not change direction in a transformation.**
-    - *e.g.* identity matrix has two eigen vectors ($$\hat{\imath}$$ or $$\hat{\jmath}$$), and their eigen values are both $$1$$.
+*e.g.* identity matrix has two eigen vectors ($$\hat{\imath}$$ or $$\hat{\jmath}$$), and their eigen values are both $$1$$.
 
 All of this is **spicy**, but let's move on the today's topic: **covariance matrices**.
 
 ## **Covariance matrices**
-### Variance
 Before even talking about co-variance, I need to introduce its friend : **variance**.
 Variance is a measure of something varying in function of another. The **variance** defines itself in a rigorous way as the mean of squared differences to the mean. When talking about random variables one can also use the term expectation for the mean, and notate it $$E$$. 
 
@@ -164,7 +162,6 @@ $$
 \mathbb{V}(X) = \mathbb{E}\left[(X-\mathbb{E}(X))^2\right]
 $$
 
-### Co-variance
 Co-variance extends the definition of variance to two variables. So instead of measuring the variability of one variable, we want to assess the similarity of variation of two variables. The definiton is straight forward if I develop the variance definition:
 
 $$
@@ -192,7 +189,7 @@ Why are covariance matrices interesting ? From construction :
 
  You might wonder why this is interesting, I will tell you:  from a transformation matrix perspective it's a gem to play with !
 
-### Co-variance matrix as a transformation
+## Co-variance matrix as a transformation
 
 First, a matrix that have orthogonal eigen vectors has to be some form of scaling, where each direction is scaled by the corresponding eigen value. The actual directions of this stretching are probably not along our old friends $$\hat{\imath}$$ and $$\hat{\jmath}$$ so $$\operatorname{K}_\mathbf{XX}$$ is an homothety in another base. In order to find that base we can search the eigen vectors of $$\operatorname{K}_\mathbf{XX}$$.
 
@@ -211,7 +208,7 @@ Because $$X_1$$ and $$X_0$$ are uncorrelated $$\operatorname{cov}(X_0, X_1) = \o
 
 In the case of correlated variables, the data distribution rotates as well as the eigen vectors of $$\operatorname{K}_\mathbf{XX}$$. This means that we can write :
 $$\operatorname{K}_\mathbf{XX}=RSR^{-1}$$
-With $R$ a rotation matrix and $$S$$ a scaling matrix. Geometrically, this transformation
+With $$R$$ a rotation matrix and $$S$$ a scaling matrix. Geometrically, this transformation
 - rotates the eigen vectors back to the $$\hat{\imath}$$, $$\hat{\jmath}$$ base : $$R^{-1}$$
 - scales the data with eigen value factors : $$S$$
 - brings back the scaled data in the original base : $$R$$
@@ -220,7 +217,7 @@ It's a simple basis change, but I like visualizing it as chained elementary oper
 
 Now, any covariance matrix can be understood as a transformation matrix that scales input space in the direction of largest data variances. A lot a techniques, such as PCA, can be understood under this mental model.
 
-### Transforming data
+## Transforming data
 Let's build a toy in order to graps those concepts in a more practical way. In Python and numpy, generate 10000 samples of two random variables drawn from two gaussian distributions. 
 - $$X \sim \mathcal{N}(0,\, 1)$$
 - $$Y \sim \mathcal{N}(0,\, 9)$$
@@ -275,5 +272,5 @@ R
 ```
 Without surprise, they are the same (within sample averaging error).
 
-### Conclusion
+## Conclusion
 This little code section concludes this post about transformation and covariances matrices! There is so much more intution to gain here, I hope your curiosity was tickled and you learned something. I can't recommend enough the Essence Of Linear Algebra serie by 3Blue1Brown [(check it out on Youtube)](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw) that goes over the geometrical interpretation of Linear Algebra concepts in a very visual way.
