@@ -218,8 +218,8 @@ Now, any covariance matrix can be understood as a transformation matrix that sca
 
 # Transforming data
 Let's build a toy in order to grasp those concepts in a more practical way. In Python and numpy, generate 10000 samples of two random variables drawn from two gaussian distributions. 
-- $$X \sim \mathcal{N}(0,\, 1)$$
-- $$Y \sim \mathcal{N}(0,\, 9)$$
+$$X \sim \mathcal{N}(0,\, 9)$$
+$$Y \sim \mathcal{N}(0,\, 1)$$
 
 ```python
 X = 3*random.randn(10000)
