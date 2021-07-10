@@ -240,7 +240,7 @@ R = array([
     [sin(angle), cos(angle)]
     ])
 ```
-And apply it to $D$.
+And apply it to $$D$$.
 ```python
 RD = R@D
 ```
