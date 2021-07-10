@@ -1,3 +1,9 @@
+---
+title: Thoughts On Polyrhythmic Effects
+date: 2019-01-17 12:00:00 -00:00
+layout: post
+---
+
 *def*. Polyrhythm : literally means multiples rhythmes at the same time (I made up this definition).
 But because the word doesn't mean anything today (because people use it in every situation) we will use it only to refer to phenomenon related to the very definition above.
 

@@ -1,6 +1,7 @@
 ---
 ---
 
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 @import "reset";
 @import "config";
 @import url(pastie.css);
@@ -8,7 +9,7 @@
 body {
 	color: $color-black;
 	background: $color-white;
-	font-size: 100%;
+	font-size: 1.1em;
 	font-weight: 400;
 	margin-top: 25px;
 	margin: auto;
@@ -23,14 +24,14 @@ p {
 	font-size: 1em;
 }
 a {
-  color: $color-link-blue;
+  color: #797979;
   text-decoration: none;
   background-repeat: no-repeat;
   background-position: bottom;
 }
 
 a:hover {
-	color: #0a67ff;
+	color: #797979;
 }
 
 h1 a,
@@ -50,10 +51,6 @@ h3 a:hover,
 h4 a:hover,
 h5 a:hover,
 h6 a:hover {
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: 100% 6px;
-  background-image: linear-gradient(transparent, transparent 4px, #000 4px, #000);
 }
 
 ul {
@@ -84,8 +81,7 @@ blockquote {
 
 
 .header {
-	font-family: 'Roboto', serif;
-	font-weight: 900;
+	font-family: 'Courier Prime', serif;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
@@ -97,7 +93,6 @@ blockquote {
 		font-size: 1.5em;
 		margin-bottom: 0;
 		text-transform: lowercase;
-                letter-spacing: .2em
 	}
 	ul {
 		margin-top: 10px;
@@ -111,18 +106,15 @@ blockquote {
 
 hr {
   border: 0;
-  border-bottom: 1px solid #999
 }
 
 .footer {
-	font-family: 'Roboto', serif;
+	font-family: 'Courier Prime', serif;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
-	border-top: 1px solid #777;
-	padding-top: 10px;
 	color: #777;
-	margin-top: 5rem;
+	margin-top: 1rem;
 
 	@media screen and (max-width: $br) {
 		display: block;
@@ -149,7 +141,7 @@ hr {
 
 
 .blog {
-	font-family: 'Roboto', serif;
+	font-family: 'Courier Prime', serif;
 	padding-bottom: 30px;
 	h1 {
 		font-size: 1.4em;
@@ -159,7 +151,7 @@ hr {
 }
 
 .post {
-	font-family: 'Roboto', serif;
+	font-family: 'Courier Prime', serif;
 	padding-bottom: 30px;
 	&__back {
 		a {
@@ -251,24 +243,23 @@ hr {
 			}
 		}
 		code {
-			font-family: 'Roboto Mono', sans-serif;
-			font-size: 0.8em;
-			background: $color-black;
+			font-family: 'Courier Prime', sans-serif;
+			font-size: 0.9em;
+			background: black;
 		}
 		.highlight {
-			margin-bottom: 15px;
-			padding: 10px;
 			line-height: 1.5;
 			border-radius: 3px;
-			background: #343642;
+			padding: 10px;
+			padding-bottom: 5px;
+			margin-bottom: 5px;
 			code {
 				background: none;
 			}
 		}
 		.codebreak {
-			margin: 15px;
+			margin: 10px;
 			border: 0;
-			border-bottom: 1px dashed $color-black;
 		}
 	}
 }
@@ -295,3 +286,15 @@ hr {
 		}
 	}
 }
+
+.prompt {
+    animation: promptblink 1s infinite ease-in;
+    color: #000000;
+}
+
+@keyframes promptblink{
+	0% {color: rgb(255, 254, 248)}
+	80% {color: rgb(255, 254, 248);}
+	100% {color: #1f1f1f}
+  
+  }
