@@ -7,7 +7,7 @@ layout: post
 
 ## **Short introduction to transformation matrices**
 
-**Matrices are a simple yet a vast topic.** Actually, one can project all sorts of things onto this conceptual object, geometrical transformation being one of them.
+**Matrices are a simple yet vast topic.** Actually, one can project all sorts of things onto this conceptual object, geometrical transformation being one of them.
 
 *I love thinking about matrices and their properties as geometrical phenomena, with shapes and movements. I will try to share my excitement about it in this blog post.*
 
@@ -120,8 +120,9 @@ $$ R = \begin{bmatrix}
 0 & -1\\
 1 & 0
 \end{bmatrix}
- $$
- Plugging $$\theta=\pi / 2$$ in the well known 2D rotation matrix expression yields the same thing:
+$$
+
+Plugging $$\theta=\pi / 2$$ in the well known 2D rotation matrix expression yields the same thing:
  
 $$ R = \begin{bmatrix}
 \cos \theta & -\sin \theta \\  
@@ -133,21 +134,21 @@ Except that in the first approach, we deduced $$R$$ from understanding what $$R$
 
 Because the main subject of this blog post is not to do a full depth intro to geometric intution of matrices, I will drop a **few fun facts** that could tackle your curiosity when thinking about matrices this way:
 
-- **the determinant $$\det(M)$$ of a matrix is the change factor of the area spanned by $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$**
+- **the determinant $$\det(M)$$ of a matrix is the change factor of the area spanned by $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$**  
 *e.g.* rotation matrix do not scale $$\hat{\imath}$$ or $$\hat{\jmath}$$ so there is no area change, $$\det(M)=1$$  
 *e.g.* scaling matrices do scale $$\hat{\imath}$$ or $$\hat{\jmath}$$ by some factors, $$\det(M)=s_x \times s_y$$
-- **the rank of a matrix is the final dimension of the vector space spanned by $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$**
+- **the rank of a matrix is the final dimension of the vector space spanned by $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$**  
 *e.g.* if $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$ happen to lie on the same line (colinear), the whole 2D plane can't be described by a linear combination of $$f(\hat{\imath})$$ and $$f(\hat{\jmath})$$. The whole 2D plane was squashed onto on single line of 1 dimension, hence it's rank is 1.
-- **the kernel $$\ker(M)$$ of a matrix is the linear subspace (plane, line, point) which is mapped to the zero vector $$\vec0$$.**
+- **the kernel $$\ker(M)$$ of a matrix is the linear subspace (plane, line, point) which is mapped to the zero vector $$\vec0$$.**  
 *e.g.* if we again consider a matrix with colinear columns (but different), we know that the plane is crushed to a line in a linear fashion. But if you picture in your head such crushing, is it also obvious that a whole line must be squashed into a single point, the zero vector $$\vec0$$. This line is $$\ker(M)$$. 
- - **The kernel dimension added to the image dimension must be equal to the input dimension.**
+ - **The kernel dimension added to the image dimension must be equal to the input dimension.**  
 *e.g.* as we saw before, if the whole plane is flattened to a line, their is also a line that is reduced to the zero vector.  
 *e.g.* if nothing is squashed, the image dimension is equal to input dimension and $$\ker(M)$$ has 0 dimensions.  
 *e.g.* if everything is squashed to a point, the image dimension is equal to 0 and the $$\ker(M)$$ dimension is 2 (the whole 2D world).  
-- **Eigen vectors are vector that do not change direction when transformed.**
+- **Eigen vectors are vector that do not change direction when transformed.**  
 *e.g.* rotation matrice do not have eigen vectors for $$\theta\neq 0\pmod\pi$$
 *e.g.* homothety matrices have eigen vectors colinear to input columns.
-- **Eigen values are the scaling factor of the vectors that do not change direction in a transformation.**
+- **Eigen values are the scaling factor of the vectors that do not change direction in a transformation.**  
 *e.g.* identity matrix has two eigen vectors ($$\hat{\imath}$$ or $$\hat{\jmath}$$), and their eigen values are both $$1$$.
 
 All of this is **spicy**, but let's move on the today's topic: **covariance matrices**.
