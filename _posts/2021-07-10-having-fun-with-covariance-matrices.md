@@ -3,9 +3,7 @@ title: Having fun with covariance matrices
 date: 2021-07-10 16:00:00 -00:00
 layout: post
 ---
-# Having fun with covariance matrices
-
-## **Short introduction to transformation matrices**
+# **Short introduction to transformation matrices**
 
 **Matrices are a simple yet vast topic.** Actually, one can project all sorts of things onto this conceptual object, geometrical transformation being one of them.
 
@@ -153,7 +151,7 @@ Because the main subject of this blog post is not to do a full depth intro to ge
 
 All of this is **spicy**, but let's move on the today's topic: **covariance matrices**.
 
-## **Covariance matrices**
+# **Covariance matrices**
 Before even talking about co-variance, I need to introduce its friend : **variance**.
 Variance is a measure of something varying in function of another. The **variance** defines itself in a rigorous way as the mean of squared differences to the mean. When talking about random variables one can also use the term expectation for the mean, and notate it $$E$$. 
 
@@ -190,7 +188,7 @@ Why are covariance matrices interesting ? From construction :
 
  You might wonder why this is interesting, I will tell you:  from a transformation matrix perspective it's a gem to play with !
 
-## Co-variance matrix as a transformation
+# Co-variance matrix as a transformation
 
 First, a matrix that have orthogonal eigen vectors has to be some form of scaling, where each direction is scaled by the corresponding eigen value. The actual directions of this stretching are probably not along our old friends $$\hat{\imath}$$ and $$\hat{\jmath}$$ so $$\operatorname{K}_\mathbf{XX}$$ is an homothety in another base. In order to find that base we can search the eigen vectors of $$\operatorname{K}_\mathbf{XX}$$.
 
@@ -218,7 +216,7 @@ It's a simple basis change, but I like visualizing it as chained elementary oper
 
 Now, any covariance matrix can be understood as a transformation matrix that scales input space in the direction of largest data variances. A lot a techniques, such as PCA, can be understood under this mental model.
 
-## Transforming data
+# Transforming data
 Let's build a toy in order to graps those concepts in a more practical way. In Python and numpy, generate 10000 samples of two random variables drawn from two gaussian distributions. 
 - $$X \sim \mathcal{N}(0,\, 1)$$
 - $$Y \sim \mathcal{N}(0,\, 9)$$
@@ -273,5 +271,5 @@ R
 ```
 Without surprise, they are the same (within sample averaging error).
 
-## Conclusion
+# Conclusion
 This little code section concludes this post about transformation and covariances matrices! There is so much more intution to gain here, I hope your curiosity was tickled and you learned something. I can't recommend enough the Essence Of Linear Algebra serie by 3Blue1Brown [(check it out on Youtube)](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw) that goes over the geometrical interpretation of Linear Algebra concepts in a very visual way.
