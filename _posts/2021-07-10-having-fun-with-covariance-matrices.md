@@ -192,7 +192,7 @@ Why are covariance matrices interesting ? From construction :
 
 First, a matrix that have orthogonal eigen vectors has to be some form of scaling, where each direction is scaled by the corresponding eigen value. The actual directions of this stretching are probably not along our old friends $$\hat{\imath}$$ and $$\hat{\jmath}$$ so $$\operatorname{K}_\mathbf{XX}$$ is an homothety in another base. In order to find that base we can search the eigen vectors of $$\operatorname{K}_\mathbf{XX}$$.
 
-It turns out that for covariance matrices, the eigen vectors are also the direction in which the data demonstrates the largest variances. We can verify this claim by looking at a covariance matrix with uncorrelated variables:
+It turns out that for covariance matrices, the eigen vectors are also the directions in which the data demonstrates the largest variances. We can verify this claim by looking at a covariance matrix with uncorrelated variables:
 
 $$ \operatorname{K}_\mathbf{XX} = \begin{bmatrix}
 \operatorname{cov}(X_0, X_0) & \operatorname{cov}(X_1, X_0) \\  
@@ -217,7 +217,7 @@ It's a simple basis change, but I like visualizing it as chained elementary oper
 Now, any covariance matrix can be understood as a transformation matrix that scales input space in the direction of largest data variances. A lot a techniques, such as PCA, can be understood under this mental model.
 
 # Transforming data
-Let's build a toy in order to graps those concepts in a more practical way. In Python and numpy, generate 10000 samples of two random variables drawn from two gaussian distributions. 
+Let's build a toy in order to grasp those concepts in a more practical way. In Python and numpy, generate 10000 samples of two random variables drawn from two gaussian distributions. 
 - $$X \sim \mathcal{N}(0,\, 1)$$
 - $$Y \sim \mathcal{N}(0,\, 9)$$
 
