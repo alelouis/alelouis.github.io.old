@@ -1,5 +1,5 @@
 ---
-title: Autostereogram, eyes and brain
+title: Autostereograms, eyes and brain
 date: 2021-08-03 16:00:00 -00:00
 layout: post
 ---
