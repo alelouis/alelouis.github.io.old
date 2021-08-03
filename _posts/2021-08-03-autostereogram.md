@@ -39,9 +39,11 @@ In image terms, this means we have to adjust the value of two pixels separated b
 
 <img style="margin: 0 auto; display: block; width : 50%;" src="../images/autostereogram/example.png">
 
-When close to focus distance, you should feel like two separate images are merging. The depth illusion is sharp and crisp, the feeling is exactly the same as looking a normal object behind your screen. At the right spot, you should see the logo below in 3D, higher values (bright) being closer.  </br> 
+When close to focus distance, you should feel like two separate images are merging. The depth illusion is sharp and crisp, the feeling is exactly the same as looking a normal object behind your screen. At the right spot, you should see the logo below in 3D, higher values (bright) being closer. 
 
-<img style="margin: 0 auto; display: block; width : 50%;" src="../images/autostereogram/depthmap.png">
+From aside, this should be the depth profile observed.
+
+<img style="margin: 0 auto; display: block; width : 70%;" src="../images/autostereogram/3D.png">
 
 ## Implementation
 
