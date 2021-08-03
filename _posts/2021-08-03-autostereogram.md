@@ -23,11 +23,11 @@ In everyday life, [we perceive our world in three dimensions](https://en.wikiped
 
 In nominal case, the focus length is adapted to the distance of the object which is being looked at. We can picture this scenario with two straight lines starting from each eye and converging towards the point of focus.
 
-<img style="margin: 0 auto; display: block; width : 40%;" src="../images/autostereogram/normal.png">
+<img style="margin: 0 auto; display: block; width : 50%;" src="../images/autostereogram/normal.png">
 
 In the autostereogram case, we are looking at an image but with a point of focus *behind* the screen (or paper). By construction, there is only one focus length that triggers the 3D illusion. 
 
-<img style="margin: 0 auto; display: block; width : 40%;" src="../images/autostereogram/stereo.png">
+<img style="margin: 0 auto; display: block; width : 50%;" src="../images/autostereogram/stereo.png">
 
 The trick consists in building an image that, if viewed with a focus point behind the image plane, feeds the same visual information about the focus point (mainly color here) to both eyes. When both eyes see the same information at focus point, the brains knows that there is an object at focus distance (because that’s what happens everyday).
 
