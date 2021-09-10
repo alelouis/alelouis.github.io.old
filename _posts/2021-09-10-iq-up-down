@@ -1,0 +1,42 @@
+---
+title: Getting real
+date: 2021-07-10 16:00:00 -00:00
+layout: post
+---
+# **What does cos(wt) says to e(j) ? Get real.**
+
+When dealing everyday with baseband complex signals, I often forget those are not real (yes).  
+*I write this post in order to commit strongly to not forgetting those lines.*
+
+### Constant envelope baseband signal - *complex*
+
+$$
+\begin{align}
+    s_b(t) &= e^{j\theta(t)} \\
+    & = \cos\theta(t)+j\sin\theta(t) \\
+    & = i + jq
+\end{align}
+ $$
+
+ ### Send it - *real*
+
+$$
+\begin{align}
+    s_u(t) &= 2\Re [e^{j\theta(t)}e^{j \omega t}] \\
+    & = 2\Re [(i + jq)(\cos\omega t + j \sin \omega t)] \\
+    & = 2(i\cos \omega t - q\sin \omega t)
+\end{align}
+ $$
+
+ ### Get it back - *complex*
+
+$$
+\begin{align}
+    s_d(t) &= s_u(t)\cos\omega t - j s_u(t)\sin \omega t \\
+    & = 2 (i\cos^2\omega t+j\sin^2\omega t - q\sin \omega t\cos \omega t - ji\sin \omega t\cos \omega t)\\
+    & = 2\left(\frac{i}{2}+j\frac{q}{2}+\frac{\cos(2\omega t)}{2}-j\frac{\cos(2\omega t)}{2}- q\sin \omega t\cos \omega t - ji\sin \omega t\cos \omega t\right)\\
+    & \text{... Apply Low Pass Filter}\\
+    \mathbf{}{s_d(t)} &= s_b(t)
+    
+\end{align}
+ $$
