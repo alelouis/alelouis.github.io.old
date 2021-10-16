@@ -100,7 +100,7 @@ $$
 
 We can even see 76 BPM being notated on the score on Adam's video.
 In total, 8 groupings of 5 notes are played. Again, we can *feel* it like two measures of 4/4 at 76 BPM.  
-Again, the thing that glues everything is the ostinato pattern running at 95 BPM. By the end of the first 4 groupings of 5 notes, the current ostinato is at 3/4 completion. By the end of the 8 groupings, it completes entirely, right before the final switch, **good job**.
+Remember, the thing that glues everything is the ostinato pattern running at 95 BPM. By the end of the first 4 groupings of 5 notes, the current ostinato is at 3/4 completion. By the end of the 8 groupings, it completes entirely, right before the final switch, **good job**.
 
 ## Full power
 At the end of the second measure of pre-76, the nice fill lands on the 1 of the first measure of 4/4 at 76 BPM. We know that because the stack / hi-hat pattern switches to regular 16th notes at 76 BPM. The ostinato stops.
