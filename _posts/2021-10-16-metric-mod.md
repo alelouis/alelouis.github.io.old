@@ -115,7 +115,7 @@ I overlapped several layers onto the real track in order to visualize and hear m
 Enjoy :D
 
 <div style="text-align:center;">
-<video  style="margin: 0 auto; width: 100%; max-width: 1020px;">
+<video controls style="margin: 0 auto; width: 100%; max-width: 1020px;">
 ```
    <source src="../images/explain_machina.mp4" type="video/mp4" />
 ```
