@@ -1,0 +1,32 @@
+I"4<h1 id="what-does-coswt-says-to-ej--get-real"><strong>What does cos(wt) says to e(j) ? Get real.</strong></h1>
+
+<p>When dealing everyday with baseband complex signals, I often forget those are not real (yes).<br />
+<em>I write this post in order to commit strongly to not forgetting those lines.</em></p>
+
+<h2 id="constant-envelope-baseband-signal---complex">Constant envelope baseband signal - <em>complex</em></h2>
+
+\[\begin{align}
+    s_b(t) &amp;= e^{j\theta(t)} \\
+    &amp; = \cos\theta(t)+j\sin\theta(t) \\
+    &amp; = i + jq \\
+\end{align}\]
+
+<h2 id="send-it---real">Send it - <em>real</em></h2>
+
+\[\begin{align}
+    s_u(t) &amp;= 2\Re [e^{j\theta(t)}e^{j \omega t}] \\
+    &amp; = 2\Re [(i + jq)(\cos\omega t + j \sin \omega t)] \\
+    &amp; = 2(i\cos \omega t - q\sin \omega t) \\
+\end{align}\]
+
+<h2 id="get-it-back---complex">Get it back - <em>complex</em></h2>
+
+\[\begin{align}
+    s_d(t) &amp;= s_u(t)\cos\omega t - j s_u(t)\sin \omega t \\
+    &amp; = 2 (i\cos^2\omega t+j\sin^2\omega t - q\sin \omega t\cos \omega t - ji\sin \omega t\cos \omega t)\\
+    &amp; = 2\left(\frac{i}{2}+j\frac{q}{2}+\frac{\cos(2\omega t)}{2}-j\frac{\cos(2\omega t)}{2}- q\sin \omega t\cos \omega t - ji\sin \omega t\cos \omega t\right)\\
+    &amp; \text{... Apply Low Pass Filter} \\
+    \mathbf{}{s_d(t)} &amp;= s_b(t)
+    
+\end{align}\]
+:ET

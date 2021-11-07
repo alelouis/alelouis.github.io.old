@@ -1,0 +1,112 @@
+I"O*<p>Two days ago, <a href="https://www.youtube.com/channel/UCnkp4xDOwqqJD7sSM3xdUiQ">Adam Neely</a> and <a href="https://www.youtube.com/channel/UCiPApSjDJ_ShVUbCFZRzxQQ">Shawn Crowder</a> released their last album <a href="https://sungazermusic.bandcamp.com/album/perihelion">Perihelion</a>.<br />
+As a part of their launching campaign, they released (yet) <a href="https://youtu.be/_d8wApjLuf8">two</a> <a href="https://youtu.be/ACA-i8BOr9Q">videos</a> explaining several music theory concepts used in the elaboration of the tracks.</p>
+
+<h1 id="metric-modulation">Metric Modulation</h1>
+
+<p>One of them being <em>metric modulation</em>. Metric modulation, in short, is about modulating (changing) the tempo or meter of a song. Of course, it is not about doing it without caution, for example jumping from 100 BPM to 120 without prior notice. The goal here is to modulate smoothly from tempo A to tempo B, much alike a smooth harmony modulation (e.g. ii V I in target key).</p>
+
+<p>One way to smooth a metric modulation, the one being discussed about in Adam’s video (explained by Shawn about the track Macchina), is to accentuate different groupings of notes prior to a final switch.</p>
+
+<p>By only using the existing grid and changing the grouping, a butter-smooth transition can be obtained.</p>
+
+<h2 id="examples-in-44">Examples in 4/4</h2>
+
+<p>As always, let’s take an example in 4/4, which means a beat is subdivided in 4 quarter notes. For calculus clarity, we set our tempo to 100 Beats Per Minute (BPM). The <strong>beat</strong> is played every 4 notes (subdivision = 4) at 100 BPM.</p>
+
+<p><strong>Example 1:</strong> If we were to play the beat every <em>third</em> notes, the new BPM / tempo would speed up to a new tempo of :</p>
+
+\[\begin{align}
+   100 \times 4/3 \approx 133 \text{ BPM}
+\end{align}\]
+
+<p><strong>Example 2:</strong> If we were to play the beat every <em>fifth</em> notes, the new BPM / tempo would slow down to a new tempo of :</p>
+
+\[\begin{align}
+   100 \times 4/5 = 80 \text{ BPM}
+\end{align}\]
+
+<p>Notice that we have two ways of thinking about the same musical result :</p>
+<ul>
+  <li>either stay at 100 BPM and accentuate groupings of 5</li>
+  <li>or set metronome to 80 BPM and play the new beat.</li>
+</ul>
+
+<h2 id="generalization">Generalization</h2>
+
+<p>For further analysis, here is a piece of code I wrote that lists down possible metrics modulations ratios for a given beat subdivision (in a two beats span).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_possible_metric_modulations</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Possible metric modulations for </span><span class="si">{</span><span class="n">subdivisions</span><span class="si">}</span><span class="s"> subdivisions per beat (2 beats span)"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"- Every </span><span class="si">{</span><span class="n">i</span><span class="p">:</span><span class="mi">02</span><span class="si">}</span><span class="s"> notes : tempo x </span><span class="si">{</span><span class="p">(</span><span class="n">subdivisions</span><span class="o">/</span><span class="n">i</span><span class="p">):.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">subdivisions</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">)"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>For the 4 subdivisions case the talked about we can find back our results among many others :</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">find_possible_metric_modulations</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">Possible</span> <span class="n">metric</span> <span class="n">modulations</span> <span class="k">for</span> <span class="mi">4</span> <span class="n">subdivisions</span> <span class="n">per</span> <span class="n">beat</span> <span class="p">(</span><span class="mi">2</span> <span class="n">beats</span> <span class="n">span</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">01</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">4.00</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">02</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">2.00</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">03</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">1.33</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">04</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">1.00</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">05</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">0.80</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">06</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">0.67</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">07</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">0.57</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Every</span> <span class="mi">08</span> <span class="n">notes</span> <span class="p">:</span> <span class="n">tempo</span> <span class="n">x</span> <span class="mf">0.50</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></div></div>
+<h1 id="sungazers-macchina">Sungazer’s Macchina</h1>
+
+<p>As a real music example, let’s break down in details how the metric modulation from Sungazer’s Macchina works.</p>
+
+<h2 id="before-transition">Before transition</h2>
+<p>First, the BPM is equal to 95 BPM. Groupings of 4 are played, a bit offset from the real beat but that changes nothing.</p>
+
+<p>The glue of all of this, that never changes, is the 16th note ostinato (the engine, as they call it) played on the side stack and hi-hat.</p>
+
+<h2 id="shifting-gears-part-1">Shifting gears, part 1</h2>
+<p>Then comes the start of the transition. As Shawn says in Adam’s video, he first plays 8th dotted notes, that would be groupings of 3 notes. Personally, I feel that this first part is slower than the later one, so I consider the beat to be groupings of 6.</p>
+
+<p>By looking at the ratios above, or just thinking about it, the equivalent new tempo should be slowed down by 4/6:</p>
+
+\[\begin{align}
+   95 \times 4/6 \approx 63.3 \text{ BPM}
+\end{align}\]
+
+<p>In total, 4 groupings of 6 notes are played. This is clever: they want people to bang their head to this transition, so everything have to stay in 4/4 (in temporary tempo) in order to feel everything slowing down.</p>
+
+<p>Remember, the ostinato do not change here. And yes, it is completely out of sync. By the end of the 4 groupings of 6 notes, we are in the middle of the ostinato.</p>
+
+<h2 id="shifting-gears-part-2">Shifting gears, part 2</h2>
+<p>But it’s only temporary, the real metric modulation is coming. The pattern changes and Shawn is now playing grouping of 5. Again, the equivalent new tempo should slow down by 4/5 (with respect to original 95 BPM, we feel it speeding up because we come from 63):</p>
+
+\[\begin{align}
+   95 \times 4/5 \approx 76 \text{ BPM}
+\end{align}\]
+
+<p>We can even see 76 BPM being notated on the score on Adam’s video.
+In total, 8 groupings of 5 notes are played. Again, we can <em>feel</em> it like two measures of 4/4 at 76 BPM.<br />
+Remember, the thing that glues everything is the ostinato pattern running at 95 BPM. By the end of the first 4 groupings of 5 notes, the current ostinato is at 3/4 completion. By the end of the 8 groupings, it completes entirely, right before the final switch, <strong>good job</strong>.</p>
+
+<h2 id="full-power">Full power</h2>
+<p>At the end of the second measure of pre-76, the nice fill lands on the 1 of the first measure of 4/4 at 76 BPM. We know that because the stack / hi-hat pattern switches to regular 16th notes at 76 BPM. The ostinato stops.</p>
+
+<h2 id="ableton-playground">Ableton playground</h2>
+
+<p>I overlapped several layers onto the real track in order to visualize and hear more clearly the analysis:</p>
+<ul>
+  <li>with varying metronomes</li>
+  <li>with midi instrument playing different groupings</li>
+  <li>with the full 16th notes grid playing behind</li>
+</ul>
+
+<p>Enjoy :D</p>
+
+<div style="text-align:center;">
+<video controls="" style="margin: 0 auto; width: 100%; max-width: 1020px;">
+```
+   <source src="../images/explain_machina.mp4" type="video/mp4" />
+```
+   </video>
+</div>
+:ET
